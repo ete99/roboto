@@ -22,7 +22,7 @@ public class Drop extends Task {
     }
 
     @Override
-    public void execute() {
+    public void execute() throws Exception {
         System.out.println("Dropping");
         Condition.sleep(Random.nextInt(350, 500));
         Iterator<Item> inv = ctx.inventory.select().iterator();
@@ -30,6 +30,8 @@ public class Drop extends Task {
             ctx.input.move(Random.nextInt(670, 695),Random.nextInt(510, 540));
             ctx.input.click(true);
         }
+        if(!ctx.inventory.peek().valid())
+            throw new Exception("Bugged");
         Item i;
         do{
             Condition.sleep(Random.nextInt(250, 400));
