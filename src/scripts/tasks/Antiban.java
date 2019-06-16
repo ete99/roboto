@@ -119,7 +119,7 @@ public class Antiban extends Task {
     public void moveMouseOffScreen(){
         int x, y;
         if (Random.nextDouble() > 0.50){
-            y = Random.nextInt(-200, -2);
+            y = Random.nextInt(-2000, -1000);
         }
         else {
             y = Random.nextInt(1000, 1500);
@@ -147,10 +147,10 @@ public class Antiban extends Task {
             }
         }, 1000, 100);
         ctx.input.focus();
-        x = Random.nextInt(10, 510);
-        y = Random.nextInt(10, 330);
-        ctx.input.move(x, y);
-        Condition.sleep(Random.nextInt(250, 500));
+//        x = Random.nextInt(10, 510);
+//        y = Random.nextInt(10, 330);
+//        ctx.input.move(x, y);
+//        Condition.sleep(Random.nextInt(250, 500));
     }
 
     @Override

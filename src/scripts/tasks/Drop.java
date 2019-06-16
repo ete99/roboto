@@ -1,6 +1,7 @@
 package scripts.tasks;
 
 
+import org.powerbot.script.Condition;
 import org.powerbot.script.Random;
 import org.powerbot.script.rt4.ClientContext;
 import org.powerbot.script.rt4.Item;
@@ -23,6 +24,7 @@ public class Drop extends Task {
     @Override
     public void execute() {
         System.out.println("Dropping");
+        Condition.sleep(Random.nextInt(350, 500));
         Iterator<Item> inv = ctx.inventory.select().iterator();
         if(!ctx.inventory.peek().valid()){
             ctx.input.move(Random.nextInt(670, 695),Random.nextInt(510, 540));
@@ -30,6 +32,7 @@ public class Drop extends Task {
         }
         Item i;
         do{
+            Condition.sleep(Random.nextInt(250, 400));
             i=inv.next();
             if(!(i.id()==AXE_ID))
                 i.interact("Drop");
