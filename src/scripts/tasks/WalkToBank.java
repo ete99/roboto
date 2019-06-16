@@ -31,14 +31,6 @@ public class WalkToBank extends Task {
         System.out.println("Walking to bank");
         Condition.sleep(Random.nextInt(250, 500));
         TilePath path = ctx.movement.newTilePath(tiles);
-//        path = path.reverse();
-//        Area d =  new Area(new Tile(ctx.players.local().tile().x(), ctx.players.local().tile().y()));
-//        Area d2 =  new Area(new Tile(3181, 3489), new Tile(3180, 3488));
-//        System.out.println(TreeArea.contains(ctx.players.local()));
-//        System.out.println(d.contains(ctx.players.local()));
-//        System.out.println(d2.contains(ctx.players.local()));
-//        System.out.println(ctx.players.local().tile().toString());
-//        System.out.println(ctx.players.local().tile().toString());
         path.randomize(1, 1);
         path.traverse();
 

@@ -1,28 +1,25 @@
 package scripts.tasks;
 
 import org.powerbot.script.Condition;
-import org.powerbot.script.Locatable;
 import org.powerbot.script.Random;
-import org.powerbot.script.Tile;
-import org.powerbot.script.rt4.BasicQuery;
 import org.powerbot.script.rt4.ClientContext;
 import org.powerbot.script.rt4.GameObject;
 import scripts.Constants;
 import scripts.Task;
 
-import java.util.Iterator;
 
 public class Chop extends Task {
-    final int OAK_ID = 10820;
-    public Chop(ClientContext ctx) {
+    int TREE_ID;
+    public Chop(ClientContext ctx, int TREE_ID) {
         super(ctx);
+        this.TREE_ID = TREE_ID;
     }
     GameObject Tree;
     @Override
     public boolean activate() {
-        Tree = ctx.objects.select().id(OAK_ID).nearest().poll();
+        Tree = ctx.objects.select().id(TREE_ID).nearest().poll();
         if(ctx.camera.pitch()<50)
-            ctx.camera.pitch(80);
+            ctx.camera.pitch(99-Random.nextInt(0, 3));
         if(!(ctx.players.local().animation()==-1) && !Tree.inViewport()) {
             ctx.input.move(Tree.nextPoint());
             ctx.camera.pitch(99-Random.nextInt(0, 3));
