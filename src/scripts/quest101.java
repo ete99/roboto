@@ -39,12 +39,7 @@ public class quest101 extends PollingScript<ClientContext> {
             }
 
             if(task.activate()){
-                try {
-                    task.execute();
-                } catch (Exception e) {
-                    ctx.game.logout();
-                    System.exit(1);
-                }
+                task.execute();
 
                 break;
             }

@@ -6,6 +6,7 @@ import org.powerbot.script.Condition;
 import org.powerbot.script.Tile;
 import org.powerbot.script.rt4.ClientContext;
 import org.powerbot.script.rt4.GameObject;
+import org.powerbot.script.rt4.Item;
 import org.powerbot.script.rt4.TilePath;
 import scripts.Task;
 import yew.AREA;
@@ -20,7 +21,7 @@ public class PosUtil extends Task {
     GameObject Tree;
     @Override
     public boolean activate() {
-
+        System.out.println(ctx.inventory.contains(ctx.inventory.name("Willow Logs").peek()));
 //        Tree = ctx.objects.select().name("Oak").nearest().poll();
 //        System.out.println(Tree.inViewport());
 //        int i = 1;
