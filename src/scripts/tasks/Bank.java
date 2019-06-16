@@ -11,7 +11,6 @@ import scripts.Task;
 import java.util.concurrent.Callable;
 
 public class Bank extends Task {
-    final static  int AXE[] = {1355, 1357, 1359, 1361};
     public Bank(ClientContext ctx) {
         super(ctx);
     }
@@ -30,7 +29,7 @@ public class Bank extends Task {
             ctx.camera.angle(ctx.camera.yaw() + Random.nextInt(-50, 50));
         }else {
             ctx.bank.open();
-            ctx.bank.depositAllExcept(AXE[0]);
+            ctx.bank.depositAllExcept(1355);
         }
     }
 }

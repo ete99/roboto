@@ -15,7 +15,6 @@ import java.util.concurrent.Callable;
  */
 public class Antiban extends Task {
     final int SKILL_WC = 22;
-    final int ANIM_CUTTING = 873;
 
     public Antiban(ClientContext ctx) {
         super(ctx);

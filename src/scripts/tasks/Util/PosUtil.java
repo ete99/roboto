@@ -21,7 +21,7 @@ public class PosUtil extends Task {
     GameObject Tree;
     @Override
     public boolean activate() {
-        System.out.println(ctx.inventory.contains(ctx.inventory.name("Willow Logs").peek()));
+        System.out.println(ctx.inventory.name("Willow Logs").peek().inViewport());
 //        Tree = ctx.objects.select().name("Oak").nearest().poll();
 //        System.out.println(Tree.inViewport());
 //        int i = 1;

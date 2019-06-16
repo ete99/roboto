@@ -4,6 +4,7 @@ import org.powerbot.script.Area;
 import org.powerbot.script.Tile;
 
 public class Constants {
+    //@TODO: Pasar todo a constantes
     final static int OAK_ID = 10820;
     final static int WILL_ID = 10833;
     public static int WC_ANIM;

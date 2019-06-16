@@ -25,6 +25,7 @@ public class quest101 extends PollingScript<ClientContext> {
         taskList.add(new Chop(ctx, WILL_ID));
         taskList.add(new Drop(ctx, ADAM_AXE));
         taskList.add(new Antiban(ctx));
+        taskList.add(new Idle(ctx));
 //        taskList.add(new WalkToBank(ctx));
 //        taskList.add(new Bank(ctx));
 //        taskList.add(new PosUtil(ctx));
