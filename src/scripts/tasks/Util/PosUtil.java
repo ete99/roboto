@@ -1,18 +1,11 @@
 package scripts.tasks.Util;
 
 
-import org.powerbot.script.Area;
-import org.powerbot.script.Condition;
-import org.powerbot.script.Tile;
 import org.powerbot.script.rt4.ClientContext;
 import org.powerbot.script.rt4.GameObject;
-import org.powerbot.script.rt4.Item;
-import org.powerbot.script.rt4.TilePath;
 import scripts.Task;
-import yew.AREA;
 
-import java.awt.*;
-import java.util.concurrent.Callable;
+import static scripts.Constants.YEW_AREA;
 
 public class PosUtil extends Task {
     public PosUtil(ClientContext ctx) {
@@ -21,7 +14,7 @@ public class PosUtil extends Task {
     GameObject Tree;
     @Override
     public boolean activate() {
-        System.out.println(ctx.inventory.name("Willow Logs").peek().inViewport());
+//        System.out.println(ctx.objects.select().name("Door").nearest().poll().id());
 //        Tree = ctx.objects.select().name("Oak").nearest().poll();
 //        System.out.println(Tree.inViewport());
 //        int i = 1;
@@ -51,15 +44,17 @@ public class PosUtil extends Task {
 //            }
 //        }, 2000, 100);
 //        System.out.println("chau");
-        return false;
+        return true;
     }
     @Override
     public void execute() {
+        System.out.println(YEW_AREA.contains(ctx.players.local()));
+
 //        Area d =  new Area(new Tile(ctx.players.local().tile().x(), ctx.players.local().tile().y()));
 //        Area d2 =  new Area(new Tile(3181, 3489), new Tile(3180, 3488));
 //        System.out.println(d.contains(ctx.players.local()));
 //        System.out.println(d2.contains(ctx.players.local()));
-        System.out.println(ctx.players.local().tile().toString());
+//        System.out.println(ctx.players.local().tile().toString());
 
     }
 }

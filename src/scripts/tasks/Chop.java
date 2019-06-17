@@ -1,5 +1,6 @@
 package scripts.tasks;
 
+import org.powerbot.script.Area;
 import org.powerbot.script.Condition;
 import org.powerbot.script.Random;
 import org.powerbot.script.rt4.ClientContext;
@@ -7,23 +8,29 @@ import org.powerbot.script.rt4.GameObject;
 import scripts.Constants;
 import scripts.Task;
 
+import static scripts.Constants.WILLOW_AREA;
+
 
 public class Chop extends Task {
-    int TREE_ID;
-    public Chop(ClientContext ctx, int TREE_ID) {
+    String TREE_NAME;
+    Area TREE_AREA;
+    public Chop(ClientContext ctx, Area TREE_AREA, String TREE_NAME) {
         super(ctx);
-        this.TREE_ID = TREE_ID;
+        this.TREE_NAME = TREE_NAME;
+        this.TREE_AREA = TREE_AREA;
     }
     GameObject Tree;
     @Override
     public boolean activate() {
-        Tree = ctx.objects.select().id(TREE_ID).nearest().poll();
-        if(ctx.camera.pitch()<50)
-            ctx.camera.pitch(99-Random.nextInt(0, 3));
-        if(!(ctx.players.local().animation()==-1) && !Tree.inViewport()) {
-            ctx.input.move(Tree.nextPoint());
-            ctx.camera.pitch(99-Random.nextInt(0, 3));
-            ctx.camera.angle(ctx.camera.yaw() + Random.nextInt(-50, 50));
+        Tree = ctx.objects.select().name(TREE_NAME).within(TREE_AREA).nearest().poll();
+        if(!(ctx.objects.select().name("Tree Stump").isEmpty())) {
+//            if (ctx.camera.pitch() > 50)
+//                ctx.camera.pitch();
+            if ((ctx.players.local().animation() == -1) && !Tree.inViewport()) {
+                ctx.input.move(Tree.nextPoint());
+                ctx.camera.pitch(Random.nextInt(0, 99));
+                ctx.camera.angle(ctx.camera.yaw() + Random.nextInt(-180, 180));
+            }
         }
         return ctx.players.local().animation()==-1 && ctx.inventory.select().count()<28&& !ctx.players.local().inMotion() && Tree.inViewport();
     }
@@ -34,7 +41,7 @@ public class Chop extends Task {
             Condition.sleep(Random.nextInt(350, 500));
             Tree.interact("Chop");
             Tree.click();
-            if (ctx.players.local().animation()!=-1)
+            if (ctx.players.local().animation()!=-1 && Constants.WC_ANIM==0)
                 Constants.WC_ANIM = ctx.players.local().animation();
             Condition.sleep(Random.nextInt(350, 500));
     }

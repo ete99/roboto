@@ -130,8 +130,7 @@ public class Antiban extends Task {
         int t=Random.nextInt(0, 101);
         if(t>99){
             System.out.println("The long wait");
-            Condition.sleep(Random.nextInt(15000, 1000000));
-
+            Condition.sleep(Random.nextInt(15000, 28000));
         }
         else if(t>70){
             Condition.sleep(Random.nextInt(5000, 7500));
@@ -160,7 +159,14 @@ public class Antiban extends Task {
     @Override
     public void execute() {
         System.out.println("AntiBanning");
-        moveMouseOffScreen();
+        if (Random.nextDouble() > 0.90){
+            randomCameraTurn();
+        }
+        else {
+            moveMouseOffScreen();
+        }
+
+//        moveMouseOffScreen();
 //        doAntibanAction(Random.nextInt(1,11));
     }
 }

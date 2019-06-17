@@ -1,18 +1,17 @@
 package scripts.tasks;
 
 
+import org.powerbot.script.Area;
 import org.powerbot.script.Condition;
 import org.powerbot.script.Random;
-import org.powerbot.script.Tile;
 import org.powerbot.script.rt4.ClientContext;
-import org.powerbot.script.rt4.GameObject;
 import scripts.Task;
 
-import java.util.concurrent.Callable;
-
 public class Bank extends Task {
-    public Bank(ClientContext ctx) {
+    String AXE_NAME;
+    public Bank(ClientContext ctx, String AXE_NAME) {
         super(ctx);
+        this.AXE_NAME= AXE_NAME;
     }
 
     @Override
@@ -29,7 +28,8 @@ public class Bank extends Task {
             ctx.camera.angle(ctx.camera.yaw() + Random.nextInt(-50, 50));
         }else {
             ctx.bank.open();
-            ctx.bank.depositAllExcept(1355);
+            int AXE_ID=ctx.inventory.name(AXE_NAME).poll().id();
+            ctx.bank.depositAllExcept(AXE_ID);
         }
     }
 }

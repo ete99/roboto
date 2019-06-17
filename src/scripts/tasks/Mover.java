@@ -1,18 +1,9 @@
 package scripts.tasks;
 
 
-import org.powerbot.script.Condition;
-import org.powerbot.script.Locatable;
 import org.powerbot.script.Tile;
 import org.powerbot.script.rt4.*;
-import org.powerbot.script.rt4.Component;
 import scripts.Task;
-
-import java.awt.*;
-import java.util.List;
-import java.util.Iterator;
-import java.util.Locale;
-import java.util.concurrent.Callable;
 
 public class Mover extends Task {
 

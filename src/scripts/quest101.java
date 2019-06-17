@@ -1,5 +1,6 @@
 package scripts;
 
+import org.powerbot.script.Area;
 import org.powerbot.script.PollingScript;
 import org.powerbot.script.Script;
 import org.powerbot.script.rt4.ClientContext;
@@ -9,26 +10,31 @@ import scripts.tasks.Util.PosUtil;
 import java.util.ArrayList;
 import java.util.List;
 
-import static scripts.Constants.ADAM_AXE;
-import static scripts.Constants.WILL_ID;
+import static scripts.Constants.*;
 
 @Script.Manifest(name="quesast", description="primero", properties="client=4; author=Ete; topic=999;")
 
 public class quest101 extends PollingScript<ClientContext> {
 
-    List<Task> taskList = new ArrayList<Task>();
-    public static int con;
+    public List<Task> taskList = new ArrayList<Task>();
+    public static String TREE_NAME = "Yew";
+    public static String AXE_NAME = "Rune Axe";
+    public static Area TREE_AREA = YEW_AREA;
 
     @Override
     public void start(){
-//        taskList.add(new WalkToTree(ctx));
-        taskList.add(new Chop(ctx, WILL_ID));
-        taskList.add(new Drop(ctx, ADAM_AXE));
-        taskList.add(new Antiban(ctx));
-        taskList.add(new Idle(ctx));
-//        taskList.add(new WalkToBank(ctx));
-//        taskList.add(new Bank(ctx));
 //        taskList.add(new PosUtil(ctx));
+
+
+        taskList.add(new WalkToTree(ctx,TREE_AREA,EDGE_TO_BANK_RIDE));
+//        taskList.add(new OpenDoor(ctx));
+        taskList.add(new Chop(ctx,TREE_AREA, TREE_NAME));
+        taskList.add(new Antiban(ctx));
+        taskList.add(new WalkToBank(ctx,EDGE_BANK_AREA, EDGE_TO_BANK_RIDE));
+        taskList.add(new Bank(ctx,AXE_NAME));
+        taskList.add(new Idle(ctx));
+
+
     }
 
     @Override

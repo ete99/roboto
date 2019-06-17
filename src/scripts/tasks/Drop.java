@@ -6,16 +6,15 @@ import org.powerbot.script.Random;
 import org.powerbot.script.rt4.ClientContext;
 import org.powerbot.script.rt4.Item;
 import org.powerbot.script.rt4.ItemQuery;
-import org.powerbot.script.rt4.Widget;
 import scripts.Task;
 
-import java.util.Iterator;
-
 public class Drop extends Task {
-    int AXE_ID;
-    public Drop(ClientContext ctx, int AXE_ID) {
+    String AXE_NAME;
+    String LOG_NAME;
+    public Drop(ClientContext ctx, String AXE_NAME, String LOG_NAME) {
         super(ctx);
-        this.AXE_ID = AXE_ID;
+        this.AXE_NAME = AXE_NAME;
+        this.LOG_NAME = LOG_NAME;
     }
 
     @Override
@@ -27,7 +26,7 @@ public class Drop extends Task {
     public void execute() {
         System.out.println("Begin Dropping: ");
         Condition.sleep(Random.nextInt(350, 500));
-        ItemQuery<Item> d = ctx.inventory.select().name("Willow Logs");
+        ItemQuery<Item> d = ctx.inventory.select().name(LOG_NAME);
         while(d.count()!=0){
             if(!(d.peek().component().visible()))
             {
@@ -36,14 +35,13 @@ public class Drop extends Task {
                 ctx.input.click(true);
             }
             for(Item i: d){
-                if(!(i.name().equals("Adamant Axe") && i.component().visible())){ // probably not needed to specify vibility just trying to solve a bug
+                if((AXE_NAME==null || !(i.name().equals(AXE_NAME)) && i.component().visible())){ // probably not needed to specify vibility just trying to solve a bug
                     i.interact("Drop");
                     System.out.println("Dropping");
                 }
                 Condition.sleep(Random.nextInt(350, 400));
             }
-            d = ctx.inventory.select().name("Willow Logs");
+            d = ctx.inventory.select().name(LOG_NAME);
         }
-
     }
 }
