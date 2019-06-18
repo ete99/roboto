@@ -5,11 +5,14 @@ import org.powerbot.script.Condition;
 import org.powerbot.script.Random;
 import org.powerbot.script.rt4.ClientContext;
 import org.powerbot.script.rt4.GameObject;
+import scripts.AntibanScript;
 import scripts.Constants;
+import scripts.SetUp;
 import scripts.Task;
+import static scripts.script.Util.Chop;
+import scripts.tasks.Antiban.*;
 
-import static scripts.Constants.WILLOW_AREA;
-import static scripts.Constants.YEW_AREA;
+import static scripts.quest101.setUp;
 
 
 public class Chop extends Task {
@@ -21,8 +24,8 @@ public class Chop extends Task {
         this.TREE_AREA = TREE_AREA;
     }
     GameObject Tree;
-    @Override
-    public boolean activate() {
+
+    private void EdgeCheck(){
         Tree = ctx.objects.select().name(TREE_NAME).within(TREE_AREA).nearest().poll();
         if(!(ctx.objects.select().within(TREE_AREA).name("Tree Stump").size()==2)) {
 //            if (ctx.camera.pitch() > 50)
@@ -30,24 +33,35 @@ public class Chop extends Task {
             if ((ctx.players.local().animation() == -1) && !Tree.inViewport()) {
                 ctx.input.move(Tree.nextPoint());
                 ctx.camera.pitch(Random.nextInt(0, 99));
+                int now = ctx.camera.yaw();
                 if(Random.nextDouble()>0.5) {
-                    ctx.camera.angle(ctx.camera.yaw() + 180 + Random.nextInt(-10, 10));
+                    for(int deg = 0; deg<=360 && !Tree.inViewport();deg+=Random.nextInt(1,25)) {
+                        ctx.camera.angle(now + deg);
+                    }
                 }else{
-                    ctx.camera.angle(ctx.camera.yaw() - 180 + Random.nextInt(-10, 10));
+                    for(int deg = 0; deg<=360 && !Tree.inViewport();deg+=Random.nextInt(1,25)) {
+                        ctx.camera.angle(now - deg);
+                    }
                 }
             }
         }
-        return ctx.players.local().animation()==-1 && ctx.inventory.select().count()<28&& !ctx.players.local().inMotion() && Tree.inViewport();
+    }
+
+
+
+    @Override
+    public boolean activate() {
+        setUp.ctx = ctx;
+        EdgeCheck();
+        return ctx.players.local().animation()==-1 && ctx.inventory.select().count()<28 && !ctx.players.local().inMotion() && Tree.inViewport();
     }
 
     @Override
     public void execute() {
-            System.out.println("Chopping");
-            Condition.sleep(Random.nextInt(350, 500));
-            Tree.interact("Chop");
-            Tree.click();
-            if (ctx.players.local().animation()!=-1 && Constants.WC_ANIM==0)
-                Constants.WC_ANIM = ctx.players.local().animation();
-            Condition.sleep(Random.nextInt(350, 500));
+        System.out.println("Chopping");
+        Condition.sleep(Random.nextInt(350, 500));
+        Chop(Tree);
+        AntibanScript.moveMouseOffScreen(ctx,0);
+        Condition.sleep(Random.nextInt(350, 500));
     }
 }

@@ -8,8 +8,6 @@ import org.powerbot.script.rt4.GameObject;
 import scripts2.Constants;
 import scripts2.Task;
 
-import static scripts.Constants.WILLOW_AREA;
-import static scripts.Constants.YEW_AREA;
 
 
 public class Chop extends Task {
@@ -40,8 +38,9 @@ public class Chop extends Task {
     public void execute() {
             System.out.println("Chopping");
             Condition.sleep(Random.nextInt(350, 500));
-            Tree.interact("Chop");
-            Tree.click();
+            Tree.click(false);
+            Tree.click("Chop down","Willow");
+//            Tree.interact("Chop");
             if (ctx.players.local().animation()!=-1 && Constants.WC_ANIM==0)
                 Constants.WC_ANIM = ctx.players.local().animation();
             Condition.sleep(Random.nextInt(350, 500));

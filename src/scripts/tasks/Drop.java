@@ -6,7 +6,10 @@ import org.powerbot.script.Random;
 import org.powerbot.script.rt4.ClientContext;
 import org.powerbot.script.rt4.Item;
 import org.powerbot.script.rt4.ItemQuery;
+import scripts.SetUp;
 import scripts.Task;
+
+import static scripts.quest101.setUp;
 
 public class Drop extends Task {
     String AXE_NAME;
@@ -28,6 +31,7 @@ public class Drop extends Task {
         Condition.sleep(Random.nextInt(350, 500));
         ItemQuery<Item> d = ctx.inventory.select().name(LOG_NAME);
         while(d.count()!=0){
+            setUp.state = SetUp.Type.DROPPING;
             if(!(d.peek().component().visible()))
             {
                 System.out.println("Making Inverntory Visible");

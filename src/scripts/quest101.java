@@ -4,6 +4,7 @@ import org.powerbot.script.Area;
 import org.powerbot.script.PollingScript;
 import org.powerbot.script.Script;
 import org.powerbot.script.rt4.ClientContext;
+import scripts.script.Util;
 import scripts.tasks.*;
 import scripts.tasks.Util.PosUtil;
 
@@ -15,9 +16,10 @@ import static scripts.SetUp.*;
 
 @Script.Manifest(name="quesast", description="primero", properties="client=4; author=Ete; topic=999;")
 
-public class quest101 extends PollingScript<ClientContext> {
+public class quest101 extends PollingScript<ClientContext>{
 
     public List<Task> taskList = new ArrayList<Task>();
+    public static SetUp setUp = new SetUp();
 
     @Override
     public void start(){
@@ -30,8 +32,6 @@ public class quest101 extends PollingScript<ClientContext> {
             taskList.add(new WalkToBank(ctx, EDGE_BANK_AREA, EDGE_TO_BANK_RIDE));
             taskList.add(new Bank(ctx, AXE_NAME));
             taskList.add(new Idle(ctx));
-
-
     }
 
     @Override
