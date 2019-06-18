@@ -11,28 +11,25 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static scripts.Constants.*;
+import static scripts.SetUp.*;
 
 @Script.Manifest(name="quesast", description="primero", properties="client=4; author=Ete; topic=999;")
 
 public class quest101 extends PollingScript<ClientContext> {
 
     public List<Task> taskList = new ArrayList<Task>();
-    public static String TREE_NAME = "Yew";
-    public static String AXE_NAME = "Rune Axe";
-    public static Area TREE_AREA = YEW_AREA;
 
     @Override
     public void start(){
 //        taskList.add(new PosUtil(ctx));
 
-
-        taskList.add(new WalkToTree(ctx,TREE_AREA,EDGE_TO_BANK_RIDE));
+            taskList.add(new WalkToTree(ctx, TREE_AREA, EDGE_TO_BANK_RIDE));
 //        taskList.add(new OpenDoor(ctx));
-        taskList.add(new Chop(ctx,TREE_AREA, TREE_NAME));
-        taskList.add(new Antiban(ctx));
-        taskList.add(new WalkToBank(ctx,EDGE_BANK_AREA, EDGE_TO_BANK_RIDE));
-        taskList.add(new Bank(ctx,AXE_NAME));
-        taskList.add(new Idle(ctx));
+            taskList.add(new Chop(ctx, TREE_AREA, TREE_NAME));
+            taskList.add(new Antiban(ctx));
+            taskList.add(new WalkToBank(ctx, EDGE_BANK_AREA, EDGE_TO_BANK_RIDE));
+            taskList.add(new Bank(ctx, AXE_NAME));
+            taskList.add(new Idle(ctx));
 
 
     }

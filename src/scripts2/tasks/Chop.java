@@ -1,12 +1,12 @@
-package scripts.tasks;
+package scripts2.tasks;
 
 import org.powerbot.script.Area;
 import org.powerbot.script.Condition;
 import org.powerbot.script.Random;
 import org.powerbot.script.rt4.ClientContext;
 import org.powerbot.script.rt4.GameObject;
-import scripts.Constants;
-import scripts.Task;
+import scripts2.Constants;
+import scripts2.Task;
 
 import static scripts.Constants.WILLOW_AREA;
 import static scripts.Constants.YEW_AREA;
@@ -24,19 +24,15 @@ public class Chop extends Task {
     @Override
     public boolean activate() {
         Tree = ctx.objects.select().name(TREE_NAME).within(TREE_AREA).nearest().poll();
-        if(!(ctx.objects.select().within(TREE_AREA).name("Tree Stump").size()==2)) {
+//        if(!(ctx.objects.select().within(TREE_AREA).name("Tree Stump").size()==2)) {
 //            if (ctx.camera.pitch() > 50)
 //                ctx.camera.pitch();
             if ((ctx.players.local().animation() == -1) && !Tree.inViewport()) {
                 ctx.input.move(Tree.nextPoint());
                 ctx.camera.pitch(Random.nextInt(0, 99));
-                if(Random.nextDouble()>0.5) {
-                    ctx.camera.angle(ctx.camera.yaw() + 180 + Random.nextInt(-10, 10));
-                }else{
-                    ctx.camera.angle(ctx.camera.yaw() - 180 + Random.nextInt(-10, 10));
-                }
+                ctx.camera.angle(ctx.camera.yaw() + Random.nextInt(-180, 180));
             }
-        }
+//        }
         return ctx.players.local().animation()==-1 && ctx.inventory.select().count()<28&& !ctx.players.local().inMotion() && Tree.inViewport();
     }
 

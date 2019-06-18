@@ -1,12 +1,16 @@
-package scripts.tasks.Util;
+package scripts2.tasks.Util;
 
 
-import org.powerbot.script.rt4.BasicQuery;
-import org.powerbot.script.rt4.ClientContext;
-import org.powerbot.script.rt4.GameObject;
-import scripts.Task;
+import org.powerbot.script.Area;
+import org.powerbot.script.Condition;
+import org.powerbot.script.Tile;
+import org.powerbot.script.rt4.*;
+import scripts2.Task;
+import org.powerbot.script.rt4.Players;
+import java.awt.*;
+import java.util.concurrent.Callable;
 
-import static scripts.Constants.YEW_AREA;
+import static scripts2.Constants.WC_ANIM;
 
 public class PosUtil extends Task {
     public PosUtil(ClientContext ctx) {
@@ -15,7 +19,9 @@ public class PosUtil extends Task {
     GameObject Tree;
     @Override
     public boolean activate() {
-//        System.out.println(ctx.objects.select().name("Door").nearest().poll().id());
+//        System.out.println(ctx.worlds.open());
+
+//        System.out.println(ctx.inventory.name("Willow Logs").peek().inViewport());
 //        Tree = ctx.objects.select().name("Oak").nearest().poll();
 //        System.out.println(Tree.inViewport());
 //        int i = 1;
@@ -49,9 +55,18 @@ public class PosUtil extends Task {
     }
     @Override
     public void execute() {
-//        System.out.println(YEW_AREA.contains(ctx.players.local()));
-        BasicQuery<GameObject> k = ctx.objects.select().within(YEW_AREA).name("Tree Stump");
-        System.out.println(k.size());
+//        System.out.println(ctx.players.local().orientation());
+        int t = ctx.camera.yaw();
+        if(WC_ANIM!=5) {
+            ctx.camera.angle(t+180);
+            System.out.println("moveds");
+        }
+        WC_ANIM=5;
+//        System.out.println("Pool");
+//        System.out.println(ctx.inventory.select().poll().name().split(" ")[1]);
+//        ctx.bank.open();
+//        ctx.bank.depositAllExcept(ctx.inventory.select().poll().id());
+
 //        Area d =  new Area(new Tile(ctx.players.local().tile().x(), ctx.players.local().tile().y()));
 //        Area d2 =  new Area(new Tile(3181, 3489), new Tile(3180, 3488));
 //        System.out.println(d.contains(ctx.players.local()));

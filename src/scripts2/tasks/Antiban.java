@@ -1,11 +1,11 @@
-package scripts.tasks;
+package scripts2.tasks;
 
 import org.powerbot.script.Condition;
 import org.powerbot.script.Random;
 import org.powerbot.script.rt4.ClientContext;
 import org.powerbot.script.rt4.Player;
-import scripts.Constants;
-import scripts.Task;
+import scripts2.Constants;
+import scripts2.Task;
 
 import java.awt.*;
 import java.util.concurrent.Callable;
@@ -23,8 +23,9 @@ public class Antiban extends Task {
     public void doAntibanAction(int antibanAction){
         if (antibanAction == 1 || antibanAction == 2){
         } else if (antibanAction == 3 || antibanAction == 4){
-
-            randomMouseMovement();
+            int minDistance = Random.nextInt(50, 100);
+            int maxDistance = Random.nextInt(250, 300);
+            randomMouseMovement(minDistance, maxDistance);
         } else if (antibanAction == 5 || antibanAction == 6){
             hoverOverRandomPlayer();
         } else if (antibanAction == 7 || antibanAction == 8){
@@ -55,14 +56,12 @@ public class Antiban extends Task {
      * minDistance and maxDistance. The maximum distance is cut short if the
      * mouse would go off screen in the direction it chose.
      *
-     *
+     * @param minDistance
      * The minimum distance the cursor will move
-     *
+     * @param maxDistance
      * The maximum distance the cursor will move (exclusive)
      */
-    public void randomMouseMovement() {
-        int minDistance = Random.nextInt(50, 100);
-        int maxDistance = Random.nextInt(250, 300);
+    public void randomMouseMovement(int minDistance, int maxDistance) {
         double xvec = Math.random();
         if (Random.nextInt(0, 2) == 1) {
             xvec = -xvec;
@@ -173,10 +172,9 @@ public class Antiban extends Task {
         System.out.println("AntiBanning");
         if (Random.nextDouble() > 0.90){
             randomCameraTurn();
-            randomMouseMovement();
         }
         else {
-            moveMouseOffScreen(3);
+            moveMouseOffScreen(2);
         }
 
 //        moveMouseOffScreen();
