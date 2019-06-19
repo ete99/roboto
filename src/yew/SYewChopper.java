@@ -6,13 +6,8 @@ import org.powerbot.script.rt4.ClientContext;
 import org.powerbot.script.rt4.GeItem;
 
 
-import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.Random;
-import yew.GUI.*;
-import yew.AREA.*;
 
 @Script.Manifest(name = "yew.SYewChopper", properties = "author=Spearless; topic=1333332; client=4;", description = "Cuts Yews and banks in East Varrock,DraynorV,GE,SouthFalador,Edgeville")
 public class SYewChopper extends PollingScript<ClientContext> implements PaintListener  {

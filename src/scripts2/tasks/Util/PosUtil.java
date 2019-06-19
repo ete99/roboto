@@ -7,8 +7,6 @@ import org.powerbot.script.Tile;
 import org.powerbot.script.rt4.*;
 import scripts2.Task;
 import org.powerbot.script.rt4.Players;
-import java.awt.*;
-import java.util.concurrent.Callable;
 
 import static scripts2.Constants.WC_ANIM;
 

@@ -9,31 +9,30 @@ import scripts.AntibanScript;
 import scripts.Constants;
 import scripts.SetUp;
 import scripts.Task;
+
+import java.util.concurrent.Callable;
+
 import static scripts.script.Util.Chop;
-import scripts.tasks.Antiban.*;
 
 import static scripts.quest101.setUp;
 
 
 public class Chop extends Task {
-    String TREE_NAME;
-    Area TREE_AREA;
-    public Chop(ClientContext ctx, Area TREE_AREA, String TREE_NAME) {
+    public Chop(ClientContext ctx) {
         super(ctx);
-        this.TREE_NAME = TREE_NAME;
-        this.TREE_AREA = TREE_AREA;
     }
     GameObject Tree;
 
     private void EdgeCheck(){
-        Tree = ctx.objects.select().name(TREE_NAME).within(TREE_AREA).nearest().poll();
-        if(!(ctx.objects.select().within(TREE_AREA).name("Tree Stump").size()==2)) {
+        Tree = ctx.objects.select().name(setUp.TREE_NAME).within(setUp.TREE_AREA).nearest().poll();
+        int now = ctx.camera.yaw();
+        if(!(ctx.objects.select().within(setUp.TREE_AREA).name("Tree Stump").size()==2)) {
 //            if (ctx.camera.pitch() > 50)
 //                ctx.camera.pitch();
             if ((ctx.players.local().animation() == -1) && !Tree.inViewport()) {
                 ctx.input.move(Tree.nextPoint());
                 ctx.camera.pitch(Random.nextInt(0, 99));
-                int now = ctx.camera.yaw();
+
                 if(Random.nextDouble()>0.5) {
                     for(int deg = 0; deg<=360 && !Tree.inViewport();deg+=Random.nextInt(1,25)) {
                         ctx.camera.angle(now + deg);
@@ -44,6 +43,19 @@ public class Chop extends Task {
                     }
                 }
             }
+        }else if(setUp.state != SetUp.State.WAITING){
+
+            if(Random.nextDouble()>0.5) {
+                    ctx.camera.angle(now + 180 + Random.nextInt(-90,90));
+            }else{
+                    ctx.camera.angle(now - 180 + Random.nextInt(-90,90));
+            }
+            Condition.wait(new Callable<Boolean>() {
+                @Override
+                public Boolean call() throws Exception {
+                    return ctx.objects.select().within(setUp.TREE_AREA).name("Tree Stump").size()==2;
+                }
+            },400,20);
         }
     }
 

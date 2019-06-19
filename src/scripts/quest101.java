@@ -1,36 +1,37 @@
 package scripts;
-
-import org.powerbot.script.Area;
 import org.powerbot.script.PollingScript;
 import org.powerbot.script.Script;
 import org.powerbot.script.rt4.ClientContext;
-import scripts.script.Util;
 import scripts.tasks.*;
-import scripts.tasks.Util.PosUtil;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static scripts.Constants.*;
-import static scripts.SetUp.*;
 
 @Script.Manifest(name="quesast", description="primero", properties="client=4; author=Ete; topic=999;")
 
 public class quest101 extends PollingScript<ClientContext>{
 
     public List<Task> taskList = new ArrayList<Task>();
-    public static SetUp setUp = new SetUp();
+    public static SetUp setUp;
+
 
     @Override
     public void start(){
+        setUp =  new SetUp(ctx, 1);
+//        try {
+//            Thread.
+//            mailme.sendPOST();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
 //        taskList.add(new PosUtil(ctx));
-
-            taskList.add(new WalkToTree(ctx, TREE_AREA, EDGE_TO_BANK_RIDE));
+            taskList.add(new CheckValid(ctx));
+            taskList.add(new WalkToTree(ctx));
 //        taskList.add(new OpenDoor(ctx));
-            taskList.add(new Chop(ctx, TREE_AREA, TREE_NAME));
+            taskList.add(new Chop(ctx));
             taskList.add(new Antiban(ctx));
-            taskList.add(new WalkToBank(ctx, EDGE_BANK_AREA, EDGE_TO_BANK_RIDE));
-            taskList.add(new Bank(ctx, AXE_NAME));
+            taskList.add(new WalkToBank(ctx));
+            taskList.add(new Bank(ctx));
             taskList.add(new Idle(ctx));
     }
 

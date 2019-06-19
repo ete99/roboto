@@ -36,9 +36,9 @@ public class Mover extends Task {
 //        while(i.hasNext()){
 //            Widget w= i.next();
 //            if(w.componentCount()>0)
-//                for(Component m : w.components())
-//                    if(m.actions().length>0)
-//                        System.out.println(m.actions()[0]);
+//                for(Component mandamail : w.components())
+//                    if(mandamail.actions().length>0)
+//                        System.out.println(mandamail.actions()[0]);
 //        }
         System.out.println("numbero"+c);
 //        Component nametxt = ctx.widgets.widget(263).component(1).component(0);

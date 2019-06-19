@@ -31,7 +31,7 @@ public class Drop extends Task {
         Condition.sleep(Random.nextInt(350, 500));
         ItemQuery<Item> d = ctx.inventory.select().name(LOG_NAME);
         while(d.count()!=0){
-            setUp.state = SetUp.Type.DROPPING;
+            setUp.state = SetUp.State.DROPPING;
             if(!(d.peek().component().visible()))
             {
                 System.out.println("Making Inverntory Visible");
