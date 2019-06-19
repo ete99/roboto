@@ -2,7 +2,7 @@ package scripts.tasks;
 
 import org.powerbot.script.Random;
 import org.powerbot.script.rt4.ClientContext;
-import scripts.AntibanScript;
+import scripts.script.AntibanScript;
 import scripts.Constants;
 import scripts.SetUp.*;
 import scripts.Task;

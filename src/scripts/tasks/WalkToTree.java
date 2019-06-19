@@ -1,13 +1,12 @@
 package scripts.tasks;
 
 
-import org.powerbot.script.Area;
 import org.powerbot.script.Condition;
 import org.powerbot.script.Random;
-import org.powerbot.script.Tile;
 import org.powerbot.script.rt4.ClientContext;
 import org.powerbot.script.rt4.GameObject;
 import org.powerbot.script.rt4.TilePath;
+import scripts.script.AntibanScript;
 import scripts.Constants;
 import scripts.SetUp.*;
 import scripts.Task;
@@ -16,6 +15,7 @@ import static scripts.script.Util.Chop;
 import java.util.concurrent.Callable;
 
 import static scripts.quest101.setUp;
+import static scripts.script.Util.walkToTree;
 
 public class WalkToTree extends Task {
 //    static Tile  tiles[] = { new Tile(3172, 3426, 0), new Tile(3167, 3417, 0)};
@@ -47,25 +47,21 @@ public class WalkToTree extends Task {
     public void execute() {
         System.out.println("Walking to Trees");
         Condition.sleep(Random.nextInt(250, 500));
-        if(setUp.state != State.IDLE && ctx.objects.select().name(setUp.TREE_NAME).nearest().poll().inViewport())
+//        if(setUp.state != State.IDLE && ctx.objects.select().name(setUp.TREE_NAME).nearest().poll().inViewport())
         if(!(setUp.TREE_AREA.contains(ctx.players.local())))
             openDoor();
         GameObject Tree = ctx.objects.select().name(setUp.TREE_NAME).nearest().poll();
-        if (Tree.inViewport()){
+        if (Tree.inViewport() && ctx.objects.select().id(1544).nearest().poll().valid()){
             Chop(Tree);
+            AntibanScript.moveMouseOffScreen(ctx,0);
+        }else {
+            walkToTree();
+            if (setUp.ctx.players.local().animation() == Constants.RUN_ANIM)
+                setUp.state = State.WALKING;
+            Condition.sleep(Random.nextInt(250, 500));
+            ctx.camera.pitch(ctx.camera.pitch() + Random.nextInt(-10, 10));
+            ctx.camera.angle(ctx.camera.yaw() + Random.nextInt(-50, 50));
         }
-
-        TilePath path = ctx.movement.newTilePath(setUp.RIDE);
-        path.reverse();
-        path.randomize(1, 1);
-        path.traverse();
-        if(setUp.ctx.players.local().animation()!=-1 && Constants.RUN_ANIM==0)
-            Constants.RUN_ANIM = setUp.ctx.players.local().animation();
-        if(setUp.ctx.players.local().animation() == Constants.RUN_ANIM)
-            setUp.state = State.WALKING;
-        Condition.sleep(Random.nextInt(250, 500));
-        ctx.camera.pitch(ctx.camera.pitch()+Random.nextInt(-10,10));
-        ctx.camera.angle(ctx.camera.yaw() + Random.nextInt(-50, 50));
     }
 }
 

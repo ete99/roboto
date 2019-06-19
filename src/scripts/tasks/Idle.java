@@ -3,7 +3,7 @@ package scripts.tasks;
 
 import org.powerbot.script.Condition;
 import org.powerbot.script.rt4.ClientContext;
-
+import static scripts.script.Util.sendMail;
 import scripts.SetUp.*;
 import scripts.Task;
 
@@ -41,7 +41,8 @@ public class Idle extends Task {
     @Override
     public void execute() {
         if(t>1000){
-            String s[] = {"idle"};
+            sendMail("Paro");
+
             System.exit(3);
         }
     }

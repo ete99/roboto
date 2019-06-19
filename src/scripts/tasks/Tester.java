@@ -1,4 +1,4 @@
-package scripts.tasks.Util;
+package scripts.tasks;
 
 
 import org.powerbot.script.rt4.BasicQuery;
@@ -8,8 +8,8 @@ import scripts.Task;
 
 import static scripts.Constants.YEW_AREA;
 
-public class PosUtil extends Task {
-    public PosUtil(ClientContext ctx) {
+public class Tester extends Task {
+    public Tester(ClientContext ctx) {
         super(ctx);
     }
     GameObject Tree;

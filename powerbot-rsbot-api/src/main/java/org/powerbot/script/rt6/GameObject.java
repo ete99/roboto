@@ -93,7 +93,7 @@ public class GameObject extends Interactive implements InteractiveEntity, Nameab
 		return object != null ? object.getFloor() : -1;
 	}
 
-	//TODO: get config
+	//TODO: get scripts.config
 
 	public Area area() {
 		//TODO: special type

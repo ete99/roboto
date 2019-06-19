@@ -9,7 +9,7 @@ import static scripts.Constants.YEW_AREA;
 
 public class  SetUp {
     public  String TREE_NAME = "Yew";
-    public  String LOGS_NAME;
+    public  String LOGS_NAME;  // To drop, possibly deprecated
     public  String AXE_NAME;
     public  int AXE_ID;
     public  Area TREE_AREA;
@@ -17,11 +17,11 @@ public class  SetUp {
     public  State state = State.IDLE;
     public ClientContext ctx;
     public  Tile[] RIDE;
-//    public static GameObject currentTree;
 
     SetUp (ClientContext ctx, int set){
         this.ctx = ctx;
         if(set == 1) {
+            // @TODO hacer jframe y otras areas
             this.TREE_AREA = YEW_AREA;
             this.BANK_AREA = EDGE_BANK_AREA;
             this.TREE_NAME = "Yew";

@@ -1,12 +1,10 @@
 package scripts.tasks;
 
-import org.powerbot.script.Area;
 import org.powerbot.script.Condition;
 import org.powerbot.script.Random;
 import org.powerbot.script.rt4.ClientContext;
 import org.powerbot.script.rt4.GameObject;
-import scripts.AntibanScript;
-import scripts.Constants;
+import scripts.script.AntibanScript;
 import scripts.SetUp;
 import scripts.Task;
 
@@ -43,8 +41,8 @@ public class Chop extends Task {
                     }
                 }
             }
-        }else if(setUp.state != SetUp.State.WAITING){
-
+        } else if (setUp.state != SetUp.State.WAITING){
+            // waits for a new yew tree
             if(Random.nextDouble()>0.5) {
                     ctx.camera.angle(now + 180 + Random.nextInt(-90,90));
             }else{
@@ -55,7 +53,7 @@ public class Chop extends Task {
                 public Boolean call() throws Exception {
                     return ctx.objects.select().within(setUp.TREE_AREA).name("Tree Stump").size()==2;
                 }
-            },400,20);
+            },400,150);
         }
     }
 

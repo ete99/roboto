@@ -15,14 +15,17 @@ public class CheckValid extends Task {
 
     @Override
     public boolean activate() {
-//        if(ctx.game.clientState()!=30)
+        if(ctx.game.clientState()!=30){
+            sendMail("Paro!");
+            System.exit(4);
+        }
 
         return ctx.inventory.select().name(setUp.AXE_NAME).count()!=1;
     }
 
     @Override
     public void execute() {
-        walkToBank(setUp.RIDE);
+        walkToBank();
         pickAxe();
     }
 }

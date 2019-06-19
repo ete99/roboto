@@ -5,13 +5,13 @@ import org.powerbot.script.Tile;
 import org.powerbot.script.rt4.*;
 import scripts.Task;
 
-public class Mover extends Task {
+public class Example extends Task {
 
     final static int ROCK_IDS[] = { 7453, 7484 };
 
     Tile rockLocation = Tile.NIL;
 
-    public Mover(ClientContext ctx) {
+    public Example(ClientContext ctx) {
         super(ctx);
     }
 
