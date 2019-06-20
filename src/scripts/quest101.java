@@ -1,6 +1,13 @@
 package scripts;
 
+import java.sql.Time;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import org.powerbot.script.PollingScript;
@@ -17,20 +24,27 @@ public class quest101 extends PollingScript<ClientContext>{
 
     public List<Task> taskList = new ArrayList<Task>();
     public static SetUp setUp;
-
+    DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+    LocalDateTime now = LocalDateTime.now();
     @Override
     public void start(){
-        sendMail("Comienza "+ctx.players.local().name());
+//        System.out.println(dtf.format(now)); //2016/11/16 12:08:43
+
+//        sendMail("Comienza "+ctx.players.local().name() + " " + dtf.format(now));
         setUp =  new SetUp(ctx, 1);  // sets up the needed shared data
 //        taskList.add(new Tester(ctx));
-            taskList.add(new CheckValid(ctx));
-            taskList.add(new WalkToTree(ctx));
+        taskList.add(new CheckValid(ctx));
+        taskList.add(new WalkToTree(ctx));
 //        taskList.add(new OpenDoor(ctx));
-            taskList.add(new Chop(ctx));
-            taskList.add(new Antiban(ctx));
-            taskList.add(new WalkToBank(ctx));
-            taskList.add(new Bank(ctx));
-            taskList.add(new Idle(ctx));
+        taskList.add(new Chop(ctx));
+        taskList.add(new Antiban(ctx));
+        taskList.add(new WalkToBank(ctx));
+        taskList.add(new Bank(ctx));
+        taskList.add(new Idle(ctx));
+    }
+
+    public void stop(){
+        System.out.println("paro\n");
     }
 
     @Override

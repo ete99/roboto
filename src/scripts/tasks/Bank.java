@@ -22,7 +22,7 @@ public class Bank extends Task {
     @Override
     public void execute() {
         Condition.sleep(Random.nextInt(350, 500));
-        System.out.println("banking");
+//        System.out.println("banking");
         ctx.camera.angle(ctx.camera.yaw() + Random.nextInt(-50, 50));
         if(!ctx.bank.inViewport() && ctx.bank.close()){
             ctx.camera.pitch(99-Random.nextInt(0, 3));

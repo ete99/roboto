@@ -7,6 +7,8 @@ import static scripts.script.Util.sendMail;
 import scripts.SetUp.*;
 import scripts.Task;
 
+import java.util.concurrent.Callable;
+
 import static scripts.quest101.setUp;
 
 public class Idle extends Task {
@@ -19,18 +21,24 @@ public class Idle extends Task {
     @Override
     public boolean activate() {
         Condition.sleep(500);
-        System.out.println("idle check");
+//        System.out.println("idle check");
         if(ctx.players.local().animation()==-1  && t==ctx.inventory.select().count() && !(ctx.objects.select().within(setUp.TREE_AREA).name("Tree Stump").size()==2)){
             c++;
             t=ctx.inventory.select().count();
             if(c>20) {
                 setUp.state = State.IDLE;
             }
-            System.out.println("idle");
+            if(c>500) {
+                setUp.state = State.REALLY_IDLE;
+            }
+//            System.out.println("idle");
         }
         else{
-            setUp.state = State.WAITING;
-            System.out.println("not idle");
+            if(ctx.objects.select().within(setUp.TREE_AREA).name("Tree Stump").size()==2) {
+                setUp.state = State.WAITING;
+                Condition.wait(() -> ctx.objects.select().within(setUp.TREE_AREA).name("Tree Stump").size()==2, 400,20);
+            }
+//            System.out.println("not idle");
             t=ctx.inventory.select().count();
             c=0;
             return false;
@@ -40,7 +48,7 @@ public class Idle extends Task {
 
     @Override
     public void execute() {
-        if(t>1000){
+        if(c>1000){
             sendMail("Paro");
 
             System.exit(3);

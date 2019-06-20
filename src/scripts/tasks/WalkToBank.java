@@ -25,6 +25,7 @@ public class WalkToBank extends Task {
 
     void openDoor(){
         final GameObject DOOR = ctx.objects.select().id(1543).nearest().poll();
+        DOOR.click();
         if(DOOR.valid()) {
             DOOR.interact("Open");
             Condition.wait(new Callable<Boolean>() {
@@ -43,7 +44,7 @@ public class WalkToBank extends Task {
 
     @Override
     public void execute() {
-        System.out.println("Walking to bank");
+//        System.out.println("Walking to bank");
         Condition.sleep(Random.nextInt(250, 500));
         walkToBank();
         if(ctx.players.local().animation() == Constants.RUN_ANIM)

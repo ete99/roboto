@@ -13,14 +13,14 @@ public class mailme {
 
     private static final String USER_AGENT = "Mozilla/5.0";
 
-    private static final String POST_URL = "https://api.elasticemail.com/v2/email/send";  // poner api en configure java
+    private static final String POST_URL = "https://api.elasticemail.com/v2/email/send?";  // poner api en configure java
 
 
     public static void main(String[] args) throws IOException {
 
 //        sendGET();
 //        System.out.println("GET DONE");
-        sendPOST("prueba");
+        sendPOST("hola ma");
         System.out.println("POST DONE");
     }
 
@@ -58,6 +58,7 @@ public class mailme {
         // For POST only - START
         con.setDoOutput(true);
         OutputStream os = con.getOutputStream();
+        System.out.println(POST_PARAMS);
         String POST_REQ = POST_PARAMS+str;
         os.write(POST_REQ.getBytes());
         os.flush();
@@ -71,7 +72,7 @@ public class mailme {
 
         if (responseCode == HttpURLConnection.HTTP_OK) {
             // Respuesta si se conecto con el API
-            /*
+
             BufferedReader in = new BufferedReader(new InputStreamReader(
                     con.getInputStream()));
             String inputLine;
@@ -83,7 +84,7 @@ public class mailme {
             in.close();
             // print result
             System.out.println(response.toString());
-             */
+
         } else {
             System.out.println("POST request not worked");
         }

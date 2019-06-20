@@ -35,6 +35,7 @@ public class  SetUp {
 
     public enum State {
         IDLE,
+        REALLY_IDLE,
         WAITING,
         ANTIBANNING,
         WALKING,

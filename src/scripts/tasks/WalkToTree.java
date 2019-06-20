@@ -10,12 +10,11 @@ import scripts.script.AntibanScript;
 import scripts.Constants;
 import scripts.SetUp.*;
 import scripts.Task;
-import static scripts.script.Util.Chop;
 
 import java.util.concurrent.Callable;
 
 import static scripts.quest101.setUp;
-import static scripts.script.Util.walkToTree;
+import static scripts.script.Util.*;
 
 public class WalkToTree extends Task {
 //    static Tile  tiles[] = { new Tile(3172, 3426, 0), new Tile(3167, 3417, 0)};
@@ -27,6 +26,7 @@ public class WalkToTree extends Task {
 
     void openDoor(){
         final GameObject DOOR = ctx.objects.select().id(1543).nearest().poll();
+        DOOR.click();
         if(DOOR.valid()) {
             DOOR.interact("Open");
             Condition.wait(new Callable<Boolean>() {
@@ -45,22 +45,20 @@ public class WalkToTree extends Task {
 
     @Override
     public void execute() {
-        System.out.println("Walking to Trees");
+//        System.out.println("Walking to Trees");
         Condition.sleep(Random.nextInt(250, 500));
 //        if(setUp.state != State.IDLE && ctx.objects.select().name(setUp.TREE_NAME).nearest().poll().inViewport())
         if(!(setUp.TREE_AREA.contains(ctx.players.local())))
             openDoor();
         GameObject Tree = ctx.objects.select().name(setUp.TREE_NAME).nearest().poll();
-        if (Tree.inViewport() && ctx.objects.select().id(1544).nearest().poll().valid()){
+        if (Tree.inViewport() && ctx.objects.select().id(1544).nearest().poll().valid() && setUp.ctx.players.local().animation()!=-1){
             Chop(Tree);
-            AntibanScript.moveMouseOffScreen(ctx,0);
+//            AntibanScript.moveMouseOffScreen(ctx,0);
         }else {
             walkToTree();
             if (setUp.ctx.players.local().animation() == Constants.RUN_ANIM)
                 setUp.state = State.WALKING;
             Condition.sleep(Random.nextInt(250, 500));
-            ctx.camera.pitch(ctx.camera.pitch() + Random.nextInt(-10, 10));
-            ctx.camera.angle(ctx.camera.yaw() + Random.nextInt(-50, 50));
         }
     }
 }

@@ -27,21 +27,21 @@ public class Drop extends Task {
 
     @Override
     public void execute() {
-        System.out.println("Begin Dropping: ");
+//        System.out.println("Begin Dropping: ");
         Condition.sleep(Random.nextInt(350, 500));
         ItemQuery<Item> d = ctx.inventory.select().name(LOG_NAME);
         while(d.count()!=0){
             setUp.state = SetUp.State.DROPPING;
             if(!(d.peek().component().visible()))
             {
-                System.out.println("Making Inverntory Visible");
+                System.out.println("Making Inventory Visible");
                 ctx.input.move(Random.nextInt(670, 695),Random.nextInt(510, 540));  // click on inventory if not visible
                 ctx.input.click(true);
             }
             for(Item i: d){
                 if((AXE_NAME==null || !(i.name().equals(AXE_NAME)) && i.component().visible())){ // probably not needed to specify vibility just trying to solve a bug
                     i.interact("Drop");
-                    System.out.println("Dropping");
+//                    System.out.println("Dropping");
                 }
                 Condition.sleep(Random.nextInt(350, 400));
             }

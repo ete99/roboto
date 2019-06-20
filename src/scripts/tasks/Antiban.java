@@ -27,7 +27,7 @@ public class Antiban extends Task {
 
     @Override
     public void execute() {
-        System.out.println("AntiBanning");
+//        System.out.println("AntiBanning");
         setUp.state = State.ANTIBANNING;
         if (Random.nextDouble() > 0.90){
             AntibanScript.randomCameraTurn(ctx);

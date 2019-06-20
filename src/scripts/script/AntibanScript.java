@@ -124,8 +124,6 @@ public class AntibanScript {
         ctx.input.defocus();
         if(level>0)
             Condition.sleep(Random.nextInt(3000, 5000));
-        else
-            Condition.sleep(Random.nextInt(500, 2500));
         int t=Random.nextInt(0, 101);
         if(t>99 && level>=3){
             System.out.println("The long wait");
@@ -144,13 +142,21 @@ public class AntibanScript {
                     return ctx.players.local().animation()==-1;
                 }
             }, 1000, 100);
-        else
+        else if(level == 0)
             Condition.wait(new Callable<Boolean>(){
                 @Override
                 public Boolean call() {
                     return ctx.players.local().animation()==-1;
                 }
-            }, 300, 10);
+            }, 200, 10);
+        else {
+            Condition.wait(new Callable<Boolean>(){
+                @Override
+                public Boolean call() {
+                    return ctx.players.local().animation()==-1;
+                }
+            }, 3, 100);
+        }
         ctx.input.focus();
 //        x = Random.nextInt(10, 510);
 //        y = Random.nextInt(10, 330);
