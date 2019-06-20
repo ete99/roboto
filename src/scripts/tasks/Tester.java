@@ -2,6 +2,7 @@ package scripts.tasks;
 
 
 import org.powerbot.script.Condition;
+import org.powerbot.script.MenuCommand;
 import org.powerbot.script.rt4.BasicQuery;
 import org.powerbot.script.rt4.ClientContext;
 import org.powerbot.script.rt4.GameObject;
@@ -18,6 +19,7 @@ public class Tester extends Task {
     GameObject Tree;
     @Override
     public boolean activate() {
+
 //        System.out.println(ctx.objects.select().name("Door").nearest().poll().id());
 //        Tree = ctx.objects.select().name("Oak").nearest().poll();
 //        System.out.println(Tree.inViewport());
@@ -52,6 +54,18 @@ public class Tester extends Task {
     }
     @Override
     public void execute() {
+//        ctx.menu.commands()
+        for(MenuCommand i : ctx.menu.commands()){
+            if(i.toString().equals("Chop down Yew")) {
+//                ctx.input.move(134,234);
+                ctx.input.click(1);
+
+//                ctx.input.click(1);
+//                ctx.input.press(2);
+                System.out.println("chopaaa");
+            }
+        }
+//            System.out.println(i.toString());
 //        ctx.input.move(100,100);
 //        ctx.input.drag(new Point(ctx.players.local().centerPoint().x+20,ctx.players.local().centerPoint().y),2);
 //        ctx.camera.pitch(100);
@@ -62,7 +76,7 @@ public class Tester extends Task {
         t1.start();
         t2.start();
         */
-        Condition.sleep(10000);
+        Condition.sleep(1000);
 //        Condition.sleep(60000);
 //        System.out.println(YEW_AREA.contains(ctx.players.local()));
 //        BasicQuery<GameObject> k = ctx.objects.select().within(YEW_AREA).name("Yew");

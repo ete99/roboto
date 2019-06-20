@@ -12,6 +12,7 @@ import scripts.mailme;
 
 import java.awt.*;
 import java.io.IOException;
+import java.util.concurrent.Callable;
 
 import static scripts.Constants.WC_ANIM;
 import static scripts.quest101.setUp;
@@ -29,7 +30,7 @@ public class Util {
                 Constants.WC_ANIM = setUp.ctx.players.local().animation();
         }
     }
-
+    //@TODO on walk, moveOffScreen to the right, not left
     public static void walkToBank(){
         TilePath path = setUp.ctx.movement.newTilePath(setUp.RIDE);
         path.randomize(1, 1);
@@ -97,13 +98,32 @@ public class Util {
         }
     }
     public static void sendMail(){
+        if(!setUp.debug)
         try {
             mailme.sendPOST("paso algo");
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
+    public static void openDoor(){
+        final GameObject DOOR = setUp.ctx.objects.select().id(1543).nearest().poll();
+        if(DOOR.valid()) {
+//            System.out.println("ESNTER");
+            moveCamera(90 + Random.nextInt(0,20), Random.nextInt(0,10));
+//            ctx.camera.angle(90 + Random.nextInt(0,20));
+            DOOR.interact("Open");
+            Condition.wait(new Callable<Boolean>() {
+                @Override
+                public Boolean call() throws Exception {
+                    return DOOR.id()==1544;
+                }
+            }, 400, 4);
+        }
+    }
+
     public static void sendMail(String str){
+        if(!setUp.debug)
         try {
             mailme.sendPOST(str);
         } catch (IOException e) {

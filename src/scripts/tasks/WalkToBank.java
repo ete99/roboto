@@ -8,10 +8,12 @@ import org.powerbot.script.rt4.GameObject;
 import scripts.Constants;
 import scripts.SetUp;
 import scripts.Task;
+import scripts.script.Util;
 
 import java.util.concurrent.Callable;
 
 import static scripts.quest101.setUp;
+import static scripts.script.Util.openDoor;
 import static scripts.script.Util.walkToBank;
 
 public class WalkToBank extends Task {
@@ -20,19 +22,6 @@ public class WalkToBank extends Task {
         super(ctx);
     }
 
-    void openDoor(){
-        final GameObject DOOR = ctx.objects.select().id(1543).nearest().poll();
-        DOOR.click();
-        if(DOOR.valid()) {
-            DOOR.interact("Open");
-            Condition.wait(new Callable<Boolean>() {
-                @Override
-                public Boolean call() throws Exception {
-                    return DOOR.id()==1544;
-                }
-            }, 400, 4);
-        }
-    }
     @Override
     public boolean activate() {
         openDoor();

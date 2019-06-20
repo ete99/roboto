@@ -32,9 +32,10 @@ public class quest101 extends PollingScript<ClientContext>{
 
 //        System.out.println(dtf.format(now)); //2016/11/16 12:08:43
 
+        setUp =  new SetUp(ctx, 1, false);  // sets up the needed shared data
         sendMail("Comienza "+ctx.players.local().name().toString() + " " + dtf.format(now));
-        setUp =  new SetUp(ctx, 1);  // sets up the needed shared data
-//        taskList.add(new Tester(ctx));
+        if(setUp.debug)
+            taskList.add(new Tester(ctx));
         taskList.add(new CheckValid(ctx));
         taskList.add(new WalkToTree(ctx));
 //        taskList.add(new OpenDoor(ctx));

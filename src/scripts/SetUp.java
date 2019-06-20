@@ -8,6 +8,7 @@ import static scripts.Constants.EDGE_BANK_AREA;
 import static scripts.Constants.YEW_AREA;
 
 public class  SetUp {
+    public Boolean debug = true;
     public  String TREE_NAME = "Yew";
     public  String LOGS_NAME;  // To drop, possibly deprecated
     public  String AXE_NAME;
@@ -19,8 +20,9 @@ public class  SetUp {
     public  Tile[] RIDE;
     public int LOGS_CHOPP;
 
-    SetUp (ClientContext ctx, int set){
+    SetUp (ClientContext ctx, int set, Boolean debug){
         this.ctx = ctx;
+        this.debug = debug;
         if(set == 1) {
             // @TODO hacer jframe y otras areas
             this.LOGS_CHOPP = 0;

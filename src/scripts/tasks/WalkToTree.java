@@ -5,11 +5,9 @@ import org.powerbot.script.Condition;
 import org.powerbot.script.Random;
 import org.powerbot.script.rt4.ClientContext;
 import org.powerbot.script.rt4.GameObject;
-import scripts.Constants;
 import scripts.SetUp.*;
 import scripts.Task;
 
-import java.util.concurrent.Callable;
 
 import static scripts.quest101.setUp;
 import static scripts.script.Util.*;
@@ -20,20 +18,6 @@ public class WalkToTree extends Task {
 //    Area bankArea =  new Area(new Tile(3180, 3446), new Tile(3185, 3434));
     public WalkToTree(ClientContext ctx) {
         super(ctx);
-    }
-
-    void openDoor(){
-        final GameObject DOOR = ctx.objects.select().id(1543).nearest().poll();
-        DOOR.click();
-        if(DOOR.valid()) {
-            DOOR.interact("Open");
-            Condition.wait(new Callable<Boolean>() {
-                @Override
-                public Boolean call() throws Exception {
-                    return DOOR.id()==1544;
-                }
-            }, 400, 4);
-        }
     }
 
     @Override
