@@ -183,9 +183,9 @@ public class Game extends ClientAccessor {
 	}
 
 	/**
-	 * The current client state.
+	 * The current client STATE.
 	 *
-	 * @return The current client state.
+	 * @return The current client STATE.
 	 * @see Constants
 	 */
 	public int clientState() {

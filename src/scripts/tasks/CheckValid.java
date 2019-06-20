@@ -17,7 +17,7 @@ public class CheckValid extends Task {
 
     @Override
     public boolean activate() {
-        System.out.println(setUp.state);
+        System.out.println(setUp.STATE);
         if(ctx.game.clientState()!=30){
             sendMail("Paro!");
             System.exit(4);
@@ -27,11 +27,11 @@ public class CheckValid extends Task {
             walkToBank();
             pickAxe();
         }
-        if(setUp.state == SetUp.State.REALLY_IDLE && (setUp.TREE_AREA.contains(ctx.players.local()))) {
+        if(setUp.STATE == SetUp.State.REALLY_IDLE && (setUp.TREE_AREA.contains(ctx.players.local()))) {
             dragCamera();
             AntibanScript.moveMouseOffScreen(setUp.ctx, 0);
         }
-        if(setUp.state == SetUp.State.IDLE && (setUp.BANK_AREA.contains(ctx.players.local()))) {
+        if(setUp.STATE == SetUp.State.IDLE && (setUp.BANK_AREA.contains(ctx.players.local()))) {
             walkToTree();
         }
         return false;

@@ -16,7 +16,7 @@ public class Constants {
     public final static Area SGE_BANK_AREA =  new Area(new Tile(3180, 3446), new Tile(3185, 3434));
     public final static Area EDGE_BANK_AREA =  new Area(new Tile(3091, 3488), new Tile(3098, 3497));
     public final static Tile EDGE_TO_BANK_RIDE[] = {
-            new Tile(3086, 3476),
+            new Tile(3087, 3477),
             new Tile(3089, 3470),
             new Tile(3092, 3470),
             new Tile(3094, 3474),

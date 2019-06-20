@@ -15,7 +15,7 @@ public class TClientState extends ClientAccessor implements TextPaintListener {
 	}
 
 	public int draw(int idx, final Graphics render) {
-		drawLine(render, idx++, "Client state: " + ctx.game.clientState());
+		drawLine(render, idx++, "Client STATE: " + ctx.game.clientState());
 		return idx;
 	}
 }

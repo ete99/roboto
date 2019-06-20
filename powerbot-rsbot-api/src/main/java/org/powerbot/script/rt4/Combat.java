@@ -108,10 +108,10 @@ public class Combat extends ClientAccessor {
 	}
 
 	/**
-	 * Sets the desired state of auto-retaliate
+	 * Sets the desired STATE of auto-retaliate
 	 *
 	 * @param set Whether or not to set the auto-retaliate.
-	 * @return {@code true} if auto-retaliate was set to desired state, {@code false} otherwise.
+	 * @return {@code true} if auto-retaliate was set to desired STATE, {@code false} otherwise.
 	 */
 	public boolean autoRetaliate(final boolean set) {
 		if (autoRetaliate() == set) {

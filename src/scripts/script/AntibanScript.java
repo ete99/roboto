@@ -136,26 +136,11 @@ public class AntibanScript {
             Condition.sleep(Random.nextInt(1000, 3000));
         }
         if(level>0)
-            Condition.wait(new Callable<Boolean>(){
-                @Override
-                public Boolean call() {
-                    return ctx.players.local().animation()==-1;
-                }
-            }, 1000, 100);
+            Condition.wait(() -> ctx.players.local().animation()==-1, 1000, 100);
         else if(level == 0)
-            Condition.wait(new Callable<Boolean>(){
-                @Override
-                public Boolean call() {
-                    return ctx.players.local().animation()==-1;
-                }
-            }, 200, 10);
+            Condition.wait(() -> ctx.players.local().animation()==-1, 200, 10);
         else {
-            Condition.wait(new Callable<Boolean>(){
-                @Override
-                public Boolean call() {
-                    return ctx.players.local().animation()==-1;
-                }
-            }, 3, 100);
+            Condition.wait(() -> ctx.players.local().animation()==-1, 3, 100);
         }
         ctx.input.focus();
 //        x = Random.nextInt(10, 510);

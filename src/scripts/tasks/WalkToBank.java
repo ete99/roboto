@@ -1,13 +1,10 @@
 package scripts.tasks;
 
 
-import org.powerbot.script.Area;
 import org.powerbot.script.Condition;
 import org.powerbot.script.Random;
-import org.powerbot.script.Tile;
 import org.powerbot.script.rt4.ClientContext;
 import org.powerbot.script.rt4.GameObject;
-import org.powerbot.script.rt4.TilePath;
 import scripts.Constants;
 import scripts.SetUp;
 import scripts.Task;
@@ -48,6 +45,6 @@ public class WalkToBank extends Task {
         Condition.sleep(Random.nextInt(250, 500));
         walkToBank();
         if(ctx.players.local().animation() == Constants.RUN_ANIM)
-            setUp.state = SetUp.State.WALKING;
+            setUp.STATE = SetUp.State.WALKING;
     }
 }

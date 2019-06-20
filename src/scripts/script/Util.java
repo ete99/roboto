@@ -2,7 +2,6 @@ package scripts.script;
 
 import org.powerbot.script.Condition;
 import org.powerbot.script.Random;
-import org.powerbot.script.Tile;
 import org.powerbot.script.rt4.ClientContext;
 import org.powerbot.script.rt4.GameObject;
 import org.powerbot.script.rt4.TilePath;
@@ -27,7 +26,7 @@ public class Util {
             moveMouseOffScreen(setUp.ctx,-1);
             Condition.wait(()-> setUp.ctx.players.local().animation()==WC_ANIM, 200,100);
             if (setUp.ctx.players.local().animation() == WC_ANIM)
-                setUp.state = SetUp.State.CHOPPING;
+                setUp.STATE = SetUp.State.CHOPPING;
             if (setUp.ctx.players.local().animation() != -1 && WC_ANIM == 0)
                 Constants.WC_ANIM = setUp.ctx.players.local().animation();
         }
@@ -50,7 +49,7 @@ public class Util {
         if (setUp.ctx.players.local().animation() != -1 && Constants.RUN_ANIM == 0)
             Constants.RUN_ANIM = setUp.ctx.players.local().animation();
         moveCamera(setUp.ctx.camera.yaw() + Random.nextInt(-50, 50), setUp.ctx.camera.pitch() + Random.nextInt(-10, 10));
-        moveMouseOffScreen(setUp.ctx,-1);
+//        moveMouseOffScreen(setUp.ctx,-1);
     }
 
     public static void moveCamera(final int angle, final int pitch){
@@ -61,7 +60,7 @@ public class Util {
     }
 
     public static void dragUntilCamera(GameObject obj){
-        for(int br=0; br<=4; br++) {
+        for(int br=0; br<2; br++) {
             Point pre = new Point(60 + Random.nextInt(-50, 50), 180 + Random.nextInt(-50, 50));
             setUp.ctx.input.move( pre );
             Point post = new Point(300 + Random.nextInt(-50, 50), 400 + Random.nextInt(-50, 50));
@@ -92,7 +91,7 @@ public class Util {
         if(!ctx.bank.inViewport() && ctx.bank.close()){
             ctx.camera.pitch(99-Random.nextInt(0, 3));
         }else {
-            setUp.state = SetUp.State.BANKING;
+            setUp.STATE = SetUp.State.BANKING;
             ctx.bank.open();
             ctx.bank.withdraw(setUp.AXE_ID, 1);
             ctx.bank.close();

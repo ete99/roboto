@@ -154,10 +154,10 @@ public class Movement extends ClientAccessor {
 	}
 
 	/**
-	 * Alters the running state.
+	 * Alters the running STATE.
 	 *
 	 * @param run {@code true} to run; otherwise {@code false}
-	 * @return {@code true} if the state was successfully changed; otherwise {@code false}
+	 * @return {@code true} if the STATE was successfully changed; otherwise {@code false}
 	 */
 	public boolean running(final boolean run) {
 		return running() == run || (ctx.widgets.component(Constants.MOVEMENT_WIDGET, Constants.MOVEMENT_RUN).click() &&

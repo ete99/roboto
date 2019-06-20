@@ -185,10 +185,10 @@ public class CombatBar extends IdQuery<Action> {
 	}
 
 	/**
-	 * Changes the state of the combat bar's expansion.
+	 * Changes the STATE of the combat bar's expansion.
 	 *
 	 * @param expanded {@code true} to be expanded; {@code false} to be collapsed
-	 * @return {@code true} if the state was successfully changed; otherwise {@code false}
+	 * @return {@code true} if the STATE was successfully changed; otherwise {@code false}
 	 */
 	public boolean expanded(final boolean expanded) {
 		if (ctx.combatBar.legacy()) {
@@ -296,10 +296,10 @@ public class CombatBar extends IdQuery<Action> {
 	}
 
 	/**
-	 * Sets the locked state of the combat bar.
+	 * Sets the locked STATE of the combat bar.
 	 *
 	 * @param locked {@code true} to be locked; otherwise {@code false}
-	 * @return {@code true} if the state was successfully changed; otherwise {@code false}
+	 * @return {@code true} if the STATE was successfully changed; otherwise {@code false}
 	 */
 	public boolean locked(final boolean locked) {
 		if (locked() == locked) {

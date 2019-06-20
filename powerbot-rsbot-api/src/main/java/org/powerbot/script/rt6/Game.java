@@ -71,9 +71,9 @@ public class Game extends ClientAccessor {
 	}
 
 	/**
-	 * Returns the current client state.
+	 * Returns the current client STATE.
 	 *
-	 * @return the client state
+	 * @return the client STATE
 	 * @see org.powerbot.script.rt6.Constants#GAME_LOGIN
 	 * @see org.powerbot.script.rt6.Constants#GAME_LOBBY
 	 * @see org.powerbot.script.rt6.Constants#GAME_LOGGING

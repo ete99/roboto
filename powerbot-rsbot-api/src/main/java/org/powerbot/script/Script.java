@@ -18,7 +18,7 @@ public interface Script extends EventListener {
 	/**
 	 * Returns the execution queue.
 	 *
-	 * @param state the state being invoked
+	 * @param state the STATE being invoked
 	 * @return a sequence of {@link java.lang.Runnable} items to process
 	 */
 	List<Runnable> getExecQueue(State state);
@@ -33,7 +33,7 @@ public interface Script extends EventListener {
 
 	/**
 	 * Controller
-	 * A controller for a {@link Script} which invokes and determines state changes.
+	 * A controller for a {@link Script} which invokes and determines STATE changes.
 	 */
 	interface Controller extends Suspendable, Stoppable {
 		/**

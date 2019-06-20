@@ -1,20 +1,15 @@
 package scripts.tasks;
 
 import org.powerbot.script.Condition;
+import org.powerbot.script.Input;
 import org.powerbot.script.Random;
 import org.powerbot.script.rt4.ClientContext;
 import org.powerbot.script.rt4.GameObject;
-import scripts.script.AntibanScript;
 import scripts.SetUp;
 import scripts.Task;
 
-import java.util.concurrent.Callable;
-
-import static scripts.Constants.WC_ANIM;
-import static scripts.script.Util.Chop;
-
 import static scripts.quest101.setUp;
-import static scripts.script.Util.moveCamera;
+import static scripts.script.Util.*;
 
 
 public class Chop extends Task {
@@ -34,25 +29,28 @@ public class Chop extends Task {
 
                 if(Random.nextDouble()>0.5) {
                     for(int deg = 0; deg<=360 && !Tree.inViewport();deg+=Random.nextInt(20,50)) {
-                        moveCamera(now+deg, Random.nextInt(0, 99));
-                        ctx.camera.angle(now + deg);
+                        moveCamera(now-deg, 99);
+
+                        dragUntilCamera(Tree);
+//                        moveCamera(now+deg, 99);
+//                        ctx.camera.angle(now + deg);
                     }
                 }else{
                     for(int deg = 0; deg<=360 && !Tree.inViewport();deg+=Random.nextInt(20,50)) {
-                        moveCamera(now-deg, Random.nextInt(0, 99));
-                        ctx.camera.angle(now - deg);
+                        moveCamera(now-deg, 99);
+                        dragUntilCamera(Tree);
+//                        ctx.camera.angle(now - deg);
                     }
                 }
             }
-        } else if (setUp.state != SetUp.State.WAITING){
+        } else if (setUp.STATE != SetUp.State.WAITING){
             // waits for a new yew tree
             if(Random.nextDouble()>0.5) {
                 moveCamera(now + 180 + Random.nextInt(-90,90), Random.nextInt(80,99));
             }else{
                 moveCamera(now - 180 + Random.nextInt(-90,90), Random.nextInt(80,99));
             }
-
-            Condition.wait(() -> ctx.objects.select().within(setUp.TREE_AREA).name("Tree Stump").size()==2,400,150);
+            Condition.wait(() -> ctx.objects.select().within(setUp.TREE_AREA).name("Tree Stump").size()!=2,400,150);
         }
     }
 

@@ -5,8 +5,6 @@ import org.powerbot.script.Condition;
 import org.powerbot.script.Random;
 import org.powerbot.script.rt4.ClientContext;
 import org.powerbot.script.rt4.GameObject;
-import org.powerbot.script.rt4.TilePath;
-import scripts.script.AntibanScript;
 import scripts.Constants;
 import scripts.SetUp.*;
 import scripts.Task;
@@ -40,24 +38,24 @@ public class WalkToTree extends Task {
 
     @Override
     public boolean activate() {
-        return !ctx.inventory.isFull() && !setUp.TREE_AREA.contains(ctx.players.local()) && setUp.state!=State.CHOPPING;
+        return !ctx.inventory.isFull() && !setUp.TREE_AREA.contains(ctx.players.local()) && setUp.STATE !=State.CHOPPING;
     }
 
     @Override
     public void execute() {
 //        System.out.println("Walking to Trees");
         Condition.sleep(Random.nextInt(250, 500));
-//        if(setUp.state != State.IDLE && ctx.objects.select().name(setUp.TREE_NAME).nearest().poll().inViewport())
+//        if(setUp.STATE != State.IDLE && ctx.objects.select().name(setUp.TREE_NAME).nearest().poll().inViewport())
         if(!(setUp.TREE_AREA.contains(ctx.players.local())))
             openDoor();
         GameObject Tree = ctx.objects.select().name(setUp.TREE_NAME).nearest().poll();
-        if (Tree.inViewport() && ctx.objects.select().id(1544).nearest().poll().valid() && setUp.ctx.players.local().animation()!=-1){
+        if (Tree.inViewport() && ctx.objects.select().id(1544).nearest().poll().valid() && ctx.players.local().animation()!=-1){
             Chop(Tree);
 //            AntibanScript.moveMouseOffScreen(ctx,0);
         }else {
             walkToTree();
             if (setUp.ctx.players.local().animation() == Constants.RUN_ANIM)
-                setUp.state = State.WALKING;
+                setUp.STATE = State.WALKING;
             Condition.sleep(Random.nextInt(250, 500));
         }
     }

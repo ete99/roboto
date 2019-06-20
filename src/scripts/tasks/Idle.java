@@ -7,8 +7,6 @@ import static scripts.script.Util.sendMail;
 import scripts.SetUp.*;
 import scripts.Task;
 
-import java.util.concurrent.Callable;
-
 import static scripts.quest101.setUp;
 
 public class Idle extends Task {
@@ -26,16 +24,16 @@ public class Idle extends Task {
             c++;
             t=ctx.inventory.select().count();
             if(c>20) {
-                setUp.state = State.IDLE;
+                setUp.STATE = State.IDLE;
             }
             if(c>500) {
-                setUp.state = State.REALLY_IDLE;
+                setUp.STATE = State.REALLY_IDLE;
             }
 //            System.out.println("idle");
         }
         else{
             if(ctx.objects.select().within(setUp.TREE_AREA).name("Tree Stump").size()==2) {
-                setUp.state = State.WAITING;
+                setUp.STATE = State.WAITING;
                 Condition.wait(() -> ctx.objects.select().within(setUp.TREE_AREA).name("Tree Stump").size()==2, 400,20);
             }
 //            System.out.println("not idle");

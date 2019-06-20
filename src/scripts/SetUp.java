@@ -14,7 +14,7 @@ public class  SetUp {
     public  int AXE_ID;
     public  Area TREE_AREA;
     public  Area BANK_AREA;
-    public  State state = State.IDLE;
+    public  State STATE = State.IDLE;
     public ClientContext ctx;
     public  Tile[] RIDE;
 
@@ -28,6 +28,7 @@ public class  SetUp {
             this.AXE_NAME = "Rune Axe";  //can change(update)
             this.AXE_ID = 1359;  //can change(update)
             this.RIDE = Constants.EDGE_TO_BANK_RIDE;
+            this.STATE = State.UNKNOWN;
         } else {
             System.out.println("no tadavia");
         }

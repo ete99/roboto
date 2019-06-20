@@ -23,11 +23,11 @@ public class Bank extends Task {
     public void execute() {
         Condition.sleep(Random.nextInt(350, 500));
 //        System.out.println("banking");
+        setUp.STATE = SetUp.State.BANKING;
         ctx.camera.angle(ctx.camera.yaw() + Random.nextInt(-50, 50));
         if(!ctx.bank.inViewport() && ctx.bank.close()){
             ctx.camera.pitch(99-Random.nextInt(0, 3));
         }else {
-            setUp.state = SetUp.State.BANKING;
             ctx.bank.open();
             int AXE_ID=ctx.inventory.name(setUp.AXE_NAME).poll().id();
             ctx.bank.depositAllExcept(AXE_ID);
