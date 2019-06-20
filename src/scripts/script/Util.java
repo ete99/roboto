@@ -24,9 +24,7 @@ public class Util {
                 Tree.interact("Chop");
 //            Tree.click();
             moveMouseOffScreen(setUp.ctx,-1);
-            Condition.wait(()-> setUp.ctx.players.local().animation()==WC_ANIM, 200,100);
-            if (setUp.ctx.players.local().animation() == WC_ANIM)
-                setUp.STATE = SetUp.State.CHOPPING;
+
             if (setUp.ctx.players.local().animation() != -1 && WC_ANIM == 0)
                 Constants.WC_ANIM = setUp.ctx.players.local().animation();
         }
@@ -48,8 +46,9 @@ public class Util {
         path.traverse();
         if (setUp.ctx.players.local().animation() != -1 && Constants.RUN_ANIM == 0)
             Constants.RUN_ANIM = setUp.ctx.players.local().animation();
-        moveCamera(setUp.ctx.camera.yaw() + Random.nextInt(-50, 50), setUp.ctx.camera.pitch() + Random.nextInt(-10, 10));
-//        moveMouseOffScreen(setUp.ctx,-1);
+        if(Random.nextDouble()>0.5)
+            moveCamera(setUp.ctx.camera.yaw() + Random.nextInt(-50, 50), setUp.ctx.camera.pitch() + Random.nextInt(-10, 10));
+        moveMouseOffScreen(setUp.ctx,-1);
     }
 
     public static void moveCamera(final int angle, final int pitch){

@@ -17,11 +17,13 @@ public class  SetUp {
     public  State STATE = State.IDLE;
     public ClientContext ctx;
     public  Tile[] RIDE;
+    public int LOGS_CHOPP;
 
     SetUp (ClientContext ctx, int set){
         this.ctx = ctx;
         if(set == 1) {
             // @TODO hacer jframe y otras areas
+            this.LOGS_CHOPP = 0;
             this.TREE_AREA = YEW_AREA;
             this.BANK_AREA = EDGE_BANK_AREA;
             this.TREE_NAME = "Yew";

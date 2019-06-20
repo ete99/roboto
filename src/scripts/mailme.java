@@ -58,7 +58,7 @@ public class mailme {
         // For POST only - START
         con.setDoOutput(true);
         OutputStream os = con.getOutputStream();
-        System.out.println(POST_PARAMS);
+//        System.out.println(POST_PARAMS);
         String POST_REQ = POST_PARAMS+str;
         os.write(POST_REQ.getBytes());
         os.flush();

@@ -10,12 +10,7 @@ import scripts.script.Util;
 
 import static scripts.quest101.setUp;
 
-
-/**
- * Created by Thijs on 16-6-2017.
- */
 public class Antiban extends Task {
-
 
     public Antiban(ClientContext ctx) {
         super(ctx);

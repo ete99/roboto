@@ -1,11 +1,14 @@
 package scripts.tasks;
 
 
+import org.powerbot.script.Condition;
 import org.powerbot.script.rt4.ClientContext;
+import scripts.Constants;
 import scripts.SetUp;
 import scripts.Task;
 import scripts.script.AntibanScript;
 
+import static scripts.Constants.WC_ANIM;
 import static scripts.quest101.setUp;
 import static scripts.script.Util.*;
 
@@ -17,6 +20,11 @@ public class CheckValid extends Task {
 
     @Override
     public boolean activate() {
+        Condition.wait(()-> setUp.ctx.players.local().animation() != -1, 60,10);
+        if(ctx.players.local().inMotion())
+            setUp.STATE = SetUp.State.WALKING;
+        if (setUp.ctx.players.local().animation() == WC_ANIM)
+            setUp.STATE = SetUp.State.CHOPPING;
         System.out.println(setUp.STATE);
         if(ctx.game.clientState()!=30){
             sendMail("Paro!");

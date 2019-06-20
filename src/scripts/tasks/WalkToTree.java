@@ -54,9 +54,8 @@ public class WalkToTree extends Task {
 //            AntibanScript.moveMouseOffScreen(ctx,0);
         }else {
             walkToTree();
-            if (setUp.ctx.players.local().animation() == Constants.RUN_ANIM)
-                setUp.STATE = State.WALKING;
-            Condition.sleep(Random.nextInt(250, 500));
+            if(!Tree.inViewport())
+                Condition.sleep(Random.nextInt(250, 500));
         }
     }
 }

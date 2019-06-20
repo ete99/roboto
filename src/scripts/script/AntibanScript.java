@@ -140,7 +140,7 @@ public class AntibanScript {
         else if(level == 0)
             Condition.wait(() -> ctx.players.local().animation()==-1, 200, 10);
         else {
-            Condition.wait(() -> ctx.players.local().animation()==-1, 3, 100);
+            Condition.wait(() -> ctx.players.local().animation()==-1, 300, 4);
         }
         ctx.input.focus();
 //        x = Random.nextInt(10, 510);

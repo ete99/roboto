@@ -44,7 +44,6 @@ public class WalkToBank extends Task {
 //        System.out.println("Walking to bank");
         Condition.sleep(Random.nextInt(250, 500));
         walkToBank();
-        if(ctx.players.local().animation() == Constants.RUN_ANIM)
-            setUp.STATE = SetUp.State.WALKING;
+
     }
 }

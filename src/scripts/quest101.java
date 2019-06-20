@@ -28,9 +28,11 @@ public class quest101 extends PollingScript<ClientContext>{
     LocalDateTime now = LocalDateTime.now();
     @Override
     public void start(){
+        //@TODO use menus
+
 //        System.out.println(dtf.format(now)); //2016/11/16 12:08:43
 
-//        sendMail("Comienza "+ctx.players.local().name() + " " + dtf.format(now));
+        sendMail("Comienza "+ctx.players.local().name().toString() + " " + dtf.format(now));
         setUp =  new SetUp(ctx, 1);  // sets up the needed shared data
 //        taskList.add(new Tester(ctx));
         taskList.add(new CheckValid(ctx));
@@ -45,6 +47,7 @@ public class quest101 extends PollingScript<ClientContext>{
 
     public void stop(){
         System.out.println("paro\n");
+        sendMail("Paro: "+ ctx.players.local().name().toString() + " " + dtf.format(now));
     }
 
     @Override
