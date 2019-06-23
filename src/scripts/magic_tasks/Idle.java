@@ -34,7 +34,7 @@ public class Idle extends Task {
 //            System.out.println("idle");
         }
         else{
-            if(ctx.objects.select().within(setUp.TREE_AREA).name("Tree Stump").size()==2) {
+            if(ctx.objects.select().within(setUp.TREE_AREA).name("Tree Stump").id(setUp.TREE_ID).size()==2) {
                 setUp.STATE = State.WAITING;
                 Condition.wait(() -> ctx.objects.select().within(setUp.TREE_AREA).name("Tree Stump").size()==2, 400,20);
             }

@@ -20,9 +20,9 @@ public class WalkToArea extends Task {
 
     @Override
     public boolean activate() {
-        System.out.println(ctx.objects.select().id(setUp.TREE_ID).size());
-        Player player = ctx.players.local();
-        return !ctx.inventory.isFull() && setUp.STATE != State.CHOPPING;// && ctx.objects.select().id(setUp.TREE_ID).size()<0;// && !MAGIC_AREA1.contains(player) && !MAGIC_AREA2.contains(player);
+//        System.out.println(ctx.objects.select().id(setUp.TREE_ID).size());
+        return false;
+//        return !ctx.inventory.isFull() && setUp.STATE != State.CHOPPING;// && ctx.objects.select().id(setUp.TREE_ID).size()<0;// && !MAGIC_AREA1.contains(player) && !MAGIC_AREA2.contains(player);
     }
 
     @Override

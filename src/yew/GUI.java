@@ -118,13 +118,13 @@ public class GUI implements MessageListener {
         runTime = (double) (System.currentTimeMillis() - initime) / 3600000;
 
         Graphics2D g2= (Graphics2D) g1;
-        int posx= (int) ctx.input.getLocation().getX();
-        int posy= (int) ctx.input.getLocation().getY();
-        g2.setColor(Color.GREEN);
-        g2.drawLine(posx,posy-10,posx,posy+10);
-        g2.drawLine(posx-10,posy,posx+10,posy);
-        g2.setColor(Color.GREEN);
-        g2.drawOval(posx-9,posy-9,18,18);
+//        int posx= (int) ctx.input.getLocation().getX();
+//        int posy= (int) ctx.input.getLocation().getY();
+//        g2.setColor(Color.GREEN);
+//        g2.drawLine(posx,posy-10,posx,posy+10);
+//        g2.drawLine(posx-10,posy,posx+10,posy);
+//        g2.setColor(Color.GREEN);
+//        g2.drawOval(posx-9,posy-9,18,18);
         g1.setColor(Color.BLACK);
         g1.fillRect(1,340,515,140);
         long thickness = 4;
@@ -147,7 +147,7 @@ public class GUI implements MessageListener {
 
     public void messaged(MessageEvent me) {
         String msg = me.text();
-
+        System.out.println("holas");
         if(msg.contains(" get some yew logs"))
         {
             GUI.logsChopped++;

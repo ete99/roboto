@@ -274,7 +274,6 @@ public class SYewChopper extends PollingScript<ClientContext> implements PaintLi
         }else if(GUI.choser==6){
             return State.CHEDGEVILLE;
         }else{
-            log.info("Nothing");
             return State.NOTHING;
         }
     }

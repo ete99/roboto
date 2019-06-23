@@ -6,9 +6,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.powerbot.script.PaintListener;
-import org.powerbot.script.PollingScript;
-import org.powerbot.script.Script;
+import org.powerbot.script.*;
 import org.powerbot.script.rt4.ClientContext;
 
 import scripts.utility.Task;
@@ -17,7 +15,7 @@ import static scripts.script.Util.sendMail;
 
 @Script.Manifest(name="quesast", description="Yew chopper for OSRS", properties="client=4; author=Ete; topic=999;")
 
-public class quest101 extends PollingScript<ClientContext> implements PaintListener {
+public class quest101 extends PollingScript<ClientContext> implements PaintListener, MessageListener {
 
     public static List<Task> taskList = new ArrayList<Task>();
     public static SetUp setUp;
@@ -36,6 +34,8 @@ public class quest101 extends PollingScript<ClientContext> implements PaintListe
     }
 
     public void stop(){
+        GUI.frame.setVisible(false);
+        GUI.frame.dispose();
         System.out.println("paro\n");
         sendMail("Paro: "+ ctx.players.local().name().toString() + " " + dtf.format(LocalDateTime.now()));
     }
@@ -59,5 +59,13 @@ public class quest101 extends PollingScript<ClientContext> implements PaintListe
     @Override
     public void repaint(Graphics graphics) {
         GUI.rep(graphics, ctx);
+    }
+
+    public void messaged(MessageEvent me) {
+        String msg = me.text();
+        if(msg.equals("You get some "+ setUp.TREE_MESS_NAME+" logs."))
+        {
+            GUI.logsChopped++;
+        }
     }
 }

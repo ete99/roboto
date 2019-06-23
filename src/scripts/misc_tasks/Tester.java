@@ -13,7 +13,7 @@ public class Tester extends Task {
     GameObject Tree;
     @Override
     public boolean activate() {
-        System.out.println(ctx.widgets.select().id(320).poll().component(22).component(4).text());
+//        System.out.println(ctx.widgets.select().id(320).poll().component(22).component(4).text());
 //        System.out.println(ctx.objects.select().name("Door").nearest().poll().id());
 //        Tree = ctx.objects.select().name("Oak").nearest().poll();
 //        System.out.println(Tree.inViewport());
@@ -64,7 +64,7 @@ public class Tester extends Task {
         t1.start();
         t2.start();
         */
-        Condition.sleep(100000);
+        Condition.sleep(1000);
 //        Condition.sleep(60000);
 //        System.out.println(YEW_AREA.contains(ctx.players.local()));
 //        BasicQuery<GameObject> k = ctx.objects.select().within(YEW_AREA).name("Yew");

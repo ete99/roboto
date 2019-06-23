@@ -30,7 +30,9 @@ public class Constants {
             new Tile(3089, 3487),
             new Tile(3092, 3491)};
     public final static Tile MAGIC_TO_BANK_RIDE[] = {
-            new Tile(3363, 3296),
+            new Tile(3358, 3300),
+            new Tile(3363, 3290),
+            new Tile(3370, 3296),
             new Tile(3379, 3289),
             new Tile(3381, 3281),
             new Tile(3383, 3271)

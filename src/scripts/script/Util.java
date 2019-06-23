@@ -1,6 +1,8 @@
 package scripts.script;
 
 import org.powerbot.script.Condition;
+import org.powerbot.script.Filter;
+import org.powerbot.script.MenuCommand;
 import org.powerbot.script.Random;
 import org.powerbot.script.rt4.ClientContext;
 import org.powerbot.script.rt4.GameObject;
@@ -20,11 +22,22 @@ import static scripts.script.AntibanScript.moveMouseOffScreen;
 
 public class Util {
     public static void Chop(GameObject Tree){
-        if(setUp.ctx.players.local().animation()!=WC_ANIM) {
-            for (int i=0; i<Random.nextInt(1,3);i++)
-                Tree.interact("Chop");
+        System.out.println("wola");
+        if(setUp.ctx.players.local().animation()!=WC_ANIM){
+            boolean b=false;
+            Tree.hover();
+            Condition.sleep(150); // must have this sleep after hover
+            for (int i=0; i<2;i++)
+                if(setUp.ctx.menu.commands()[0].toString().equals("Chop down "+ setUp.TREE_NAME))
+                    b= b || Tree.interact("Chop");
+
+            Condition.sleep(150);
+            if(setUp.ctx.players.local().animation()!=WC_ANIM)
+                    b=b || setUp.ctx.menu.click(menuCommand -> menuCommand.toString().equals("Chop down "+ setUp.TREE_NAME));
 //            Tree.click();
             moveMouseOffScreen(setUp.ctx,-1);
+            if(b)
+                setUp.STATE = SetUp.State.CHOPPING;
 
             if (setUp.ctx.players.local().animation() != -1 && WC_ANIM == 0)
                 Constants.WC_ANIM = setUp.ctx.players.local().animation();
@@ -76,7 +89,7 @@ public class Util {
             } else break;
         }
     }
-
+    //@TODO drag camera only horizontally
     public static void dragCamera(){
         Point pre = new Point(60 + Random.nextInt(-50, 50), 180 + Random.nextInt(-50, 50));
         setUp.ctx.input.move( pre );
@@ -93,10 +106,11 @@ public class Util {
         ClientContext ctx = setUp.ctx;
         ctx.camera.angle(ctx.camera.yaw() + Random.nextInt(-50, 50));
         if(!ctx.bank.inViewport() && ctx.bank.close()){
-            ctx.camera.pitch(99-Random.nextInt(0, 3));
+           dragCamera();
         }else {
             setUp.STATE = SetUp.State.BANKING;
             ctx.bank.open();
+            ctx.bank.depositInventory();
             ctx.bank.withdraw(setUp.AXE_ID, 1);
             ctx.bank.close();
         }

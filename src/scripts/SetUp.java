@@ -6,7 +6,6 @@ import org.powerbot.script.Tile;
 import org.powerbot.script.rt4.ClientContext;
 import scripts.common_tasks.Antiban;
 import scripts.misc_tasks.Tester;
-import scripts.yew_tasks.CheckValid;
 
 import java.awt.*;
 
@@ -52,18 +51,18 @@ public class  SetUp {
             this.TREE_MESS_NAME = "yew";  //can change(update)
             this.AXE_ID = 1359;  //can change(update)
             this.RIDE = Constants.EDGE_TO_BANK_RIDE;
-            taskList.add(new CheckValid(ctx));
+            taskList.add(new scripts.common_tasks.CheckValid(ctx));
             taskList.add(new scripts.yew_tasks.WalkToTree(ctx));
 //        taskList.add(new OpenDoor(ctx));
             taskList.add(new scripts.yew_tasks.Chop(ctx));
             taskList.add(new Antiban(ctx));
             taskList.add(new scripts.yew_tasks.WalkToBank(ctx));
-            taskList.add(new scripts.yew_tasks.Bank(ctx));
+            taskList.add(new scripts.common_tasks.Bank(ctx));
             taskList.add(new scripts.yew_tasks.Idle(ctx));
         } else if (set == 2){
             this.TREE_ID = MAGIC_ID;
             this.LOGS_CHOPP = 0;
-            this.TREE_AREA = MAGIC_REST_AREA;
+            this.TREE_AREA = MAGIC_FULL_AREA;
             this.BANK_AREA = MAGIC_BANK_AREA;
             this.TREE_NAME = "Magic tree";
             this.AXE_NAME = "Dragon Axe";  //can change(update)
@@ -71,7 +70,7 @@ public class  SetUp {
             this.AXE_ID = 6739;  //dragon axe
             this.RIDE = MAGIC_TO_BANK_RIDE;
             this.STATE = State.UNKNOWN;
-            taskList.add(new scripts.magic_tasks.CheckValid(ctx));
+            taskList.add(new scripts.common_tasks.CheckValid(ctx));
             taskList.add(new scripts.magic_tasks.WalkToArea(ctx));
             taskList.add(new scripts.magic_tasks.WalkToTree(ctx));
             taskList.add(new scripts.magic_tasks.Chop(ctx));

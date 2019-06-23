@@ -4,9 +4,12 @@ import org.powerbot.script.Condition;
 import org.powerbot.script.Random;
 import org.powerbot.script.rt4.ClientContext;
 import org.powerbot.script.rt4.Player;
+import scripts.SetUp;
 
 import java.awt.*;
 import java.util.concurrent.Callable;
+
+import static scripts.quest101.setUp;
 
 public class AntibanScript {
     final int SKILL_WC = 22;
@@ -151,4 +154,25 @@ public class AntibanScript {
 //        ctx.input.move(x, y);
 //        Condition.sleep(Random.nextInt(250, 500));
     }
+
+
+    public static void antibanned(int level){
+//        System.out.println("AntiBanning");
+        if (Random.nextDouble() > 0.90){
+//            AntibanScript.randomCameraTurn(ctx);
+            Thread t1 = new Thread(()-> Util.moveCamera(Random.nextInt(-90,90),Random.nextInt(50,99)));
+            Thread t2 = new Thread(()-> AntibanScript.randomMouseMovement(setUp.ctx));
+            t1.start();
+            t2.start();
+//            Util.moveCamera(Random.nextInt(-90,90),Random.nextInt(50,99));
+//            AntibanScript.randomMouseMovement(ctx);
+        }
+        else {
+            AntibanScript.moveMouseOffScreen(setUp.ctx,level);
+        }
+
+//        moveMouseOffScreen();
+//        doAntibanAction(Random.nextInt(1,11));
+    }
+
 }

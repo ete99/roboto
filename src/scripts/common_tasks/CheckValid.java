@@ -1,4 +1,4 @@
-package scripts.yew_tasks;
+package scripts.common_tasks;
 
 
 import org.powerbot.script.Condition;
@@ -30,8 +30,10 @@ public class CheckValid extends Task {
         }
         if(ctx.inventory.select().name(setUp.AXE_NAME).count()!=1){
             System.out.println("Grabbing axe");
-            walkToBank();
-            pickAxe();
+            if(!ctx.bank.inViewport())
+                walkToBank();
+            else
+                pickAxe();
         }
         /*
 @TODO fix bug

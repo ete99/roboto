@@ -433,7 +433,7 @@ public class yew extends PollingScript<ClientContext> implements PaintListener,M
     }
     public void messaged(MessageEvent me) {
         String msg = me.text();
-
+        System.out.println(msg);
         if(msg.contains(" get some yew logs"))
         {
             logsChopped++;
