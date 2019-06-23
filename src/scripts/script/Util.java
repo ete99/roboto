@@ -7,7 +7,7 @@ import org.powerbot.script.rt4.GameObject;
 import org.powerbot.script.rt4.TilePath;
 import scripts.Constants;
 import scripts.SetUp;
-import scripts.mailme;
+import scripts.utility.mailme;
 
 
 import java.awt.*;
@@ -59,6 +59,7 @@ public class Util {
         t2.start();
     }
 
+    // @TODO: fix to only hold mouse once until hit the game object
     public static void dragUntilCamera(GameObject obj){
         for(int br=0; br<2; br++) {
             Point pre = new Point(60 + Random.nextInt(-50, 50), 180 + Random.nextInt(-50, 50));
@@ -66,6 +67,9 @@ public class Util {
             Point post = new Point(300 + Random.nextInt(-50, 50), 400 + Random.nextInt(-50, 50));
             setUp.ctx.input.drag( post , 2);
             if(!obj.inViewport()) {
+                post.x += Random.nextInt(-20,20);
+                post.y += Random.nextInt(-20,20);
+                setUp.ctx.input.move( post );
                 pre.x = post.x + 100 + Random.nextInt(-50, 50);
                 pre.y = post.y - 200 + Random.nextInt(-50, 50);
                 setUp.ctx.input.drag(pre, 2);
@@ -97,9 +101,10 @@ public class Util {
             ctx.bank.close();
         }
     }
+
     public static void sendMail(){
-        if(!setUp.debug)
-        try {
+        if(setUp.mail)
+            try {
             mailme.sendPOST("paso algo");
         } catch (IOException e) {
             e.printStackTrace();
@@ -123,7 +128,7 @@ public class Util {
     }
 
     public static void sendMail(String str){
-        if(!setUp.debug)
+        if(setUp.mail)
         try {
             mailme.sendPOST(str);
         } catch (IOException e) {
