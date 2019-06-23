@@ -23,7 +23,7 @@ public class WalkToBank extends Task {
     }
 
     @Override
-    public void execute() {
+    public void execute() throws Exception {
 //        System.out.println("Walking to bank");
         Condition.sleep(Random.nextInt(250, 500));
         walkToBank();

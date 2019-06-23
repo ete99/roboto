@@ -11,7 +11,7 @@ import static scripts.script.Util.sendMail;
 
 public class Idle extends Task {
 
-    static int t, c;
+    static int c;
     public Idle(ClientContext ctx) {
         super(ctx);
     }
@@ -21,25 +21,22 @@ public class Idle extends Task {
     public boolean activate() {
         Condition.sleep(500);
 //        System.out.println("idle check");
-        if(ctx.players.local().animation()==-1  && t==ctx.inventory.select().count() && !(ctx.objects.select().within(setUp.TREE_AREA).name("Tree Stump").name(setUp.TREE_NAME).size()==2)){
+        if(ctx.players.local().animation()==-1 && (ctx.objects.select().name(setUp.TREE_NAME).size()>0)){
             System.out.println("entro idle");
             c++;
-            t=ctx.inventory.select().count();
             if(c>20) {
                 setUp.STATE = State.IDLE;
             }
             if(c>500) {
                 setUp.STATE = State.REALLY_IDLE;
             }
-//            System.out.println("idle");
         }
         else{
-            if(ctx.objects.select().within(setUp.TREE_AREA).name("Tree Stump").id(setUp.TREE_ID).size()==2) {
+            if(ctx.objects.select().id(setUp.TREE_ID).size()==0) {
                 setUp.STATE = State.WAITING;
-                Condition.wait(() -> ctx.objects.select().within(setUp.TREE_AREA).name("Tree Stump").size()==2, 400,20);
+                Condition.wait(() -> ctx.objects.select().name(setUp.TREE_NAME).size()>0, 400,20);
             }
 //            System.out.println("not idle");
-            t=ctx.inventory.select().count();
             c=0;
             return false;
         }

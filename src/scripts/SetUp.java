@@ -26,10 +26,10 @@ public class  SetUp {
     public  State STATE = State.UNKNOWN;
     public ClientContext ctx;
     public  Tile[] RIDE;
-    public int LOGS_CHOPP;
     public int set;
     public boolean mail = false;
     public Boolean run = false;
+    public boolean stap =false;
 
     SetUp (ClientContext ctx){
         this.ctx = ctx;
@@ -38,12 +38,12 @@ public class  SetUp {
 
     public void setTheSetUp(){
         GUI.frame();
-        Condition.wait(()->run, 1000,100);
+        Condition.wait(() -> run, 300, 1000);
+
         if(setUp.debug)
             taskList.add(new Tester(ctx));
         if(set == 1) {
             // @TODO hacer jframe y otras areas
-            this.LOGS_CHOPP = 0;
             this.TREE_AREA = YEW_AREA;
             this.BANK_AREA = EDGE_BANK_AREA;
             this.TREE_NAME = "Yew";
@@ -61,7 +61,6 @@ public class  SetUp {
             taskList.add(new scripts.yew_tasks.Idle(ctx));
         } else if (set == 2){
             this.TREE_ID = MAGIC_ID;
-            this.LOGS_CHOPP = 0;
             this.TREE_AREA = MAGIC_FULL_AREA;
             this.BANK_AREA = MAGIC_BANK_AREA;
             this.TREE_NAME = "Magic tree";
@@ -71,7 +70,6 @@ public class  SetUp {
             this.RIDE = MAGIC_TO_BANK_RIDE;
             this.STATE = State.UNKNOWN;
             taskList.add(new scripts.common_tasks.CheckValid(ctx));
-            taskList.add(new scripts.magic_tasks.WalkToArea(ctx));
             taskList.add(new scripts.magic_tasks.WalkToTree(ctx));
             taskList.add(new scripts.magic_tasks.Chop(ctx));
             taskList.add(new Antiban(ctx));

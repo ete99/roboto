@@ -3,6 +3,8 @@ package scripts.common_tasks;
 
 import org.powerbot.script.Condition;
 import org.powerbot.script.rt4.ClientContext;
+import org.powerbot.script.rt4.LocalPath;
+import org.powerbot.script.rt4.TilePath;
 import scripts.SetUp;
 import scripts.utility.Task;
 
@@ -17,7 +19,7 @@ public class CheckValid extends Task {
     }
 
     @Override
-    public boolean activate() {
+    public boolean activate() throws Exception {
         Condition.wait(()-> setUp.ctx.players.local().animation() != -1, 60,10);
         if(ctx.players.local().inMotion())
             setUp.STATE = SetUp.State.WALKING;
@@ -34,6 +36,10 @@ public class CheckValid extends Task {
                 walkToBank();
             else
                 pickAxe();
+        }
+        TilePath path = setUp.ctx.movement.newTilePath(setUp.RIDE);
+        if(!path.valid()) {
+            walkToBank();
         }
         /*
 @TODO fix bug

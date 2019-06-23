@@ -2,6 +2,7 @@ package scripts.magic_tasks;
 
 import org.powerbot.script.Condition;
 import org.powerbot.script.Random;
+import org.powerbot.script.rt4.BasicQuery;
 import org.powerbot.script.rt4.ClientContext;
 import org.powerbot.script.rt4.GameObject;
 
@@ -19,17 +20,16 @@ public class Chop extends Task {
 
     @Override
     public boolean activate() {
-        Tree = ctx.objects.select().name(setUp.TREE_NAME).within(setUp.TREE_AREA).nearest().poll();
+        BasicQuery<GameObject> trees = ctx.objects.select().name(setUp.TREE_NAME).nearest();
+
+        Tree = trees.poll();
 //        System.out.println(Tree.valid());
-        return ctx.players.local().animation()==-1 && ctx.inventory.select().count()<28 && Tree.inViewport();
+        return ctx.players.local().animation()==-1 && ctx.inventory.select().count()<28 && trees.size()>0;
     }
 
     @Override
     public void execute() {
 //        System.out.println("Chopping");
-        Condition.sleep(Random.nextInt(350, 500));
         Chop(Tree);
-//        AntibanScript.moveMouseOffScreen(ctx,0);
-        Condition.sleep(Random.nextInt(350, 500));
     }
 }

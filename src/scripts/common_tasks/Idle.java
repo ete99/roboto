@@ -1,4 +1,4 @@
-package scripts.yew_tasks;
+package scripts.common_tasks;
 
 
 import org.powerbot.script.Condition;

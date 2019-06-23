@@ -28,6 +28,9 @@ public class GUI{
         final Button RUN = new Button("RUN");
 //final JCheckBox AntibanCamera= new JCheckBox("Antiban/rotatingCamera");
         JPanel panel = new JPanel();
+        final ButtonGroup g = new ButtonGroup();
+        g.add(EDGE);
+        g.add(MAGIC);
         panel.add(EDGE);
         panel.add(MAGIC);
         panel.add(DEBUG);
@@ -63,19 +66,22 @@ public class GUI{
         DEBUG.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                if (DEBUG.isEnabled()) {
-                    setUp.debug = true;
+                if (DEBUG.isEnabled())  setUp.debug = true;
+                else{
+                    setUp.debug =false;
+                    DEBUG.setEnabled(false);
                 }
             }
         });
         MAIL.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                if (MAIL.isEnabled()) {
+                if (MAIL.isSelected()) {
                     setUp.mail = true;
                 }
             }
         });
+//        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
     static int WcInitLevel;
@@ -100,13 +106,13 @@ public class GUI{
         runTime = (double) (System.currentTimeMillis() - initime) / 3600000;
 
         Graphics2D g2= (Graphics2D) g1;
-        int posx= (int) ctx.input.getLocation().getX();
-        int posy= (int) ctx.input.getLocation().getY();
-        g2.setColor(Color.GREEN);
-        g2.drawLine(posx,posy-10,posx,posy+10);
-        g2.drawLine(posx-10,posy,posx+10,posy);
-        g2.setColor(Color.GREEN);
-        g2.drawOval(posx-9,posy-9,18,18);
+//        int posx= (int) ctx.input.getLocation().getX();
+//        int posy= (int) ctx.input.getLocation().getY();
+//        g2.setColor(Color.GREEN);
+//        g2.drawLine(posx,posy-10,posx,posy+10);
+//        g2.drawLine(posx-10,posy,posx+10,posy);
+//        g2.setColor(Color.GREEN);
+//        g2.drawOval(posx-9,posy-9,18,18);
         g1.setColor(Color.BLACK);
         int gameY=ctx.game.dimensions().height;
         g1.fillRect(1,gameY-140,515,140);

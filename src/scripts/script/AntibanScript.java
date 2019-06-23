@@ -113,8 +113,10 @@ public class AntibanScript {
             }
         }
     }
-
     public static void moveMouseOffScreen(final ClientContext ctx, int level){
+        moveMouseOffScreen(ctx,level,()->ctx.players.local().animation()==-1);
+    }
+    public static void moveMouseOffScreen(final ClientContext ctx, int level, Callable<Boolean> cond){
         int x, y;
         if (Random.nextDouble() > 0.50){
             y = Random.nextInt(-2000, -1000);
@@ -142,9 +144,9 @@ public class AntibanScript {
             Condition.sleep(Random.nextInt(1000, 3000));
         }
         if(level>0)
-            Condition.wait(() -> ctx.players.local().animation()==-1, 1000, 100);
+            Condition.wait(cond, 1000, 100);
         else if(level == 0)
-            Condition.wait(() -> ctx.players.local().animation()==-1, 300, 4);
+            Condition.wait(cond, 300, 4);
         else {
             Condition.sleep(600);
         }
@@ -158,17 +160,42 @@ public class AntibanScript {
 
     public static void antibanned(int level){
 //        System.out.println("AntiBanning");
-        if (Random.nextDouble() > 0.90){
+        if (Random.nextDouble() > 0.80){
 //            AntibanScript.randomCameraTurn(ctx);
-            Thread t1 = new Thread(()-> Util.moveCamera(Random.nextInt(-90,90),Random.nextInt(50,99)));
-            Thread t2 = new Thread(()-> AntibanScript.randomMouseMovement(setUp.ctx));
-            t1.start();
-            t2.start();
+            if (Random.nextDouble() > 0.5){
+                Thread t1 = new Thread(() -> Util.moveCamera(Random.nextInt(-90, 90), Random.nextInt(50, 99)));
+                Thread t2 = new Thread(()-> AntibanScript.randomMouseMovement(setUp.ctx));
+                t1.start();
+                t2.start();
+            }
+            else
+                Util.dragCamera();
+
 //            Util.moveCamera(Random.nextInt(-90,90),Random.nextInt(50,99));
 //            AntibanScript.randomMouseMovement(ctx);
         }
         else {
             AntibanScript.moveMouseOffScreen(setUp.ctx,level);
+        }
+    }
+    public static void antibanned(int level, Callable<Boolean> cond){
+//        System.out.println("AntiBanning");
+        if (Random.nextDouble() > 0.80){
+//            AntibanScript.randomCameraTurn(ctx);
+            if (Random.nextDouble() > 0.5){
+                Thread t1 = new Thread(() -> Util.moveCamera(Random.nextInt(-90, 90), Random.nextInt(50, 99)));
+                Thread t2 = new Thread(()-> AntibanScript.randomMouseMovement(setUp.ctx));
+                t1.start();
+                t2.start();
+            }
+            else
+                Util.dragCamera();
+
+//            Util.moveCamera(Random.nextInt(-90,90),Random.nextInt(50,99));
+//            AntibanScript.randomMouseMovement(ctx);
+        }
+        else {
+            AntibanScript.moveMouseOffScreen(setUp.ctx,level,cond);
         }
 
 //        moveMouseOffScreen();

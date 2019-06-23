@@ -7,6 +7,7 @@ public class Constants {
     //@TODO: Pasar todo a constantes
     final static int OAK_ID = 10820;
     final static int WILL_ID = 10833;
+    final static int YEW_ID = 10833;
     final static int MAGIC_ID = 10834;
     public static int WC_ANIM;
     public static int RUN_ANIM;
@@ -14,7 +15,7 @@ public class Constants {
     final static  int ADAM_AXE = 1357;
     public final static int WOODCUTTING_SKILL=22;
     public final static Area WILLOW_AREA = new Area(new Tile(3170,3276), new Tile(3160, 3266));
-    public final static Area YEW_AREA = new Area( new Tile(3088, 3482),new Tile(3085,3468));
+    public final static Area YEW_AREA = new Area( new Tile(3089, 3482),new Tile(3085,3468));
     public final static Area SGE_BANK_AREA =  new Area(new Tile(3180, 3446), new Tile(3185, 3434));
     public final static Area EDGE_BANK_AREA =  new Area(new Tile(3091, 3488), new Tile(3098, 3497));
     public final static Area MAGIC_BANK_AREA =  new Area(new Tile(3380, 3266), new Tile(3385, 3274));

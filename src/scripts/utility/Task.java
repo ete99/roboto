@@ -10,7 +10,7 @@ public abstract class Task extends ClientAccessor {
         super(ctx);
     }
 
-    public abstract boolean activate();
-    public abstract void execute();
+    public abstract boolean activate() throws Exception;
+    public abstract void execute() throws Exception;
 
 }

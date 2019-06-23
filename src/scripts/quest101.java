@@ -32,7 +32,7 @@ public class quest101 extends PollingScript<ClientContext> implements PaintListe
         setUp.setTheSetUp();
         sendMail("Comienza "+ctx.players.local().name().toString() + " " + dtf.format(now));
     }
-
+    @Override
     public void stop(){
         GUI.frame.setVisible(false);
         GUI.frame.dispose();
@@ -42,16 +42,20 @@ public class quest101 extends PollingScript<ClientContext> implements PaintListe
 
     @Override
     public void poll() {
-
         for(Task task : taskList){
 
             if(ctx.controller.isStopping()){
                 break;
             }
 
-            if(task.activate()){
-                task.execute();
-                break;
+            try {
+                if(task.activate()){
+                    task.execute();
+                    break;
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+                stop();
             }
         }
     }
