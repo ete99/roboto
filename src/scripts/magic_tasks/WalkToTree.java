@@ -1,12 +1,11 @@
 package scripts.magic_tasks;
 
 
-import org.powerbot.script.Random;
 import org.powerbot.script.rt4.*;
+import scripts.SetUp;
 import scripts.SetUp.State;
 import scripts.utility.Task;
 
-import java.util.Arrays;
 
 import static scripts.Constants.*;
 import static scripts.quest101.setUp;
@@ -38,34 +37,18 @@ public class WalkToTree extends Task {
     public void execute() {
         ctx.camera.turnTo(Tree.tile(), 35);
 //        System.out.println("Walking to Tree");
-        LocalPath toTree = findPath(Tree);
+//        LocalPath toTree = findPath(Tree);
         //@TODO see if can create a inf loop
 //        System.out.println(toTree.valid()+" "+ toTree.traverse());
         if(!Tree.inViewport() || !MAGIC_FULL_AREA.contains(player)) {
-            toTree.traverse();
+            System.out.println("move: "+ctx.movement.step(Tree.tile()));
+            if(ctx.players.local().inMotion())
+                setUp.STATE = SetUp.State.WALKING;
             antibanned(0);
         } else {
             Chop(Tree);
         }
         //@TODO if just chopped, go to the other less recent area while waiting
-    }
-
-    public static LocalPath findPath(GameObject OBJ) {
-        boolean[][] m = new boolean[5][5];
-        int x, y;
-        x = Random.nextInt(-2, 3);
-        y = Random.nextInt(-2, 3);
-        LocalPath toOBJ = setUp.ctx.movement.findPath(OBJ.tile().derive(x, y));
-        int toomuch=0;
-        while (!toOBJ.valid() && toomuch<500) {
-            toomuch++;
-            m[2 + x][2 + y] = true;
-            x = Random.nextInt(-2, 3);
-            y = Random.nextInt(-2, 3);
-            if (!m[2 + x][2 + y])
-                toOBJ = setUp.ctx.movement.findPath(OBJ.tile().derive(x, y));
-        }
-        return toOBJ;
     }
 }
 

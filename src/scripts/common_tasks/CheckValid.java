@@ -23,8 +23,7 @@ public class CheckValid extends Task {
 
         System.out.println("check valid");
         Condition.wait(()-> setUp.ctx.players.local().animation() != -1, 60,10);
-        if(ctx.players.local().inMotion())
-            setUp.STATE = SetUp.State.WALKING;
+
         if (setUp.ctx.players.local().animation() == WC_ANIM)
             setUp.STATE = SetUp.State.CHOPPING;
         System.out.println(setUp.STATE);

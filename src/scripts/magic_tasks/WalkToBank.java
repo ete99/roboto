@@ -50,7 +50,7 @@ public class WalkToBank extends Task {
                     i.interact("Drop");
 //                    System.out.println("Dropping");
                 }
-                Condition.sleep(Random.nextInt(350, 400));
+                Condition.sleep(Random.nextInt(300, 350));
             }
             d = ctx.inventory.select().name("Logs");
         }

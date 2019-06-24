@@ -1,10 +1,8 @@
 package scripts.script;
 
-import org.powerbot.script.Condition;
-import org.powerbot.script.Filter;
-import org.powerbot.script.MenuCommand;
-import org.powerbot.script.Random;
+import org.powerbot.script.*;
 import org.powerbot.script.rt4.*;
+import org.powerbot.script.rt4.ClientContext;
 import scripts.Constants;
 import scripts.SetUp;
 import scripts.quest101;
@@ -33,9 +31,10 @@ public class Util {
                     b= b || Tree.interact("Chop");
 
             Condition.sleep(150);
+
             if(setUp.ctx.players.local().animation()!=WC_ANIM)
                     b=b || setUp.ctx.menu.click(menuCommand -> menuCommand.toString().equals("Chop down "+ setUp.TREE_NAME));
-//            Tree.click();
+
             moveMouseOffScreen(setUp.ctx,-1);
             if(b)
                 setUp.STATE = SetUp.State.CHOPPING;
@@ -57,14 +56,12 @@ public class Util {
             path.randomize(1, 1);
             path.traverse();
         } else {
-            LocalPath toBank = setUp.ctx.movement.findPath(setUp.RIDE[setUp.RIDE.length-1]);
-            if (!toBank.valid()) {
-                throw new Exception("Cant reach bank");
-            }
-            toBank.traverse();
+            setUp.ctx.movement.step(setUp.RIDE[setUp.RIDE.length-1]);
         }
         if(setUp.ctx.players.local().animation()!=-1 && Constants.RUN_ANIM==0)
             Constants.RUN_ANIM = setUp.ctx.players.local().animation();
+        if(setUp.ctx.players.local().inMotion())
+            setUp.STATE = SetUp.State.WALKING;
         moveCamera(setUp.ctx.camera.yaw() + Random.nextInt(-50, 50), setUp.ctx.camera.pitch() + Random.nextInt(-10, 10));
         moveMouseOffScreen(setUp.ctx,-1);
     }
