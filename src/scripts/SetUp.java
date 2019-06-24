@@ -75,6 +75,21 @@ public class  SetUp {
             taskList.add(new scripts.magic_tasks.WalkToBank(ctx));
             taskList.add(new scripts.common_tasks.Bank(ctx));
             taskList.add(new scripts.common_tasks.Idle(ctx));
+        } else if (set == 3){
+            this.TREE_ID = MAGIC_ID;
+            this.TREE_NAME = "Magic tree";
+            this.AXE_NAME = "Dragon Axe";  //can change(update)
+            this.TREE_MESS_NAME = "magic";  //can change(update)
+            this.AXE_ID = 6739;  //dragon axe
+            this.RIDE = GUILD_MAGIC_TO_BANK_RIDE;
+            this.STATE = State.UNKNOWN;
+            taskList.add(new scripts.common_tasks.CheckValid(ctx));
+            taskList.add(new scripts.guild_magic_tasks.WalkToTree(ctx));
+            taskList.add(new scripts.guild_magic_tasks.Chop(ctx));
+            taskList.add(new Antiban(ctx));
+            taskList.add(new scripts.guild_magic_tasks.WalkToBank(ctx));
+            taskList.add(new scripts.common_tasks.Bank(ctx));
+            taskList.add(new scripts.common_tasks.Idle(ctx));
         }
         else{
             System.out.println("no tadavia");

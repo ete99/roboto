@@ -27,6 +27,7 @@ public class Bank extends Task {
         ctx.camera.angle(ctx.camera.yaw() + Random.nextInt(-50, 50));
         if(!ctx.bank.inViewport() && ctx.bank.close()){
             ctx.camera.pitch(99-Random.nextInt(0, 3));
+            ctx.camera.turnTo(ctx.bank.nearest());
         }else {
             ctx.bank.open();
             int AXE_ID=ctx.inventory.name(setUp.AXE_NAME).poll().id();

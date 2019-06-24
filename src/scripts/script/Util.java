@@ -19,16 +19,19 @@ import static scripts.script.AntibanScript.moveMouseOffScreen;
 
 public class Util {
     public static void Chop(GameObject Tree){
-        Condition.sleep(Random.nextInt(350, 500));
         if(!Tree.inViewport())
             dragUntilCamera(Tree);
         if(setUp.ctx.players.local().animation()!=WC_ANIM){
             boolean b=false;
-            Tree.hover();
-            Condition.sleep(Random.nextInt(150,200)); // must have this sleep after hover
-            for (int i=0; i<2;i++)
-                if(setUp.ctx.menu.commands()[0].toString().equals("Chop down "+ setUp.TREE_NAME))
-                    b= b || Tree.interact("Chop");
+
+            for (int i=0; i<2;i++) {
+                Tree.hover();
+                Condition.sleep(Random.nextInt(150,200)); // must have this sleep after hover
+                if (setUp.ctx.menu.commands()[0].toString().equals("Chop down " + setUp.TREE_NAME))
+                    b = b || Tree.interact("Chop");
+                if(!b)
+                    Condition.sleep(Random.nextInt(300,400));
+            }
 
             Condition.sleep(150);
 
@@ -53,7 +56,7 @@ public class Util {
     public static void walkToBank() throws Exception {
         TilePath path = setUp.ctx.movement.newTilePath(setUp.RIDE);
         if(path.valid()) {
-            path.randomize(1, 1);
+            path.randomize(2, 2);
             path.traverse();
         } else {
             setUp.ctx.movement.step(setUp.RIDE[setUp.RIDE.length-1]);
@@ -67,14 +70,19 @@ public class Util {
     }
     public static void walkToTree(){
         TilePath path = setUp.ctx.movement.newTilePath(setUp.RIDE);
-        path.reverse();
-        path.randomize(1, 1);
-        path.traverse();
+        if(path.valid()) {
+            path.reverse();
+            path.randomize(2, 2);
+            path.traverse();
+        } else {
+            setUp.ctx.movement.step(setUp.RIDE[0]);
+        }
+
         if (setUp.ctx.players.local().animation() != -1 && Constants.RUN_ANIM == 0)
             Constants.RUN_ANIM = setUp.ctx.players.local().animation();
         if(Random.nextDouble()>0.5)
             moveCamera(setUp.ctx.camera.yaw() + Random.nextInt(-50, 50), setUp.ctx.camera.pitch() + Random.nextInt(-10, 10));
-        moveMouseOffScreen(setUp.ctx,-1);
+        moveMouseOffScreen(setUp.ctx,0,()->!setUp.ctx.players.local().inMotion());
     }
 
     public static void moveCamera(final int angle, final int pitch){
@@ -136,7 +144,7 @@ public class Util {
 
     private static void ViewCheck(){
         ClientContext ctx = setUp.ctx;
-        BasicQuery<GameObject> TREES = ctx.objects.select().name(setUp.TREE_NAME).within(setUp.TREE_AREA).nearest();
+        BasicQuery<GameObject> TREES = ctx.objects.select().name(setUp.TREE_NAME).nearest();
         GameObject Tree = TREES.poll();
         int now = ctx.camera.yaw();
         if(!(TREES.size()==0)) {

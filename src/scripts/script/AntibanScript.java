@@ -146,9 +146,9 @@ public class AntibanScript {
         if(level>0)
             Condition.wait(cond, 1000, 100);
         else if(level == 0)
-            Condition.wait(cond, 300, 4);
+            Condition.wait(cond, 150, 8);
         else {
-            Condition.sleep(600);
+            Condition.sleep(400);
         }
         ctx.input.focus();
 //        x = Random.nextInt(10, 510);

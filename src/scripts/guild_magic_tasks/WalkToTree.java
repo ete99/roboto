@@ -1,16 +1,14 @@
-package scripts.magic_tasks;
+package scripts.guild_magic_tasks;
 
 
-import org.powerbot.script.rt4.*;
-import scripts.SetUp;
+import org.powerbot.script.rt4.ClientContext;
+import org.powerbot.script.rt4.GameObject;
+import org.powerbot.script.rt4.Player;
 import scripts.SetUp.State;
 import scripts.utility.Task;
 
-
 import static scripts.Constants.*;
 import static scripts.quest101.setUp;
-import static scripts.script.AntibanScript.antibanned;
-import static scripts.script.AntibanScript.moveMouseOffScreen;
 import static scripts.script.Util.Chop;
 import static scripts.script.Util.walkToTree;
 
@@ -22,16 +20,13 @@ public class WalkToTree extends Task {
         super(ctx);
     }
     GameObject Tree;
-    Boolean A1, A2;
     Player player;
     @Override
     public boolean activate() {
         Tree = ctx.objects.select().name(setUp.TREE_NAME).nearest().poll();
         player = ctx.players.local();
-        A1=MAGIC_AREA1.contains(Tree) && MAGIC_AREA1.contains(player);
-        A2=MAGIC_AREA2.contains(Tree) && MAGIC_AREA2.contains(player);
 
-        return !ctx.inventory.isFull() && setUp.STATE != State.CHOPPING &&  !(A1 || A2) && ctx.objects.select().name(setUp.TREE_NAME).size()>0 && Tree.tile().distanceTo(player)>6;// && !MAGIC_AREA1.contains(player) && !MAGIC_AREA2.contains(player);
+        return !ctx.inventory.isFull() && setUp.STATE != State.CHOPPING && ctx.objects.select().name(setUp.TREE_NAME).size()>0 && Tree.tile().distanceTo(player)>6;// && !MAGIC_AREA1.contains(player) && !MAGIC_AREA2.contains(player);
     }
 
 
@@ -39,17 +34,13 @@ public class WalkToTree extends Task {
     public void execute() {
         ctx.camera.turnTo(Tree.tile(), 35);
 //        System.out.println("Walking to Tree");
-//        LocalPath toTree = findPath(Tree);
-        //@TODO see if can create a inf loop
-//        System.out.println(toTree.valid()+" "+ toTree.traverse());
-        if(!Tree.inViewport() || !MAGIC_FULL_AREA.contains(player)) {
+        if(!Tree.inViewport()) {
             walkToTree();
             if(ctx.players.local().inMotion())
-                setUp.STATE = SetUp.State.WALKING;
+                setUp.STATE = State.WALKING;
         } else {
             Chop(Tree);
         }
-        //@TODO if just chopped, go to the other less recent area while waiting
     }
 }
 

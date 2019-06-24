@@ -15,8 +15,9 @@ public class Tester extends Task {
     GameObject Tree;
     @Override
     public boolean activate() {
-        System.out.println("hola?");
-        System.out.println(ctx.skills.experience(Constants.WOODCUTTING_SKILL));
+        System.out.println("pre");
+        Condition.wait(()->!ctx.players.local().inMotion(),1000,5);
+        System.out.println("post");
 
 //        System.out.println(ctx.widgets.select().id(320).poll().component(22).component(4).text());
 //        System.out.println(ctx.objects.select().name("Door").nearest().poll().id());

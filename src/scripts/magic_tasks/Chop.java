@@ -30,6 +30,7 @@ public class Chop extends Task {
     @Override
     public void execute() {
 //        System.out.println("Chopping");
+        Condition.sleep(Random.nextInt(250, 350));
         ctx.camera.turnTo(Tree.tile(), 35);
         Chop(Tree);
     }

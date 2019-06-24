@@ -23,6 +23,7 @@ public class GUI{
         frame.setVisible(true);
         final JCheckBox EDGE = new JCheckBox("edgville - yews");
         final JCheckBox MAGIC = new JCheckBox("arena -magic tree ");
+        final JCheckBox MAGIC_GUILD = new JCheckBox("guild -magic tree ");
         final JCheckBox DEBUG = new JCheckBox("debug");
         final JCheckBox MAIL = new JCheckBox("mail?");
         final Button RUN = new Button("RUN");
@@ -31,8 +32,10 @@ public class GUI{
         final ButtonGroup g = new ButtonGroup();
         g.add(EDGE);
         g.add(MAGIC);
+        g.add(MAGIC_GUILD);
         panel.add(EDGE);
         panel.add(MAGIC);
+        panel.add(MAGIC_GUILD);
         panel.add(DEBUG);
         panel.add(MAIL);
         panel.add(RUN);
@@ -60,6 +63,14 @@ public class GUI{
             public void actionPerformed(ActionEvent actionEvent) {
                 if (MAGIC.isEnabled()) {
                     setUp.set = 2;
+                }
+            }
+        });
+        MAGIC_GUILD.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                if (MAGIC.isEnabled()) {
+                    setUp.set = 3;
                 }
             }
         });

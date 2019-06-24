@@ -7,6 +7,7 @@ import scripts.SetUp.State;
 import scripts.utility.Task;
 
 import static scripts.quest101.setUp;
+import static scripts.script.Util.Chop;
 import static scripts.script.Util.sendMail;
 
 public class Idle extends Task {
@@ -27,6 +28,7 @@ public class Idle extends Task {
             c++;
             if(c>3) {
                 setUp.STATE = State.IDLE;
+                Chop(ctx.objects.select().name(setUp.TREE_NAME).nearest().poll());
             }
             if(c>100) {
                 setUp.STATE = State.REALLY_IDLE;
@@ -40,7 +42,7 @@ public class Idle extends Task {
                 c=0;
             return false;
         }
-        return false;
+        return true;
     }
 
     @Override
