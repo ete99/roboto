@@ -43,7 +43,6 @@ public class  SetUp {
         if(setUp.debug)
             taskList.add(new Tester(ctx));
         if(set == 1) {
-            // @TODO hacer jframe y otras areas
             this.TREE_AREA = YEW_AREA;
             this.BANK_AREA = EDGE_BANK_AREA;
             this.TREE_NAME = "Yew";
@@ -58,7 +57,7 @@ public class  SetUp {
             taskList.add(new Antiban(ctx));
             taskList.add(new scripts.yew_tasks.WalkToBank(ctx));
             taskList.add(new scripts.common_tasks.Bank(ctx));
-            taskList.add(new scripts.yew_tasks.Idle(ctx));
+            taskList.add(new scripts.common_tasks.Idle(ctx));
         } else if (set == 2){
             this.TREE_ID = MAGIC_ID;
             this.TREE_AREA = MAGIC_FULL_AREA;
@@ -75,7 +74,7 @@ public class  SetUp {
             taskList.add(new Antiban(ctx));
             taskList.add(new scripts.magic_tasks.WalkToBank(ctx));
             taskList.add(new scripts.common_tasks.Bank(ctx));
-            taskList.add(new scripts.magic_tasks.Idle(ctx));
+            taskList.add(new scripts.common_tasks.Idle(ctx));
         }
         else{
             System.out.println("no tadavia");

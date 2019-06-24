@@ -36,6 +36,7 @@ public class WalkToTree extends Task {
 
     @Override
     public void execute() {
+        ctx.camera.turnTo(Tree.tile(), 35);
 //        System.out.println("Walking to Tree");
         LocalPath toTree = findPath(Tree);
         //@TODO see if can create a inf loop

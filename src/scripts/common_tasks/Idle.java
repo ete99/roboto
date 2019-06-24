@@ -19,28 +19,28 @@ public class Idle extends Task {
     //@TODO refactor idle
     @Override
     public boolean activate() {
+
         Condition.sleep(500);
 //        System.out.println("idle check");
         if(ctx.players.local().animation()==-1 && (ctx.objects.select().name(setUp.TREE_NAME).size()>0)){
             System.out.println("entro idle");
             c++;
-            if(c>20) {
+            if(c>3) {
                 setUp.STATE = State.IDLE;
             }
-            if(c>500) {
+            if(c>100) {
                 setUp.STATE = State.REALLY_IDLE;
             }
         }
-        else{
-            if(ctx.objects.select().id(setUp.TREE_ID).size()==0) {
+        else if (ctx.objects.select().name(setUp.TREE_NAME).size()==0){
                 setUp.STATE = State.WAITING;
-                Condition.wait(() -> ctx.objects.select().name(setUp.TREE_NAME).size()>0, 400,20);
-            }
-//            System.out.println("not idle");
-            c=0;
+                System.out.println("waiting");
+
+                Condition.wait(() -> !(ctx.objects.select().id(setUp.TREE_ID).size()>0), 400,20);
+                c=0;
             return false;
         }
-        return true;
+        return false;
     }
 
     @Override

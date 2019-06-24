@@ -20,9 +20,9 @@ public class Chop extends Task {
 
     @Override
     public boolean activate() {
-        BasicQuery<GameObject> trees = ctx.objects.select().name(setUp.TREE_NAME).nearest();
+        BasicQuery<GameObject> trees = ctx.objects.select().name(setUp.TREE_NAME);
 
-        Tree = trees.poll();
+        Tree = trees.nearest().poll();
 //        System.out.println(Tree.valid());
         return ctx.players.local().animation()==-1 && ctx.inventory.select().count()<28 && trees.size()>0;
     }
@@ -30,6 +30,7 @@ public class Chop extends Task {
     @Override
     public void execute() {
 //        System.out.println("Chopping");
+        ctx.camera.turnTo(Tree.tile(), 35);
         Chop(Tree);
     }
 }

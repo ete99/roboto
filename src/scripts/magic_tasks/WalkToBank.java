@@ -35,7 +35,7 @@ public class WalkToBank extends Task {
     void logCheck(){
 
 //        System.out.println("Begin Dropping: ");
-        Condition.sleep(Random.nextInt(350, 500));
+//        Condition.sleep(Random.nextInt(350, 500));
         ItemQuery<Item> d = ctx.inventory.select().name("Logs");
         while(d.count()!=0){
             setUp.STATE = SetUp.State.DROPPING;

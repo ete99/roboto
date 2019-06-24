@@ -20,6 +20,8 @@ public class CheckValid extends Task {
 
     @Override
     public boolean activate() throws Exception {
+
+        System.out.println("check valid");
         Condition.wait(()-> setUp.ctx.players.local().animation() != -1, 60,10);
         if(ctx.players.local().inMotion())
             setUp.STATE = SetUp.State.WALKING;

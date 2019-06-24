@@ -27,7 +27,7 @@ public class WalkToTree extends Task {
 
     @Override
     public void execute() {
-//        System.out.println("Walking to Trees");
+        System.out.println("Walking to Trees");
 //        Condition.sleep(Random.nextInt(250, 500));
 //        if(setUp.STATE != State.IDLE && ctx.objects.select().name(setUp.TREE_NAME).nearest().poll().inViewport())
         if(!(setUp.TREE_AREA.contains(ctx.players.local())))
@@ -37,6 +37,7 @@ public class WalkToTree extends Task {
             Chop(Tree);
 //            AntibanScript.moveMouseOffScreen(ctx,0);
         }else {
+            ctx.camera.turnTo(Tree.tile(),35);
             walkToTree();
             if(!Tree.inViewport())
                 Condition.sleep(Random.nextInt(250, 500));

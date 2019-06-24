@@ -20,15 +20,16 @@ public class Chop extends Task {
 
     @Override
     public boolean activate() {
-//        EdgeCheck();
-        BasicQuery<GameObject> trees = ctx.objects.select().name(setUp.TREE_NAME).within(setUp.TREE_AREA).nearest();
-        Tree = trees.poll();
-        return ctx.players.local().animation()==-1 && ctx.inventory.select().count()<28 && !ctx.players.local().inMotion() && trees.size()>0;
+        BasicQuery<GameObject> trees = ctx.objects.select().name(setUp.TREE_NAME);
+        final boolean b = ctx.players.local().animation()==-1 && ctx.inventory.select().count()<28 && !ctx.players.local().inMotion() && trees.size()>0;
+        Tree = trees.nearest().poll();
+        return b;
     }
 
     @Override
     public void execute() {
-//        System.out.println("Chopping");
+        System.out.println("Chopping");
+        ctx.camera.turnTo(Tree.tile(),35);
         Chop(Tree);
     }
 }

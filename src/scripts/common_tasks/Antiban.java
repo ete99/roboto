@@ -16,14 +16,14 @@ public class Antiban extends Task {
 
     @Override
     public boolean activate() {
-        return ctx.players.local().animation()== Constants.WC_ANIM;
+        return ctx.players.local().animation()== Constants.WC_ANIM && setUp.STATE == State.CHOPPING;
     }
 
     @Override
     public void execute() {
-//        System.out.println("AntiBanning");
+        System.out.println("AntiBanning");
         setUp.STATE = State.ANTIBANNING;
-        antibanned(3,(()->ctx.objects.select().name(setUp.TREE_NAME).size()>0));
+        antibanned(3,(()->(ctx.players.local().animation()==-1)));
 
 //        moveMouseOffScreen();
 //        doAntibanAction(Random.nextInt(1,11));
