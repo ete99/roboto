@@ -33,11 +33,10 @@ public class WalkToTree extends Task {
         if(!(setUp.TREE_AREA.contains(ctx.players.local())))
             openDoor();
         GameObject Tree = ctx.objects.select().name(setUp.TREE_NAME).nearest().poll();
-        if (Tree.inViewport() && ctx.objects.select().id(1544).nearest().poll().valid() && ctx.players.local().animation()!=-1){
+        if (Tree.inViewport() && ctx.objects.select().id(1544).nearest().poll().valid()){
             Chop(Tree);
 //            AntibanScript.moveMouseOffScreen(ctx,0);
         }else {
-            ctx.camera.turnTo(Tree.tile(),35);
             walkToTree();
             if(!Tree.inViewport())
                 Condition.sleep(Random.nextInt(250, 500));

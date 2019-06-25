@@ -14,6 +14,7 @@ public class Constants {
     final static  int MITH_AXE = 1355;
     final static  int ADAM_AXE = 1357;
     public final static int WOODCUTTING_SKILL=22;
+    public final static int WOODCUTTING_LEVEL=8;
     public final static Tile GE = new Tile(3165, 3485);
     public final static Tile EDGE = new Tile(3093, 3491);
     public final static Area WILLOW_AREA = new Area(new Tile(3170,3276), new Tile(3160, 3266));

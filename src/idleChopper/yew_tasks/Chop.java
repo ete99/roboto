@@ -21,7 +21,6 @@ public class Chop extends Task {
     public boolean activate() {
         BasicQuery<GameObject> trees = ctx.objects.select().name(setUp.TREE_NAME);
         final boolean b = ctx.players.local().animation()==-1 && ctx.inventory.select().count()<28 && !ctx.players.local().inMotion() && trees.size()>0;
-        System.out.println(b);
         Tree = trees.nearest().poll();
         return b;
     }

@@ -92,6 +92,7 @@ public class GUI{
     }
 
     static int WcInitLevel;
+    static int WcExpInit;
     static int hours;
     static int seconds;
     static int minutes;
@@ -102,10 +103,11 @@ public class GUI{
     public static int logsChopped = 0;
 
     static public void rep(Graphics g1, ClientContext ctx){
-        int currentExp = ctx.skills.experience(Constants.WOODCUTTING_SKILL);
-        int currLevel = ctx.skills.level(Constants.WOODCUTTING_SKILL);
+        int currentExp = ctx.skills.experience(Constants.WOODCUTTING_LEVEL);
+        int currLevel = ctx.skills.level(Constants.WOODCUTTING_LEVEL);
         int logsToNextLevel = (ctx.skills.experienceAt(currLevel + 1) - currentExp) / 175;
         Wclevel = currLevel -WcInitLevel;
+        int expGained= currentExp-WcExpInit;
         hours = (int) ((System.currentTimeMillis() - initime) / 3600000);
         minutes = (int) ((System.currentTimeMillis() - initime) / 60000 % 60);
         seconds = (int) ((System.currentTimeMillis() - initime) / 1000) % 60;
@@ -127,17 +129,24 @@ public class GUI{
         g2.setColor(Color.WHITE);
         g2.setStroke(basic);
         g2.drawRect(1, gameY-140, 515, 140);
-
+        int logH = (int)(logsChopped/runTime);
         g1.setColor(Color.WHITE);
         g1.setFont(font);
         g1.drawString("Levels gained : " + Wclevel, 20, gameY-125);
-        g1.drawString("Time passed : " + hours + " : " + minutes + " : " + seconds, 20, gameY-100);
+        g1.drawString("Curr. lvl : " + currLevel, 20, gameY-100);
         g1.drawString("Experience gained : " +expGained,20,gameY-75);
-        g1.drawString("Logs to next level: " + logsToNextLevel, 20, gameY-50);
+        g1.drawString("Logs to lvl: " + logsToNextLevel + "  t = "+ (logH==0?"inf":(logsToNextLevel/logH))+" hs", 20, gameY-50);
         g1.drawString("Logs chopped :  " + logsChopped, 20, gameY-25);
         int money= (int) ((logsChopped*1050)/runTime);
         g1.drawString("Money/Hour "+money,335,gameY-125);
-        g1.drawString("Ete", 335,gameY-25);
+        String mailOn = "Mail: "+setUp.mail;
+        g1.drawString(mailOn, 335,gameY-25);
+        String logs= "Log/h: "+logH;
+        g1.drawString(logs, 335,gameY-50);
+        String xpH= "xp/h: "+(int)(expGained/runTime);
+        g1.drawString(xpH, 335,gameY-75);
+        g1.drawString("Time passed : " + hours + " : " + minutes + " : " + seconds, 335, gameY-100);
+
     }
 
 }

@@ -25,13 +25,12 @@ public class WalkToTree extends Task {
         Tree = ctx.objects.select().name(setUp.TREE_NAME).nearest().poll();
         player = ctx.players.local();
 
-        return !ctx.inventory.isFull() && setUp.STATE != State.CHOPPING && ctx.objects.select().name(setUp.TREE_NAME).size()>0 && Tree.tile().distanceTo(player)>6;// && !MAGIC_AREA1.contains(player) && !MAGIC_AREA2.contains(player);
+        return !ctx.inventory.isFull() && setUp.STATE != State.CHOPPING;// && !MAGIC_AREA1.contains(player) && !MAGIC_AREA2.contains(player);
     }
 
 
     @Override
     public void execute() {
-        ctx.camera.turnTo(Tree.tile(), 35);
 //        System.out.println("Walking to Tree");
         if(!Tree.inViewport()) {
             walkToTree();

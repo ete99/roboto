@@ -36,6 +36,8 @@ public class  SetUp {
     }
 
     public void setTheSetUp(){
+        GUI.WcInitLevel =ctx.skills.level(WOODCUTTING_LEVEL);
+        GUI.WcExpInit= ctx.skills.experience(WOODCUTTING_LEVEL);
         GUI.frame();
         Condition.wait(() -> run, 300, 1000);
 

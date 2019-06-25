@@ -2,6 +2,7 @@ package idleChopper.misc_tasks;
 
 
 import idleChopper.script.AntibanScript;
+import org.powerbot.script.Client;
 import org.powerbot.script.Condition;
 import org.powerbot.script.rt4.ClientContext;
 import org.powerbot.script.rt4.GameObject;
@@ -19,12 +20,19 @@ public class Tester extends Task {
     GameObject Tree;
     @Override
     public boolean activate() {
-        openBank();
-        System.out.println("hola");
-        System.out.println(ctx.bank.opened());
-//        AntibanScript.moveMouseOffScreen(ctx, 0, () -> ctx.bank.opened());
+        System.out.println("s");
+//        for (int level : ctx.skills.levels()) {
+//            System.out.println(level);
+//        }
+        System.out.println(ctx.skills.level(8));
 
-        System.out.println("chau");
+//        openBank();
+//        System.out.println("hola");
+//        System.out.println(ctx.bank.opened());
+//
+//        AntibanScript.moveMouseOffScreen(ctx, 0, () -> !ctx.bank.opened());
+//
+//        System.out.println("chau");
 //        openBank();
 //        System.out.println(ctx.widgets.select().id(320).poll().component(22).component(4).text());
 //        System.out.println(ctx.objects.select().name("Door").nearest().poll().id());

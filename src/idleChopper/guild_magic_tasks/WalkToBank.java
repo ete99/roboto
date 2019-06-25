@@ -25,7 +25,6 @@ public class WalkToBank extends Task {
     @Override
     public void execute() throws Exception {
         System.out.println("Walking to bank");
-        ctx.camera.turnTo(ctx.bank.nearest().tile(), 13);
 //        ctx.bank.open();
         if(!ctx.bank.opened())
             walkToBank();

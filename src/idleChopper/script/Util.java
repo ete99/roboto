@@ -61,22 +61,24 @@ public class Util {
     }
 
     //@TODO redo banking system like this.
-    public static boolean  openBank(){
+    public static boolean openBank(){
         ClientContext ctx = setUp.ctx;
-        ctx.camera.turnTo(ctx.bank.nearest().tile(), 7);
-        final Filter<MenuCommand> filter = new Filter<MenuCommand>() {
-            public boolean accept(MenuCommand command) {
-                String action = command.action;
-                return action.equalsIgnoreCase("Bank") || action.equalsIgnoreCase("Use") || action.equalsIgnoreCase("Open");
+        if(!ctx.bank.opened()) {
+            ctx.camera.turnTo(ctx.bank.nearest().tile(), 7);
+            final Filter<MenuCommand> filter = new Filter<MenuCommand>() {
+                public boolean accept(MenuCommand command) {
+                    String action = command.action;
+                    return action.equalsIgnoreCase("Bank") || action.equalsIgnoreCase("Use") || action.equalsIgnoreCase("Open");
+                }
+            };
+            final GameObject bank = ctx.objects.select(ctx.bank.nearest().tile(), 1).nearest().name("Bank chest", "Bank Booth", "Bank").poll();
+            bank.hover();
+            final boolean b = bank.interact(filter);
+            if (b) {
+                AntibanScript.moveMouseOffScreen(ctx, 0, () -> ctx.bank.opened());
             }
-        };
-        final GameObject bank = ctx.objects.select(ctx.bank.nearest().tile(),1).nearest().name("Bank chest", "Bank Booth", "Bank").poll();
-        bank.hover();
-        final boolean b = bank.interact(filter);
-        if(b) {
-            AntibanScript.moveMouseOffScreen(ctx, 0, () -> !ctx.bank.opened());
-        }
-        return b;
+            return b;
+        } else return true;
     }
 
     //@TODO on walk, moveOffScreen to the right, not left
@@ -92,7 +94,10 @@ public class Util {
             Constants.RUN_ANIM = setUp.ctx.players.local().animation();
         if(setUp.ctx.players.local().inMotion())
             setUp.STATE = SetUp.State.WALKING;
-        moveCamera(setUp.ctx.camera.yaw() + Random.nextInt(-50, 50), setUp.ctx.camera.pitch() + Random.nextInt(-10, 10));
+        if(Random.nextDouble()>0.1)
+            moveCamera(setUp.ctx.camera.yaw() + Random.nextInt(-50, 50), setUp.ctx.camera.pitch() + Random.nextInt(-10, 10));
+        else
+            setUp.ctx.camera.turnTo(setUp.ctx.objects.select().name(setUp.TREE_NAME).poll());
         moveMouseOffScreen(setUp.ctx,-1,()->!setUp.ctx.players.local().inMotion());
     }
     public static void walkToTree(){
@@ -107,8 +112,10 @@ public class Util {
 
         if (setUp.ctx.players.local().animation() != -1 && Constants.RUN_ANIM == 0)
             Constants.RUN_ANIM = setUp.ctx.players.local().animation();
-        if(Random.nextDouble()>0.5)
+        if(Random.nextDouble()>0.1)
             moveCamera(setUp.ctx.camera.yaw() + Random.nextInt(-50, 50), setUp.ctx.camera.pitch() + Random.nextInt(-10, 10));
+        else
+            setUp.ctx.camera.turnTo(setUp.ctx.objects.select().name(setUp.TREE_NAME).poll());
         moveMouseOffScreen(setUp.ctx,0,()->!setUp.ctx.players.local().inMotion());
     }
 
