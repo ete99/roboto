@@ -8,6 +8,7 @@ import org.powerbot.script.Random;
 import org.powerbot.script.rt4.ClientContext;
 import idleChopper.utility.Task;
 
+import static idleChopper.script.Util.openBank;
 import static idleChopper.script.Util.walkToBank;
 
 public class WalkToBank extends Task {
@@ -29,17 +30,6 @@ public class WalkToBank extends Task {
         if(!ctx.bank.opened())
             walkToBank();
     }
-    boolean openBank(){
-        ctx.camera.turnTo(ctx.bank.nearest().tile(), 7);
-        boolean b =ctx.bank.poll().click("Use");
-        if(b) {
-            System.out.println("hola");
 
-            AntibanScript.moveMouseOffScreen(ctx, 0, () -> !ctx.bank.opened());
-            System.out.println("chau");
-
-        }
-        return b;
-    }
 }
 

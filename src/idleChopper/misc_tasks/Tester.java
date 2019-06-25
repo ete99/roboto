@@ -9,30 +9,20 @@ import idleChopper.utility.Task;
 
 import java.awt.*;
 
+import static idleChopper.script.Util.openBank;
+
 
 public class Tester extends Task {
     public Tester(ClientContext ctx) {
         super(ctx);
     }
     GameObject Tree;
-    boolean openBank(){
-        ctx.camera.turnTo(ctx.bank.nearest().tile(), 7);
-        boolean b =ctx.objects.select().name("Bank chest").poll().click("Use");
-        System.out.println(b);
-        if(b) {
-            System.out.println("hola");
-
-            AntibanScript.moveMouseOffScreen(ctx, 0, () -> ctx.bank.opened());
-            System.out.println("chau");
-
-        }
-        return b;
-    }
     @Override
     public boolean activate() {
+        openBank();
         System.out.println("hola");
         System.out.println(ctx.bank.opened());
-        AntibanScript.moveMouseOffScreen(ctx, 0, () -> ctx.bank.opened());
+//        AntibanScript.moveMouseOffScreen(ctx, 0, () -> ctx.bank.opened());
 
         System.out.println("chau");
 //        openBank();

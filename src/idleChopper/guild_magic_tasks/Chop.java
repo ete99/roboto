@@ -30,7 +30,6 @@ public class Chop extends Task {
     public void execute() {
 //        System.out.println("Chopping");
         Condition.sleep(Random.nextInt(250, 350));
-
         Chop(Tree);
     }
 }

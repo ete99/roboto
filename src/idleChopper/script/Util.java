@@ -31,11 +31,11 @@ public class Util {
         if(setUp.ctx.players.local().animation()!=WC_ANIM){
             boolean b=false;
 
-            for (int i=0; i<3;i++) {
+            for (int i=0; i<3 && setUp.ctx.players.local().animation()!=WC_ANIM;i++) {
                 Tree.hover();
                 Condition.sleep(Random.nextInt(50,150)); // must have this sleep after hover
-                if (setUp.ctx.menu.commands()[0].toString().equals("Chop down " + setUp.TREE_NAME))
-                    b = b || Tree.interact("Chop");
+
+                b = b || setUp.ctx.menu.click(menuCommand -> menuCommand.toString().equals("Chop down "+ setUp.TREE_NAME));
                 if(!b)
                     Condition.sleep(Random.nextInt(300,400));
             }
@@ -59,6 +59,26 @@ public class Util {
             ViewCheck();
         }
     }
+
+    //@TODO redo banking system like this.
+    public static boolean  openBank(){
+        ClientContext ctx = setUp.ctx;
+        ctx.camera.turnTo(ctx.bank.nearest().tile(), 7);
+        final Filter<MenuCommand> filter = new Filter<MenuCommand>() {
+            public boolean accept(MenuCommand command) {
+                String action = command.action;
+                return action.equalsIgnoreCase("Bank") || action.equalsIgnoreCase("Use") || action.equalsIgnoreCase("Open");
+            }
+        };
+        final GameObject bank = ctx.objects.select(ctx.bank.nearest().tile(),1).nearest().name("Bank chest", "Bank Booth", "Bank").poll();
+        bank.hover();
+        final boolean b = bank.interact(filter);
+        if(b) {
+            AntibanScript.moveMouseOffScreen(ctx, 0, () -> !ctx.bank.opened());
+        }
+        return b;
+    }
+
     //@TODO on walk, moveOffScreen to the right, not left
     public static void walkToBank() throws Exception {
         TilePath path = setUp.ctx.movement.newTilePath(setUp.RIDE);

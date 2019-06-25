@@ -116,30 +116,25 @@ public class AntibanScript {
         moveMouseOffScreen(ctx,level,()->ctx.players.local().animation()==-1);
     }
     public static void moveMouseOffScreen(final ClientContext ctx, int level, Callable<Boolean> cond){
-        System.out.println(0);
         int x, y;
         int w,h;
         w=ctx.game.dimensions().width;
         h=ctx.game.dimensions().height;
         if (Random.nextDouble() > 0.50) {
             x = -10;
+            y=Random.nextInt(-50,w+50);
+
         } else {
             x = Random.nextInt(0,w/2);
-
-        }
-        if(x>0) {
             if (Random.nextDouble() > 0.50) {
                 y = -10;
             } else {
                 y = h + 10;
             }
-        } else{
-            y=Random.nextInt(-50,w+50);
         }
         ctx.input.move(x, y);
 
         //@TODO Remove waits, add if not chopping in check valid
-        System.out.println(1);
         ctx.input.defocus();
         if(level>0)
             Condition.sleep(Random.nextInt(3000, 5000));
@@ -154,15 +149,10 @@ public class AntibanScript {
         else if (level>=1) {
             Condition.sleep(Random.nextInt(1000, 3000));
         }
-        System.out.println(2);
         if(level>0)
-            Condition.wait(cond, 1000, 100);
+            Condition.wait(cond, Random.nextInt(1000,5000), 100);
         else if(level == 0) {
-            System.out.println("here");
-            Condition.wait(cond, 150, 8);
-        }
-        else {
-            Condition.sleep(400);
+            Condition.wait(cond, Random.nextInt(150,200), 8);
         }
         ctx.input.focus();
 //        x = Random.nextInt(10, 510);
