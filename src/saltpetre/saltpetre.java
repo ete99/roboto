@@ -2,10 +2,9 @@ package saltpetre;
 
 import org.powerbot.script.*;
 import org.powerbot.script.rt4.ClientContext;
-import org.powerbot.script.rt4.Component;
 import org.powerbot.script.rt4.Item;
-import scripts.script.AntibanScript;
-import scripts.script.Util;
+import idleChopper.script.AntibanScript;
+import idleChopper.script.Util;
 
 
 @Script.Manifest(name = "salt", properties = "author=ete; topic=1333332; client=4;", description = "jaja")

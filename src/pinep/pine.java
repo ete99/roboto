@@ -4,11 +4,8 @@ import org.powerbot.script.*;
 import org.powerbot.script.rt4.ClientContext;
 import org.powerbot.script.rt4.Component;
 import org.powerbot.script.rt4.Item;
-import org.powerbot.script.rt4.Npc;
-import scripts.script.AntibanScript;
-import scripts.script.Util;
-
-import static org.powerbot.script.rt4.Magic.Spell.CURSE;
+import idleChopper.script.AntibanScript;
+import idleChopper.script.Util;
 
 
 @Script.Manifest(name = "pine", properties = "author=ete; topic=1333332; client=4;", description = "jaja")

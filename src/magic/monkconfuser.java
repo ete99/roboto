@@ -2,17 +2,11 @@ package magic;
 
 import org.powerbot.script.*;
 import org.powerbot.script.rt4.ClientContext;
-import org.powerbot.script.rt4.GameObject;
 import org.powerbot.script.rt4.Npc;
-import scripts.GUI;
-import scripts.common_tasks.Antiban;
-import scripts.script.AntibanScript;
-import scripts.script.Util;
-
-import java.awt.*;
+import idleChopper.script.AntibanScript;
+import idleChopper.script.Util;
 
 import static org.powerbot.script.rt4.Magic.Spell.CURSE;
-import static scripts.quest101.setUp;
 
 
 @Script.Manifest(name = "lego", properties = "author=ete; topic=1333332; client=4;", description = "jaja")
