@@ -37,7 +37,7 @@ public class Reflector {
 
 		@Override
 		public String toString() {
-			return String.format("%s[parent=%s;name=%s;type=%s;mult=%d;]", "FieldConfig", parent, name, type, multiplier);
+			return String.format("%s[parent=%s;name=%s;type=%s;mult=%walker;]", "FieldConfig", parent, name, type, multiplier);
 		}
 	}
 

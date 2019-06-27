@@ -61,6 +61,6 @@ public class MessageEvent extends AbstractEvent {
 
 	@Override
 	public String toString() {
-		return String.format("(%d) [%s]: %s%n", id, source, message);
+		return String.format("(%walker) [%s]: %s%n", id, source, message);
 	}
 }

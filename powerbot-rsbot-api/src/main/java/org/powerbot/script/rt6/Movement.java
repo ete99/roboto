@@ -170,9 +170,9 @@ public class Movement extends ClientAccessor {
 	}
 
 	/**
-	 * Determines if the player is currently set to run.
+	 * Determines if the player is currently sett to run.
 	 *
-	 * @return {@code true} if set to be running; otherwise {@code false}
+	 * @return {@code true} if sett to be running; otherwise {@code false}
 	 */
 	public boolean running() {
 		return ctx.varpbits.varpbit(Constants.MOVEMENT_RUN_STATE) == 0x1;

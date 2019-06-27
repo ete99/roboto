@@ -11,7 +11,7 @@ import java.util.stream.Stream;
 
 /**
  * AbstractQuery
- * An abstract implementation of a chaining query-based data set filter which is thread safe.
+ * An abstract implementation of a chaining query-based data sett filter which is thread safe.
  *
  * @param <T> the super class
  * @param <K> the subject type
@@ -44,9 +44,9 @@ public abstract class AbstractQuery<T extends AbstractQuery<T, K, C>, K, C exten
 	protected abstract T getThis();
 
 	/**
-	 * Returns a fresh data set.
+	 * Returns a fresh data sett.
 	 *
-	 * @return a new data set for subsequent queries
+	 * @return a new data sett for subsequent queries
 	 */
 	protected abstract List<K> get();
 
@@ -64,7 +64,7 @@ public abstract class AbstractQuery<T extends AbstractQuery<T, K, C>, K, C exten
 	}
 
 	/**
-	 * Selects a fresh data set into the query cache.
+	 * Selects a fresh data sett into the query cache.
 	 *
 	 * @return {@code this} for the purpose of chaining
 	 */
@@ -75,7 +75,7 @@ public abstract class AbstractQuery<T extends AbstractQuery<T, K, C>, K, C exten
 	}
 
 	/**
-	 * Selects the specified data set into the query cache.
+	 * Selects the specified data sett into the query cache.
 	 *
 	 * @param c a {@link List}, {@link Collection} or any other {@link Iterable}
 	 *          source of items to replace the existing cache with

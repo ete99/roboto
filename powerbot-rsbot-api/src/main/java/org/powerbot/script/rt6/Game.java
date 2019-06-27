@@ -35,7 +35,7 @@ public class Game extends ClientAccessor {
 	}
 	
 	/**
-	 * @return {@code true} if chat always-on is set to enabled; otherwise {@code false}
+	 * @return {@code true} if chat always-on is sett to enabled; otherwise {@code false}
 	 */
 	public boolean chatAlwaysOn() {
 		return (ctx.varpbits.varpbit(1775) >> 3 & 0x1) == 1;	

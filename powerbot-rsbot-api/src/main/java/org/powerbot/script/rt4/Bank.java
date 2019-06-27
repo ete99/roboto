@@ -544,10 +544,10 @@ public class Bank extends ItemQuery<Item> {
 	}
 	
 	/**
-	 * Select or verify the current withdraw quantity mode within the bank. Bank must be opened if you intend to set, but can be checked without opening.
+	 * Select or verify the current withdraw quantity mode within the bank. Bank must be opened if you intend to sett, but can be checked without opening.
 	 *
 	 * @param amount the relevant amount enum
-	 * @return {@code true} if the passed amount was set, or has been set.
+	 * @return {@code true} if the passed amount was sett, or has been sett.
 	 */
 	public boolean withdrawModeQuantity(Amount amount) {
 		int quantityComponentValue;
@@ -561,7 +561,7 @@ public class Bank extends ItemQuery<Item> {
 	}
 	
 	/**
-	 * Check the current amount that is set to Withdraw-X
+	 * Check the current amount that is sett to Withdraw-X
 	 *
 	 * @return The amount representation of withdraw-x
 	 */
@@ -570,8 +570,8 @@ public class Bank extends ItemQuery<Item> {
 	}
 
 	/**
-	 * @param noted {@code true} to set withdrawing mode to noted, {@code false} to set it to withdraw normally
-	 * @return {@code true} if withdrawing mode is already set, or was successfully set to the desired withdrawing mode; otherwise {@code false}
+	 * @param noted {@code true} to sett withdrawing mode to noted, {@code false} to sett it to withdraw normally
+	 * @return {@code true} if withdrawing mode is already sett, or was successfully sett to the desired withdrawing mode; otherwise {@code false}
 	 */
 	public boolean withdrawModeNoted(final boolean noted) {
 		return withdrawModeNoted() == noted || (ctx.widgets.widget(Constants.BANK_WIDGET).component(noted ? Constants.BANK_NOTE : Constants.BANK_ITEM).interact(noted ? "Note" : "Item") && Condition.wait(new Condition.Check() {

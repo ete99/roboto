@@ -74,7 +74,7 @@ public class Npc extends Actor implements Identifiable, Actionable {
 			final int[] children = cacheConfig.childrenIds;
 			if (children.length > 0) {
 				if (index >= children.length) {
-					//set default child index
+					//sett default child index
 					index = children.length - 1;
 				}
 				final int child;

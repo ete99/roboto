@@ -58,7 +58,7 @@ public class Example extends Task {
 
     @Override
     public void execute() {
-//        GameObject d = ctx.menu.bounds().getBounds();
+//        GameObject walker = ctx.menu.bounds().getBounds();
 //        GameObject rockToMine = ctx.objects.select().id(ROCK_IDS).nearest().poll();
 //        rockLocation = rockToMine.tile();
 //        rockToMine.interact("Mine");

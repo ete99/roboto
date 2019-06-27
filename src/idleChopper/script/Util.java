@@ -29,9 +29,10 @@ public class Util {
                 dragUntilCamera(Tree);
         }
         if(setUp.ctx.players.local().animation()!=WC_ANIM){
-            boolean b=false;
-
-            for (int i=0; i<3 && setUp.ctx.players.local().animation()!=WC_ANIM;i++) {
+            boolean b=true;
+            int tries = Random.nextInt(1,4);
+            for (int i = 0; i< tries && b; i++) {
+                b=false;
                 Tree.hover();
                 Condition.sleep(Random.nextInt(50,150)); // must have this sleep after hover
 
@@ -46,10 +47,15 @@ public class Util {
                     b=b || setUp.ctx.menu.click(menuCommand -> menuCommand.toString().equals("Chop down "+ setUp.TREE_NAME));
 
             moveMouseOffScreen(setUp.ctx,-1);
-            if(b)
+            if(b) {
                 setUp.STATE = SetUp.State.CHOPPING;
-            else
+                System.out.println("well");
+            }
+            else {
                 ViewCheck();
+                System.out.println("better");
+
+            }
 
             if (setUp.ctx.players.local().animation() != -1 && WC_ANIM == 0)
                 Constants.WC_ANIM = setUp.ctx.players.local().animation();
@@ -83,6 +89,10 @@ public class Util {
 
     //@TODO on walk, moveOffScreen to the right, not left
     public static void walkToBank() throws Exception {
+        if(Random.nextDouble()>0.1)
+            moveCamera(setUp.ctx.camera.yaw() + Random.nextInt(-50, 50), setUp.ctx.camera.pitch() + Random.nextInt(-10, 10));
+        else
+            setUp.ctx.camera.turnTo(setUp.ctx.objects.select().name(setUp.TREE_NAME).poll());
         TilePath path = setUp.ctx.movement.newTilePath(setUp.RIDE);
         if(path.valid()) {
             path.randomize(2, 2);
@@ -94,13 +104,14 @@ public class Util {
             Constants.RUN_ANIM = setUp.ctx.players.local().animation();
         if(setUp.ctx.players.local().inMotion())
             setUp.STATE = SetUp.State.WALKING;
+
+        moveMouseOffScreen(setUp.ctx,-1,()->!setUp.ctx.players.local().inMotion());
+    }
+    public static void walkToTree(){
         if(Random.nextDouble()>0.1)
             moveCamera(setUp.ctx.camera.yaw() + Random.nextInt(-50, 50), setUp.ctx.camera.pitch() + Random.nextInt(-10, 10));
         else
             setUp.ctx.camera.turnTo(setUp.ctx.objects.select().name(setUp.TREE_NAME).poll());
-        moveMouseOffScreen(setUp.ctx,-1,()->!setUp.ctx.players.local().inMotion());
-    }
-    public static void walkToTree(){
         TilePath path = setUp.ctx.movement.newTilePath(setUp.RIDE);
         if(path.valid()) {
             path.reverse();
@@ -112,10 +123,7 @@ public class Util {
 
         if (setUp.ctx.players.local().animation() != -1 && Constants.RUN_ANIM == 0)
             Constants.RUN_ANIM = setUp.ctx.players.local().animation();
-        if(Random.nextDouble()>0.1)
-            moveCamera(setUp.ctx.camera.yaw() + Random.nextInt(-50, 50), setUp.ctx.camera.pitch() + Random.nextInt(-10, 10));
-        else
-            setUp.ctx.camera.turnTo(setUp.ctx.objects.select().name(setUp.TREE_NAME).poll());
+
         moveMouseOffScreen(setUp.ctx,0,()->!setUp.ctx.players.local().inMotion());
     }
 
@@ -198,7 +206,7 @@ public class Util {
                 }else{
                     for(int deg = 0; deg<=360 && !Tree.inViewport();deg+=Random.nextInt(20,50)) {
                         moveCamera(now-deg, 99);
-                        dragUntilCamera(Tree);
+                        dragCamera();
 //                        ctx.camera.angle(now - deg);
                     }
                 }

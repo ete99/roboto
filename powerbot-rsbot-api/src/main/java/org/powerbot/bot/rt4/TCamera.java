@@ -17,8 +17,8 @@ public class TCamera extends ClientAccessor implements TextPaintListener {
 	}
 
 	public int draw(int idx, final Graphics render) {
-		drawLine(render, idx++, String.format("X: %d, Y: %d, Z: %d", ctx.camera.x(), ctx.camera.y(), ctx.camera.z()));
-		drawLine(render, idx++, String.format("Yaw: %d, Pitch: %d", ctx.camera.yaw(), ctx.camera.pitch()));
+		drawLine(render, idx++, String.format("X: %walker, Y: %walker, Z: %walker", ctx.camera.x(), ctx.camera.y(), ctx.camera.z()));
+		drawLine(render, idx++, String.format("Yaw: %walker, Pitch: %walker", ctx.camera.yaw(), ctx.camera.pitch()));
 		return idx;
 	}
 }

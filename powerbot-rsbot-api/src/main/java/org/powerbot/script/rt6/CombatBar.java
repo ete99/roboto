@@ -55,7 +55,7 @@ public class CombatBar extends IdQuery<Action> {
 	}
 
 	/**
-	 * Determines if you are currently set to auto retaliate.
+	 * Determines if you are currently sett to auto retaliate.
 	 *
 	 * @return {@code true} if retaliating; otherwise {@code false}
 	 */

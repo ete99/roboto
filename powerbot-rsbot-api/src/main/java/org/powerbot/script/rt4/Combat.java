@@ -110,8 +110,8 @@ public class Combat extends ClientAccessor {
 	/**
 	 * Sets the desired STATE of auto-retaliate
 	 *
-	 * @param set Whether or not to set the auto-retaliate.
-	 * @return {@code true} if auto-retaliate was set to desired STATE, {@code false} otherwise.
+	 * @param set Whether or not to sett the auto-retaliate.
+	 * @return {@code true} if auto-retaliate was sett to desired STATE, {@code false} otherwise.
 	 */
 	public boolean autoRetaliate(final boolean set) {
 		if (autoRetaliate() == set) {
@@ -142,7 +142,7 @@ public class Combat extends ClientAccessor {
 	 * Changes your current combat {@link Style} to the provided one.
 	 *
 	 * @param style The desired combat {@link Style}.
-	 * @return {@code true} if the combat {@link Style} has been successfully set, {@code false} otherwise.
+	 * @return {@code true} if the combat {@link Style} has been successfully sett, {@code false} otherwise.
 	 */
 	public boolean style(final Style style) {
 		if (style() == style) {

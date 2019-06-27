@@ -112,7 +112,7 @@ public class Summoning extends ClientAccessor {
 	}
 
 	/**
-	 * Returns the {@link Option} the left click option is set to.
+	 * Returns the {@link Option} the left click option is sett to.
 	 *
 	 * @return the {@link Option} when left clicked
 	 */

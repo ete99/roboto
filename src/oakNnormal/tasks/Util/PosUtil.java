@@ -61,9 +61,9 @@ public class PosUtil extends Task {
 //        ctx.bank.open();
 //        ctx.bank.depositAllExcept(ctx.inventory.select().poll().id());
 
-//        Area d =  new Area(new Tile(ctx.players.local().tile().x(), ctx.players.local().tile().y()));
+//        Area walker =  new Area(new Tile(ctx.players.local().tile().x(), ctx.players.local().tile().y()));
 //        Area d2 =  new Area(new Tile(3181, 3489), new Tile(3180, 3488));
-//        System.out.println(d.contains(ctx.players.local()));
+//        System.out.println(walker.contains(ctx.players.local()));
 //        System.out.println(d2.contains(ctx.players.local()));
 //        System.out.println(ctx.players.local().tile().toString());
 

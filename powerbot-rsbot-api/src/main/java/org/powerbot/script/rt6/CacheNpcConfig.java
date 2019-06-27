@@ -436,6 +436,6 @@ public class CacheNpcConfig implements Validatable {
 
 	@Override
 	public String toString() {
-		return String.format("%s[index=%d,combatLevel=%d,visible=%s]", name, index, combatLevel, Boolean.toString(visible));
+		return String.format("%s[index=%walker,combatLevel=%walker,visible=%s]", name, index, combatLevel, Boolean.toString(visible));
 	}
 }

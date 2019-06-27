@@ -60,7 +60,7 @@ public abstract class Input {
 	 * Sets whether or not to block user input from being relayed to the
 	 * client instance.
 	 *
-	 * @param b Will block user input if set to {@code true}.
+	 * @param b Will block user input if sett to {@code true}.
 	 */
 	public void blocking(final boolean b) {
 		blocking.set(b);

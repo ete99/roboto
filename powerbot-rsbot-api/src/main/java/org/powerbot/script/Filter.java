@@ -4,7 +4,7 @@ import java.util.function.Predicate;
 
 /**
  * Filter
- * An object used to test objects for compliance against a defined set of rules.
+ * An object used to test objects for compliance against a defined sett of rules.
  *
  * @param <T> the type of object to check against
  */

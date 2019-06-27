@@ -20,6 +20,7 @@ public class GUI{
         final JCheckBox EDGE = new JCheckBox("edgville - yews");
         final JCheckBox MAGIC = new JCheckBox("arena -magic tree ");
         final JCheckBox MAGIC_GUILD = new JCheckBox("guild -magic tree ");
+        final JCheckBox YEW_GUILD = new JCheckBox("guild -yew");
         final JCheckBox DEBUG = new JCheckBox("debug");
         final JCheckBox MAIL = new JCheckBox("mail?");
         final Button RUN = new Button("RUN");
@@ -29,6 +30,8 @@ public class GUI{
         g.add(EDGE);
         g.add(MAGIC);
         g.add(MAGIC_GUILD);
+        g.add(YEW_GUILD);
+        panel.add(YEW_GUILD);
         panel.add(EDGE);
         panel.add(MAGIC);
         panel.add(MAGIC_GUILD);
@@ -70,6 +73,14 @@ public class GUI{
                 }
             }
         });
+        YEW_GUILD.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                if (YEW_GUILD.isEnabled()) {
+                    setUp.set = 4;
+                }
+            }
+        });
         DEBUG.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
@@ -103,9 +114,10 @@ public class GUI{
     public static int logsChopped = 0;
 
     static public void rep(Graphics g1, ClientContext ctx){
+
         int currentExp = ctx.skills.experience(Constants.WOODCUTTING_LEVEL);
         int currLevel = ctx.skills.level(Constants.WOODCUTTING_LEVEL);
-        int logsToNextLevel = (ctx.skills.experienceAt(currLevel + 1) - currentExp) / 175;
+        int logsToNextLevel = (ctx.skills.experienceAt(currLevel + 1) - currentExp) / setUp.TREE_XP;
         Wclevel = currLevel -WcInitLevel;
         int expGained= currentExp-WcExpInit;
         hours = (int) ((System.currentTimeMillis() - initime) / 3600000);
@@ -121,31 +133,32 @@ public class GUI{
 //        g2.drawLine(posx-10,posy,posx+10,posy);
 //        g2.setColor(Color.GREEN);
 //        g2.drawOval(posx-9,posy-9,18,18);
-        g1.setColor(Color.BLACK);
+        g1.setColor(new Color(0,0,0,20));
         int gameY=ctx.game.dimensions().height;
-        g1.fillRect(1,gameY-140,515,140);
+        g1.fillRect(1,0,515,140);
         long thickness = 4;
         BasicStroke basic= new BasicStroke(thickness);
-        g2.setColor(Color.WHITE);
+        g2.setColor(new Color(255,255,255,20));
         g2.setStroke(basic);
-        g2.drawRect(1, gameY-140, 515, 140);
-        int logH = (int)(logsChopped/runTime);
+        g2.drawRect(1, 0, 515, 140);
+        double logH = (logsChopped/runTime);
+        logH = ((logH*100)-logH%100) /100;
         g1.setColor(Color.WHITE);
         g1.setFont(font);
-        g1.drawString("Levels gained : " + Wclevel, 20, gameY-125);
-        g1.drawString("Curr. lvl : " + currLevel, 20, gameY-100);
-        g1.drawString("Experience gained : " +expGained,20,gameY-75);
-        g1.drawString("Logs to lvl: " + logsToNextLevel + "  t = "+ (logH==0?"inf":(logsToNextLevel/logH))+" hs", 20, gameY-50);
-        g1.drawString("Logs chopped :  " + logsChopped, 20, gameY-25);
+        g1.drawString("Levels gained : " + Wclevel, 20, 125);
+        g1.drawString("Curr. lvl : " + currLevel, 20, 100);
+        g1.drawString("Experience gained : " +expGained,20,75);
+        g1.drawString("Logs to lvl: " + logsToNextLevel + "  t = "+ (logH==0?"inf":(((logsToNextLevel/logH)*60)))+" m", 20, 50);
+        g1.drawString("Logs chopped :  " + logsChopped, 20, 25);
         int money= (int) ((logsChopped*1050)/runTime);
-        g1.drawString("Money/Hour "+money,335,gameY-125);
+        g1.drawString("Money/Hour "+money,335,125);
         String mailOn = "Mail: "+setUp.mail;
-        g1.drawString(mailOn, 335,gameY-25);
+        g1.drawString(mailOn, 335,25);
         String logs= "Log/h: "+logH;
-        g1.drawString(logs, 335,gameY-50);
+        g1.drawString(logs, 335,50);
         String xpH= "xp/h: "+(int)(expGained/runTime);
-        g1.drawString(xpH, 335,gameY-75);
-        g1.drawString("Time passed : " + hours + " : " + minutes + " : " + seconds, 335, gameY-100);
+        g1.drawString(xpH, 335,75);
+        g1.drawString("Time passed : " + hours + " : " + minutes + " : " + seconds, 335, 100);
 
     }
 

@@ -162,7 +162,7 @@ public class HttpUtils {
 		if (c == null || c.isEmpty()) {
 			return d;
 		}
-		final Pattern p = Pattern.compile("\\bmax-age\\s*=\\s*(\\d+)\\b", Pattern.CASE_INSENSITIVE);
+		final Pattern p = Pattern.compile("\\bmax-age\\s*=\\s*(\\walker+)\\b", Pattern.CASE_INSENSITIVE);
 		final Matcher m = p.matcher(c);
 		if (m.find()) {
 			final long l = Long.parseLong(m.group(1));

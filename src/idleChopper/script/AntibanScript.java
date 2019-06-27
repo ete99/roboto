@@ -116,20 +116,40 @@ public class AntibanScript {
         moveMouseOffScreen(ctx,level,()->ctx.players.local().animation()==-1);
     }
     public static void moveMouseOffScreen(final ClientContext ctx, int level, Callable<Boolean> cond){
+        moveMouseOffScreen(ctx,level,cond,false);
+    }
+
+    public static void moveMouseOffScreen(final ClientContext ctx, int level, Callable<Boolean> cond, boolean left){
+        long t1 = System.currentTimeMillis();
         int x, y;
         int w,h;
         w=ctx.game.dimensions().width;
         h=ctx.game.dimensions().height;
-        if (Random.nextDouble() > 0.50) {
-            x = -10;
-            y=Random.nextInt(-50,w+50);
-
-        } else {
-            x = Random.nextInt(0,w/2);
+        if(left) {
             if (Random.nextDouble() > 0.50) {
-                y = -10;
+                x = -10;
+                y = Random.nextInt(-50, w + 50);
+
             } else {
-                y = h + 10;
+                x = Random.nextInt(0, w / 2);
+                if (Random.nextDouble() > 0.50) {
+                    y = -10;
+                } else {
+                    y = h + 10;
+                }
+            }
+        }else{
+            if (Random.nextDouble() > 0.50) {
+                x = w+10;
+                y = Random.nextInt(-50, h + 50);
+
+            } else {
+                x = Random.nextInt(w/2, w);
+                if (Random.nextDouble() > 0.50) {
+                    y = -10;
+                } else {
+                    y = h + 10;
+                }
             }
         }
         ctx.input.move(x, y);
@@ -155,10 +175,7 @@ public class AntibanScript {
             Condition.wait(cond, Random.nextInt(150,200), 20);
         }
         ctx.input.focus();
-//        x = Random.nextInt(10, 510);
-//        y = Random.nextInt(10, 330);
-//        ctx.input.move(x, y);
-//        Condition.sleep(Random.nextInt(250, 500));
+        System.out.println("idle:"+ (System.currentTimeMillis()-t1));
     }
 
 

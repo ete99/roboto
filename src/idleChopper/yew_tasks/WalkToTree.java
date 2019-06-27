@@ -29,7 +29,7 @@ public class WalkToTree extends Task {
     public void execute() {
         System.out.println("Walking to Trees");
 //        Condition.sleep(Random.nextInt(250, 500));
-//        if(setUp.STATE != State.IDLE && ctx.objects.select().name(setUp.TREE_NAME).nearest().poll().inViewport())
+//        if(sett.STATE != State.IDLE && ctx.objects.select().name(sett.TREE_NAME).nearest().poll().inViewport())
         if(!(setUp.TREE_AREA.contains(ctx.players.local())))
             openDoor();
         GameObject Tree = ctx.objects.select().name(setUp.TREE_NAME).nearest().poll();

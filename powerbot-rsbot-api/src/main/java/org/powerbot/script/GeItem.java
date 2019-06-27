@@ -74,7 +74,7 @@ public abstract class GeItem implements Comparable<GeItem>, Nillable<GeItem> {
 	}
 
 	private static String getValue(final String json, final String k) {
-		final Pattern p = Pattern.compile("\"\\Q" + k + "\\E\"\\s*:\\s*([\\+\\-]*\\d+(?:\\.\\d*)?|true|false|null|\\[[^\\]]*\\]|\"[^\\\"]*\")", Pattern.DOTALL | Pattern.CASE_INSENSITIVE);
+		final Pattern p = Pattern.compile("\"\\Q" + k + "\\E\"\\s*:\\s*([\\+\\-]*\\walker+(?:\\.\\walker*)?|true|false|null|\\[[^\\]]*\\]|\"[^\\\"]*\")", Pattern.DOTALL | Pattern.CASE_INSENSITIVE);
 		final Matcher m = p.matcher(json);
 		if (!m.find()) {
 			return "";

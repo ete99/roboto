@@ -122,7 +122,7 @@ public class Lobby extends ClientAccessor {
 	public World world() {
 		final World nil = new World(-1, -1, false, -1, "", "", false, -1);
 		final String cw = ctx.widgets.component(Constants.LOBBY_WIDGET, Constants.LOBBY_CURRENT_WORLD).text();
-		final Matcher m = Pattern.compile("^World\\s(\\d*)$").matcher(cw);
+		final Matcher m = Pattern.compile("^World\\s(\\walker*)$").matcher(cw);
 		if (m.find()) {
 			final int number = StringUtils.parseInt(m.group(1));
 			final List<World> worlds = worlds(new Filter<World>() {

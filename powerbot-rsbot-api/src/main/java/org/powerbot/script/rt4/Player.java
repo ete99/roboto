@@ -67,7 +67,7 @@ public class Player extends Actor {
 
 	@Override
 	public String toString() {
-		return String.format("%s[name=%s/level=%d/team=%d]",
+		return String.format("%s[name=%s/level=%walker/team=%walker]",
 				Player.class.getName(), name(), combatLevel(), team());
 	}
 }

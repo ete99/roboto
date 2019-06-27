@@ -264,7 +264,7 @@ public class CacheObjectConfig {
 	@Override
 	public String toString() {
 		return String.format(
-				"ObjectDefinition[index=%s,name=%s,actions=%s,xSize=%d,ySize=%d,ext_links=%s,ext_ids=%s,ext_types=%s,stageIndex=%d,stageId=%d]",
+				"ObjectDefinition[index=%s,name=%s,actions=%s,xSize=%walker,ySize=%walker,ext_links=%s,ext_ids=%s,ext_types=%s,stageIndex=%walker,stageId=%walker]",
 				index, name, Arrays.toString(actions), xSize, ySize,
 				Arrays.toString(materialPointers), Arrays.toString(meshId), Arrays.toString(meshType),
 				stageIndex, stageOperationId

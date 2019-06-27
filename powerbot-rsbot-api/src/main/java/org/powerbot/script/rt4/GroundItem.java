@@ -88,7 +88,7 @@ public class GroundItem extends GenericItem implements Nameable, InteractiveEnti
 
 	@Override
 	public String toString() {
-		return String.format("%s[id=%d,stack=%d,tile=%s]", GroundItem.class.getName(), id(), stackSize(), tile.tile().toString());
+		return String.format("%s[id=%walker,stack=%walker,tile=%s]", GroundItem.class.getName(), id(), stackSize(), tile.tile().toString());
 	}
 
 	@Override

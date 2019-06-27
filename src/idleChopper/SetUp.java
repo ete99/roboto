@@ -19,7 +19,7 @@ public class  SetUp {
     public  String LOGS_NAME;  // To drop, possibly deprecated
     public  String AXE_NAME;
     public  int AXE_ID;
-    public  int TREE_XP;
+    public  int TREE_XP=1;
     public  Area TREE_AREA;
     public  Area BANK_AREA;
     public  State STATE = State.UNKNOWN;
@@ -36,6 +36,7 @@ public class  SetUp {
     }
 
     public void setTheSetUp(){
+
         GUI.WcInitLevel =ctx.skills.level(WOODCUTTING_LEVEL);
         GUI.WcExpInit= ctx.skills.experience(WOODCUTTING_LEVEL);
         GUI.frame();
@@ -85,6 +86,22 @@ public class  SetUp {
             this.TREE_MESS_NAME = "magic";  //can change(update)
             this.AXE_ID = 6739;  //dragon axe
             this.TREE_XP = 250;
+            this.RIDE = GUILD_MAGIC_TO_BANK_RIDE;
+            this.STATE = State.UNKNOWN;
+            taskList.add(new idleChopper.common_tasks.CheckValid(ctx));
+            taskList.add(new idleChopper.guild_magic_tasks.WalkToTree(ctx));
+            taskList.add(new idleChopper.guild_magic_tasks.Chop(ctx));
+            taskList.add(new Antiban(ctx));
+            taskList.add(new idleChopper.guild_magic_tasks.WalkToBank(ctx));
+            taskList.add(new idleChopper.common_tasks.Bank(ctx));
+            taskList.add(new idleChopper.common_tasks.Idle(ctx));
+        } else if (set == 4){
+            this.TREE_ID = YEW_ID;
+            this.TREE_NAME = "Yew";
+            this.AXE_NAME = "Dragon Axe";  //can change(update)
+            this.TREE_MESS_NAME = "yew";  //can change(update)
+            this.AXE_ID = 6739;  //dragon axe
+            this.TREE_XP = 175;
             this.RIDE = GUILD_MAGIC_TO_BANK_RIDE;
             this.STATE = State.UNKNOWN;
             taskList.add(new idleChopper.common_tasks.CheckValid(ctx));

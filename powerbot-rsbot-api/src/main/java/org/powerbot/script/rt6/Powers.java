@@ -74,10 +74,10 @@ public class Powers extends ClientAccessor {
 	}
 
 	/**
-	 * Determines if a prayer is set as a quick prayer.
+	 * Determines if a prayer is sett as a quick prayer.
 	 *
 	 * @param effect the {@link Effect} to check
-	 * @return {@code true} if set as a quick prayer; otherwise {@code false}
+	 * @return {@code true} if sett as a quick prayer; otherwise {@code false}
 	 */
 	public boolean prayerQuick(final Effect effect) {
 		final int setting;
@@ -121,9 +121,9 @@ public class Powers extends ClientAccessor {
 	}
 
 	/**
-	 * Returns the {@link Effect}s set as quick prayers.
+	 * Returns the {@link Effect}s sett as quick prayers.
 	 *
-	 * @return the {@link Effect}s set as quick prayers
+	 * @return the {@link Effect}s sett as quick prayers
 	 */
 	public Effect[] quickPrayers() {
 		final int book = prayerBook();
@@ -218,7 +218,7 @@ public class Powers extends ClientAccessor {
 	}
 
 	/**
-	 * Attempts to set quick prayers to the given {@link Effect}s.
+	 * Attempts to sett quick prayers to the given {@link Effect}s.
 	 *
 	 * @param effects the {@link Effect}s
 	 * @return {@code true} if selected; otherwise {@code false}.

@@ -154,7 +154,7 @@ public class TilePath extends Path {
 		* CLICKING BACK AND FORTH PREVENTION: check for dest not to be null if we're just starting
 		 * our path.  If our destination isn't null and we somehow got to our first tile then
 		 * we can safely assume lag is being experienced and return null until next call of getNext.
-		 * TELEPORTATION SUPPORT: If destination is set but but we're not moving, assume
+		 * TELEPORTATION SUPPORT: If destination is sett but but we're not moving, assume
 		 * invalid destination tile from teleportation reset and return first tile. */
 		final Player p = ctx.players.local();
 		if (p != null && !p.inMotion() && dest != Tile.NIL) {

@@ -4,13 +4,17 @@ package idleChopper.misc_tasks;
 import idleChopper.script.AntibanScript;
 import org.powerbot.script.Client;
 import org.powerbot.script.Condition;
+import org.powerbot.script.Filter;
+import org.powerbot.script.MenuCommand;
 import org.powerbot.script.rt4.ClientContext;
 import org.powerbot.script.rt4.GameObject;
 import idleChopper.utility.Task;
 
 import java.awt.*;
 
+import static idleChopper.quest101.setUp;
 import static idleChopper.script.Util.openBank;
+import static idleChopper.script.Util.sendMail;
 
 
 public class Tester extends Task {
@@ -18,13 +22,34 @@ public class Tester extends Task {
         super(ctx);
     }
     GameObject Tree;
+
+    public boolean openBanked(){
+        System.out.println("open");
+        if(!ctx.bank.opened()) {
+            ctx.camera.turnTo(ctx.bank.nearest().tile(), 7);
+            final Filter<MenuCommand> filter = new Filter<MenuCommand>() {
+                public boolean accept(MenuCommand command) {
+                    String action = command.action;
+                    return action.equalsIgnoreCase("Bank") || action.equalsIgnoreCase("Use") || action.equalsIgnoreCase("Open");
+                }
+            };
+            final GameObject bank = ctx.objects.select(ctx.bank.nearest().tile(),1).nearest().name("Bank chest", "Bank Booth", "Bank", "Banker").poll();
+            System.out.println(bank.tile().toString());
+            bank.hover();
+            final boolean b = bank.interact(filter);
+            if (b) {
+                AntibanScript.moveMouseOffScreen(ctx, 0, () -> ctx.bank.opened());
+            }
+            return b;
+        } else return true;
+    }
+
     @Override
     public boolean activate() {
-        System.out.println("s");
+        openBanked();
 //        for (int level : ctx.skills.levels()) {
 //            System.out.println(level);
 //        }
-        System.out.println(ctx.skills.level(8));
 
 //        openBank();
 //        System.out.println("hola");
@@ -87,9 +112,9 @@ public class Tester extends Task {
 //        Condition.sleep(60000);
 //        System.out.println(YEW_AREA.contains(ctx.players.local()));
 //        BasicQuery<GameObject> k = ctx.objects.select().within(YEW_AREA).name("Yew");
-//        Area d =  new Area(new Tile(ctx.players.local().tile().x(), ctx.players.local().tile().y()));
+//        Area walker =  new Area(new Tile(ctx.players.local().tile().x(), ctx.players.local().tile().y()));
 //        Area d2 =  new Area(new Tile(3181, 3489), new Tile(3180, 3488));
-//        System.out.println(d.contains(ctx.players.local()));
+//        System.out.println(walker.contains(ctx.players.local()));
 //        System.out.println(d2.contains(ctx.players.local()));
 //        System.out.println(ctx.players.local().tile().toString());
 

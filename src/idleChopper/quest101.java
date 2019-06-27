@@ -19,7 +19,6 @@ public class quest101 extends PollingScript<ClientContext> implements PaintListe
 
     public static List<Task> taskList = new ArrayList<Task>();
     public static SetUp setUp = null;
-    public ClientContext ct = ctx;
     DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
     LocalDateTime now = LocalDateTime.now();
     @Override
@@ -62,7 +61,8 @@ public class quest101 extends PollingScript<ClientContext> implements PaintListe
 
     @Override
     public void repaint(Graphics graphics) {
-        GUI.rep(graphics, ctx);
+        if(setUp!=null && setUp.run)
+            GUI.rep(graphics, ctx);
     }
 
     public void messaged(MessageEvent me) {

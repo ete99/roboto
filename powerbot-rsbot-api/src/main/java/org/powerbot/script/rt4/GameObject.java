@@ -241,7 +241,7 @@ public class GameObject extends Interactive implements Nameable, InteractiveEnti
 
 	@Override
 	public String toString() {
-		return String.format("%s[id=%d,name=%s,type=%s,tile=%s]", GameObject.class.getName(), id(), name(), type.name(), tile().toString());
+		return String.format("%s[id=%walker,name=%s,type=%s,tile=%s]", GameObject.class.getName(), id(), name(), type.name(), tile().toString());
 	}
 
 	@Override

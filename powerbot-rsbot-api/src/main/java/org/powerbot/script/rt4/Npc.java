@@ -112,7 +112,7 @@ public class Npc extends Actor implements Identifiable, Actionable {
 
 	@Override
 	public String toString() {
-		return String.format("%s[id=%d/name=%s/level=%d]",
+		return String.format("%s[id=%walker/name=%s/level=%walker]",
 				Npc.class.getName(), id(), name(), combatLevel());
 	}
 

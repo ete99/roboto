@@ -22,7 +22,10 @@ public class CheckValid extends Task {
 
         System.out.println("check valid");
         Condition.wait(()-> setUp.ctx.players.local().animation() != -1, 60,10);
-
+        if(setUp.ctx.widgets.select().id(345).poll().valid()){
+            ctx.camera.pitch(99);
+            walkToBank();
+        }
         if (setUp.ctx.players.local().animation() == WC_ANIM)
             setUp.STATE = SetUp.State.CHOPPING;
         System.out.println(setUp.STATE);
@@ -43,9 +46,9 @@ public class CheckValid extends Task {
         }
         /*
 @TODO fix bug
-        if(setUp.STATE == SetUp.State.REALLY_IDLE && (setUp.TREE_AREA.contains(ctx.players.local()))) {
+        if(sett.STATE == SetUp.State.REALLY_IDLE && (sett.TREE_AREA.contains(ctx.players.local()))) {
             dragCamera();
-            AntibanScript.moveMouseOffScreen(setUp.ctx, 0);
+            AntibanScript.moveMouseOffScreen(sett.ctx, 0);
         }
 */
         if(setUp.STATE == SetUp.State.IDLE && (setUp.BANK_AREA.contains(ctx.players.local()))) {

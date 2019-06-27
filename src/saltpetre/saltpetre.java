@@ -2,6 +2,7 @@ package saltpetre;
 
 import org.powerbot.script.*;
 import org.powerbot.script.rt4.ClientContext;
+import org.powerbot.script.rt4.GameObject;
 import org.powerbot.script.rt4.Item;
 import idleChopper.script.AntibanScript;
 import idleChopper.script.Util;
@@ -17,7 +18,7 @@ public class saltpetre extends PollingScript<ClientContext> implements MessageLi
     boolean stop = false;
     public void poll() {
         if(ctx.inventory.select().name("Saltpetre").count()==0 || ctx.inventory.select().name("Compost").count()==0){
-            ctx.bank.open();
+            openBank();
             ctx.bank.select().name("Saltpetre").poll().click();
             Condition.wait(()->ctx.inventory.isFull());
             ctx.bank.depositAllExcept("Saltpetre");
@@ -44,7 +45,10 @@ public class saltpetre extends PollingScript<ClientContext> implements MessageLi
                 if(ctx.inventory.select().name("Saltpetre").count()==0)
                     stop=true;
                 int inv=ctx.inventory.select().id(13419).count();
-                if(ctx.inventory.select().id(13421).poll().interact("Use")){
+                    ctx.inventory.select().id(13421).peek().hover();
+                    Condition.sleep(Random.nextInt(30,40));
+//                    ctx.inventory.select().id(13421).peek().interact("Use");
+                    ctx.inventory.select().id(13421).poll().click();
 //                    Condition.sleep(Random.nextInt(100, 150));
                     Item pine = ctx.inventory.select().id(6032).poll();
                     pine.hover();
@@ -56,10 +60,29 @@ public class saltpetre extends PollingScript<ClientContext> implements MessageLi
 //                        ctx.input.click(true);
 //            stop=stop && ctx.menu.click(menuCommand -> menuCommand.toString().contains("Knife"));
 //                    Condition.sleep(Random.nextInt(250, 350));
-                }
 
 
         }
+
+    public boolean openBank(){
+        if(!ctx.bank.opened()) {
+            ctx.camera.turnTo(ctx.bank.nearest().tile(), 7);
+            final Filter<MenuCommand> filter = new Filter<MenuCommand>() {
+                public boolean accept(MenuCommand command) {
+                    String action = command.action;
+                    return action.equalsIgnoreCase("Bank") || action.equalsIgnoreCase("Use") || action.equalsIgnoreCase("Open");
+                }
+            };
+            final GameObject bank = ctx.objects.select(ctx.bank.nearest().tile(), 1).nearest().name("Bank chest", "Bank Booth", "Bank").poll();
+            bank.hover();
+            final boolean b = bank.interact(filter);
+            if (b) {
+                AntibanScript.moveMouseOffScreen(ctx, 0, () -> ctx.bank.opened());
+            }
+            return b;
+        } else return true;
+    }
+
     void miniAntiban(){
         AntibanScript.moveMouseOffScreen(ctx, -1,()->ctx.inventory.select().id(2114).count()==0);
         if (Random.nextDouble() < 0.01 && !stop) {

@@ -111,7 +111,7 @@ public interface Interactive extends Targetable, Validatable, Viewable, Drawable
 	 * Interacts with the target and compensates for movement.
 	 * This method will interact (and choose it) when it finds the desired action.
 	 * This method accomplishes it via left or right click (as defined).
-	 * When auto is set to false, the method forcibly right clicks before searching for menu options.
+	 * When auto is sett to false, the method forcibly right clicks before searching for menu options.
 	 * This is useful when precision clicking is required and the option is always in the menu (not up-text).
 	 * WARNING: this method DOES NOT check intent or expected result (mouse cross-hair).
 	 * WARNING: The return status does not guarantee the correct action was acted upon.
@@ -126,7 +126,7 @@ public interface Interactive extends Targetable, Validatable, Viewable, Drawable
 	 * Interacts with the target and compensates for movement.
 	 * This method will interact (and choose it) when it finds the desired action.
 	 * This method accomplishes it via left or right click (as defined).
-	 * When auto is set to false, the method forcibly right clicks before searching for menu options.
+	 * When auto is sett to false, the method forcibly right clicks before searching for menu options.
 	 * This is useful when precision clicking is required and the option is always in the menu (not up-text).
 	 * WARNING: this method DOES NOT check intent or expected result (mouse cross-hair).
 	 * WARNING: The return status does not guarantee the correct action was acted upon.
@@ -154,7 +154,7 @@ public interface Interactive extends Targetable, Validatable, Viewable, Drawable
 	 * Interacts with the target and compensates for movement.
 	 * This method will interact (and choose it) when it finds the desired action.
 	 * This method accomplishes it via left or right click (as defined).
-	 * When auto is set to false, the method forcibly right clicks before searching for menu options.
+	 * When auto is sett to false, the method forcibly right clicks before searching for menu options.
 	 * This is useful when precision clicking is required and the option is always in the menu (not up-text).
 	 * WARNING: this method DOES NOT check intent or expected result (mouse cross-hair).
 	 * WARNING: The return status does not guarantee the correct action was acted upon.

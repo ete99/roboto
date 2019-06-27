@@ -89,7 +89,7 @@ public class Camera extends ClientAccessor {
 	/**
 	 * Sets the camera pitch the desired percentage.
 	 *
-	 * @param percent the percent to set the pitch to
+	 * @param percent the percent to sett the pitch to
 	 * @return {@code true} if the pitch was reached; otherwise {@code false}
 	 */
 	public boolean pitch(final int percent) {
@@ -99,7 +99,7 @@ public class Camera extends ClientAccessor {
 	/**
      	* Sets the camera pitch the desired percentage.
      	*
-     	* @param percent the percent to set the pitch to
+     	* @param percent the percent to sett the pitch to
      	* @param wasd    use wasd or directional keys
      	* @return {@code true} if the pitch was reached; otherwise {@code false}
      	*/
@@ -151,7 +151,7 @@ public class Camera extends ClientAccessor {
 	/**
 	 * Changes the yaw (angle) of the camera.
 	 *
-	 * @param direction the direction to set the camera, 'n', 's', 'w', 'e'.     \
+	 * @param direction the direction to sett the camera, 'n', 's', 'w', 'e'.     \
 	 * @return {@code true} if the camera was rotated to the angle; otherwise {@code false}
 	 */
 	public boolean angle(final char direction) {
@@ -161,7 +161,7 @@ public class Camera extends ClientAccessor {
 	/**
 	 * Changes the yaw (angle) of the camera.
 	 *
-	 * @param direction the direction to set the camera, 'n', 's', 'w', 'e'.
+	 * @param direction the direction to sett the camera, 'n', 's', 'w', 'e'.
 	 * @param wasd use wasd or directional keys
 	 * @return {@code true} if the camera was rotated to the angle; otherwise {@code false}
 	 */
@@ -182,7 +182,7 @@ public class Camera extends ClientAccessor {
 	/**
 	 * Changes the yaw (angle) of the camera.
 	 *
-	 * @param degrees the degrees to set the camera to
+	 * @param degrees the degrees to sett the camera to
 	 * @return {@code true} if the camera was rotated to the angle; otherwise {@code false}
 	 */
 	public boolean angle(final int degrees) {
@@ -192,7 +192,7 @@ public class Camera extends ClientAccessor {
 	/**
 	 * Changes the yaw (angle) of the camera.
 	 *
-	 * @param degrees the degrees to set the camera to
+	 * @param degrees the degrees to sett the camera to
 	 * @param wasd use wasd or directional keys
 	 * @return {@code true} if the camera was rotated to the angle; otherwise {@code false}
 	 */

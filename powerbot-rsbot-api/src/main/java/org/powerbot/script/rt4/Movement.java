@@ -166,10 +166,10 @@ public class Movement extends ClientAccessor {
 	}
 
 	/**
-	 * Attempts to set the player to the specified running STATE.
+	 * Attempts to sett the player to the specified running STATE.
 	 *
 	 * @param running {@code true} to run, {@code false} to walk.
-	 * @return {@code true} if the STATE was successfully set, {@code false} otherwise.
+	 * @return {@code true} if the STATE was successfully sett, {@code false} otherwise.
 	 */
 	public boolean running(final boolean running) {
 		return running == running() || (ctx.widgets.widget(Constants.MOVEMENT_MAP).component(Constants.MOVEMENT_RUN_ENERGY - 1).interact("Toggle Run") &&
