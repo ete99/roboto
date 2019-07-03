@@ -1,5 +1,6 @@
 package idleChopper;
 
+import org.powerbot.script.Condition;
 import org.powerbot.script.rt4.ClientContext;
 
 import javax.swing.*;
@@ -7,6 +8,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import static idleChopper.Constants.WOODCUTTING_LEVEL;
 import static idleChopper.quest101.setUp;
 
 public class GUI{
@@ -15,7 +17,7 @@ public class GUI{
     static void frame() {
         initime = System.currentTimeMillis();
         frame = new JFrame();
-        frame.setSize(200, 200);
+        frame.setBounds(500,500,300,300);
         frame.setVisible(true);
         final JCheckBox EDGE = new JCheckBox("edgville - yews");
         final JCheckBox MAGIC = new JCheckBox("arena -magic tree ");
@@ -102,21 +104,36 @@ public class GUI{
 //        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
-    static int WcInitLevel;
+    public static int WcInitLevel;
     static int WcExpInit;
     static int hours;
     static int seconds;
     static int minutes;
     static int Wclevel;
-    static int expGained;
-    static double runTime;
+    public static int expGained;
+    public static double runTime;
     static long initime;
     public static int logsChopped = 0;
 
     static public void rep(Graphics g1, ClientContext ctx){
-
+        while(GUI.WcInitLevel == 0 || GUI.WcExpInit == 0){
+            int currLevel=0;
+            try {
+                final String strlvl = ctx.widgets.widget(320).component(22).component(4).text();
+                if(!strlvl.equals(""))
+                    currLevel = Integer.parseInt(strlvl);
+            } catch (Exception e){e.printStackTrace();}
+            GUI.WcInitLevel = currLevel;
+            GUI.WcExpInit = ctx.skills.experience(WOODCUTTING_LEVEL);
+            Condition.wait(()->!(GUI.WcInitLevel==0 && GUI.WcExpInit == 0));
+        }
         int currentExp = ctx.skills.experience(Constants.WOODCUTTING_LEVEL);
-        int currLevel = ctx.skills.level(Constants.WOODCUTTING_LEVEL);
+        int currLevel=0;
+        try {
+            final String strlvl = ctx.widgets.widget(320).component(22).component(4).text();
+            if(!strlvl.equals(""))
+                currLevel = Integer.parseInt(strlvl);
+        } catch (Exception e){e.printStackTrace();}
         int logsToNextLevel = (ctx.skills.experienceAt(currLevel + 1) - currentExp) / setUp.TREE_XP;
         Wclevel = currLevel -WcInitLevel;
         int expGained= currentExp-WcExpInit;
@@ -148,13 +165,13 @@ public class GUI{
         g1.drawString("Levels gained : " + Wclevel, 20, 125);
         g1.drawString("Curr. lvl : " + currLevel, 20, 100);
         g1.drawString("Experience gained : " +expGained,20,75);
-        g1.drawString("Logs to lvl: " + logsToNextLevel + "  t = "+ (logH==0?"inf":(((logsToNextLevel/logH)*60)))+" m", 20, 50);
+        g1.drawString("Logs to lvl: " + logsToNextLevel + "  t = "+ (logH==0?"inf":((int)((logsToNextLevel/logH)*60)))+" m", 20, 50);
         g1.drawString("Logs chopped :  " + logsChopped, 20, 25);
         int money= (int) ((logsChopped*1050)/runTime);
         g1.drawString("Money/Hour "+money,335,125);
         String mailOn = "Mail: "+setUp.mail;
         g1.drawString(mailOn, 335,25);
-        String logs= "Log/h: "+logH;
+        String logs= "Log/h: "+(int)logH;
         g1.drawString(logs, 335,50);
         String xpH= "xp/h: "+(int)(expGained/runTime);
         g1.drawString(xpH, 335,75);

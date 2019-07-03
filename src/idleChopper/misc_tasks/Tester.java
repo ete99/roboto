@@ -9,12 +9,14 @@ import org.powerbot.script.MenuCommand;
 import org.powerbot.script.rt4.ClientContext;
 import org.powerbot.script.rt4.GameObject;
 import idleChopper.utility.Task;
+import org.powerbot.script.rt4.Npc;
 
 import java.awt.*;
 
 import static idleChopper.quest101.setUp;
 import static idleChopper.script.Util.openBank;
 import static idleChopper.script.Util.sendMail;
+import static org.powerbot.script.rt4.Magic.Spell.WEAKEN;
 
 
 public class Tester extends Task {
@@ -33,20 +35,48 @@ public class Tester extends Task {
                     return action.equalsIgnoreCase("Bank") || action.equalsIgnoreCase("Use") || action.equalsIgnoreCase("Open");
                 }
             };
-            final GameObject bank = ctx.objects.select(ctx.bank.nearest().tile(),1).nearest().name("Bank chest", "Bank Booth", "Bank", "Banker").poll();
-            System.out.println(bank.tile().toString());
+            final Npc bank = (Npc)ctx.bank.nearest();
             bank.hover();
-            final boolean b = bank.interact(filter);
-            if (b) {
-                AntibanScript.moveMouseOffScreen(ctx, 0, () -> ctx.bank.opened());
-            }
+            boolean b = bank.interact(filter);
+            AntibanScript.moveMouseOffScreen(ctx, 0, () -> ctx.bank.opened() || !ctx.players.local().inMotion());
+            if(b && !ctx.bank.opened())
+                for(int i=0;i<4;i++)
+                    openBankedN();
+            return b;
+        } else return true;
+    }
+
+    public boolean openBankedN(){
+        System.out.println("opeN");
+        if(!ctx.bank.opened()) {
+            ctx.camera.turnTo(ctx.bank.nearest().tile(), 7);
+            final Filter<MenuCommand> filter = new Filter<MenuCommand>() {
+                public boolean accept(MenuCommand command) {
+                    String action = command.action;
+                    return action.equalsIgnoreCase("Bank") || action.equalsIgnoreCase("Use") || action.equalsIgnoreCase("Open");
+                }
+            };
+            final Npc bank = (Npc)ctx.bank.nearest();
+            bank.hover();
+            boolean b = bank.interact(filter);
+            AntibanScript.moveMouseOffScreen(ctx, 1, () -> ctx.bank.opened() || !ctx.players.local().inMotion());
             return b;
         } else return true;
     }
 
     @Override
     public boolean activate() {
-        openBanked();
+        ctx.magic.cast(WEAKEN);
+//        System.out.println(ctx.players.local().animation());
+//        System.out.println(ctx.combat.specialAttack(true));
+//        System.out.println(ctx.varpbits.varpbit(300));
+
+//        Thread t1 = new Thread(()-> setUp.ctx.camera.pitch(99));
+//        t1.run();
+//        System.out.println((Npc)ctx.bank.nearest());
+//        Npc bank = (Npc)ctx.bank.nearest();
+//        bank.hover();
+//        openBanked();
 //        for (int level : ctx.skills.levels()) {
 //            System.out.println(level);
 //        }

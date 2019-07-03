@@ -3,6 +3,7 @@ package RockySand.utils;
 import RockySand.goblin_killer.RockySands;
 import RockySand.goblin_killer.Constants;
 import idleChopper.script.AntibanScript;
+import idleChopper.script.Util;
 import org.powerbot.script.*;
 import org.powerbot.script.rt4.Item;
 import org.powerbot.script.rt4.Npc;
@@ -151,8 +152,8 @@ public class util {
         goblin.click();
         Condition.sleep(Random.nextInt(50,80));
 //        final boolean b = goblin.interact(filter);
-
-        AntibanScript.moveMouseOffScreen(RockySands.s.ctx,0,()->goblin.inCombat()&& RockySands.s.ctx.players.local().inCombat());
+        Util.moveCamera(RockySands.s.ctx,RockySands.s.ctx.camera.yaw()+ Random.nextInt(0,90),99);
+        AntibanScript.moveMouseOffScreen(RockySands.s.ctx,1,()->!(goblin.inCombat()&&goblin.valid() && RockySands.s.ctx.players.local().inCombat()));
 
 //        Condition.wait(()->goblin.inCombat()&&s.ctx.players.local().inCombat(), Random.nextInt(350,500),10);
 //        goblin.interact(true, "Attack", "Goblin");

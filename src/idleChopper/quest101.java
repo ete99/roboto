@@ -28,7 +28,9 @@ public class quest101 extends PollingScript<ClientContext> implements PaintListe
 //        System.out.println(dtf.format(now)); //2016/11/16 12:08:43
 
         setUp =  new SetUp(ctx);  // sets up the needed shared data
+        System.out.println("hola");
         setUp.setTheSetUp();
+        System.out.println(setUp.run+" "+setUp);
         sendMail("Comienza "+ctx.players.local().name().toString() + " " + dtf.format(now));
     }
     @Override
@@ -61,6 +63,8 @@ public class quest101 extends PollingScript<ClientContext> implements PaintListe
 
     @Override
     public void repaint(Graphics graphics) {
+//        System.out.println("hola:");
+//        System.out.println(setUp);
         if(setUp!=null && setUp.run)
             GUI.rep(graphics, ctx);
     }

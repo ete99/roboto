@@ -2,6 +2,7 @@ package combiner.Tasks;
 
 
 import combiner.Task;
+import idleChopper.script.AntibanScript;
 import idleChopper.script.Util;
 import org.powerbot.script.Condition;
 import org.powerbot.script.Filter;
@@ -9,6 +10,9 @@ import org.powerbot.script.MenuCommand;
 import org.powerbot.script.Random;
 import org.powerbot.script.rt4.ClientContext;
 import org.powerbot.script.rt4.GameObject;
+import org.powerbot.script.rt4.Npc;
+
+import static idleChopper.script.Util.moveCamera;
 
 public class store extends Task {
     int HERB;
@@ -19,59 +23,59 @@ public class store extends Task {
         this.VIAL=VIAL;
     }
     static boolean f;
+    static int countH, countV;
     @Override
     public boolean activate() {
-        return (ctx.inventory.select().id(HERB).count() == 0||ctx.inventory.select().id(HERB).count() == 0) && !f;
+        countH = ctx.inventory.select().id(HERB).count();
+        countV = ctx.inventory.select().id(VIAL).count();
+        return (countH == 0 || countV == 0) && !f;
     }
 
     @Override
     public void execute() {
-        if (!openBank()) {
+        miniAntiban();
+        if (!Util.openBank(ctx, Random.nextDouble()>0.9)) {
             ctx.inventory.select().poll().click();
-            if(!ctx.bank.opened())
-                openBank();
         }
         if (ctx.bank.opened()) {
-            if (ctx.bank.id(HERB).select().count()==0 || ctx.bank.id(VIAL).select().count()==0) {
+            if (ctx.bank.select().id(VIAL).count()==0 || ctx.bank.select().id(HERB).count()==0) {
                 f=true;
                 Util.sendMail("c acabo");
+                throw new RuntimeException("bai");
             } else {
-                ctx.bank.depositInventory();
-                Condition.sleep(Random.nextInt(400, 550));
-                ctx.bank.select().id(HERB).poll().click();
-                Condition.wait(() -> ctx.inventory.select().id(HERB).count() != 0, 300, 3);
-                Condition.sleep(Random.nextInt(200, 350));
-
-                if (ctx.bank.opened() && ctx.bank.id(HERB).select().count() == 0) {
-                    throw new Error();
+//                ctx.bank.depositAllExcept(HERB);
+                if(Random.nextDouble()>0.8)
+                    ctx.bank.depositInventory();
+                else
+                    ctx.inventory.select().shuffle().poll().click();
+                Condition.sleep(Random.nextInt(150, 350));
+                if(Random.nextDouble()>0.8) {
+                    if (ctx.inventory.select().id(HERB).count() == 0)
+                        ctx.bank.select().id(HERB).poll().click();
+                    System.out.println(Random.nextInt(0, 30));
+                    if (ctx.inventory.select().id(VIAL).count() == 0)
+                        ctx.bank.select().id(VIAL).poll().click();
+                } else {
+                    if (ctx.inventory.select().id(VIAL).count() == 0)
+                        ctx.bank.select().id(VIAL).poll().click();
+                    System.out.println(Random.nextInt(0, 30));
+                    if (ctx.inventory.select().id(HERB).count() == 0)
+                        ctx.bank.select().id(HERB).poll().click();
                 }
-                ctx.bank.select().id(VIAL).poll().click();
                 Condition.wait(() -> ctx.inventory.select().id(VIAL).count() != 0, 150, 3);
                 ctx.bank.close();
+                System.out.println(Condition.wait(()->ctx.inventory.isFull(),300,10));
             }
         }
     }
-    public boolean openBank(){
-        System.out.println("open");
-        if(!ctx.bank.opened()) {
-            ctx.camera.turnTo(ctx.bank.nearest().tile(), 7);
-            final Filter<MenuCommand> filter = new Filter<MenuCommand>() {
-                public boolean accept(MenuCommand command) {
-                    String action = command.action;
-                    return action.equalsIgnoreCase("Bank") || action.equalsIgnoreCase("Open");
-                }
-            };
-            GameObject bank = ctx.objects.select().id(10583).nearest().poll();
-//            bank.hover();
-//            if(ctx.menu.commands()[0].toString().contains("Use")){
-//                Condition.sleep(Random.nextInt(350,600));
-//                ctx.inventory.select().poll().click();
-//                Condition.sleep(Random.nextInt(150,200));
-//            }
-            final boolean b = bank.click();
-            return b;
-        } else {
-            return true;
+
+    void miniAntiban(){
+//        Condition.sleep(Random.nextInt(14000,15000));
+        Condition.sleep(Random.nextInt(500,750));
+        if (Random.nextDouble() < 0.11) {
+            AntibanScript.moveMouseOffScreen(ctx, -1);
+            Condition.sleep(Random.nextInt(3000, 7000));
+            moveCamera(ctx,Random.nextInt(-10, 10), Random.nextInt(80, 99));
         }
     }
 }

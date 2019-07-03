@@ -19,7 +19,7 @@ public class WalkToBank extends Task {
 
     @Override
     public boolean activate() {
-        return ctx.inventory.isFull() && ctx.bank.nearest().tile().distanceTo(ctx.players.local().tile())>10 && !ctx.bank.poll().inViewport() && !openBank();
+        return ctx.inventory.isFull() && ctx.bank.nearest().tile().distanceTo(ctx.players.local().tile())>10 && !ctx.bank.poll().inViewport() && !openBank(ctx, true);
     }
 
     @Override

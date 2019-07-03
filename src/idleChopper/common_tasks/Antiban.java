@@ -23,7 +23,7 @@ public class Antiban extends Task {
     public void execute() {
         System.out.println("AntiBanning");
         setUp.STATE = State.ANTIBANNING;
-        antibanned(3,(()->(ctx.players.local().animation()==-1)));
+        antibanned(3,(()->(ctx.players.local().animation()==-1 || ctx.equipment.select().name(setUp.AXE_NAME).count()==1&&ctx.varpbits.varpbit(300)==1000)));
 
 //        moveMouseOffScreen();
 //        doAntibanAction(Random.nextInt(1,11));

@@ -156,24 +156,29 @@ public class AntibanScript {
 
         //@TODO Remove waits, add if not chopping in check valid
         ctx.input.defocus();
-        if(level>0)
-            Condition.sleep(Random.nextInt(3000, 5000));
-        int t=Random.nextInt(0, 101);
-        if(t>99 && level>=3){
-            System.out.println("The long wait");
-            Condition.sleep(Random.nextInt(15000, 28000));
+
+        if(level>2)
+            Condition.wait(cond, Random.nextInt(700,850), 50);
+        else if(level == 1) {
+            Condition.wait(cond, Random.nextInt(350,500), 50);
         }
-        else if(t>70 && level >=2){
-            Condition.sleep(Random.nextInt(5000, 7500));
-        }
-        else if (level>=1) {
-            Condition.sleep(Random.nextInt(1000, 3000));
-        }
-        if(level>0)
-            Condition.wait(cond, Random.nextInt(1000,5000), 100);
         else if(level == 0) {
             Condition.wait(cond, Random.nextInt(150,200), 20);
         }
+
+//        int t=Random.nextInt(0, 101);
+//        if(t>99 && level>=3){
+//            System.out.println("The long wait");
+//            Condition.sleep(Random.nextInt(15000, 28000));
+//        }
+//        else if(t>70 && level >=2){
+//            Condition.sleep(Random.nextInt(5000, 7500));
+//        }
+//        else
+        if (level>=1) {
+            Condition.sleep(Random.nextInt(1000, 3000));
+        }
+
         ctx.input.focus();
         System.out.println("idle:"+ (System.currentTimeMillis()-t1));
     }
@@ -184,7 +189,7 @@ public class AntibanScript {
         if (Random.nextDouble() > 0.80){
 //            AntibanScript.randomCameraTurn(ctx);
             if (Random.nextDouble() > 0.5){
-                Thread t1 = new Thread(() -> Util.moveCamera(Random.nextInt(-90, 90), Random.nextInt(50, 99)));
+                Thread t1 = new Thread(() -> Util.moveCamera(setUp.ctx,Random.nextInt(-90, 90), Random.nextInt(50, 99)));
                 Thread t2 = new Thread(()-> AntibanScript.randomMouseMovement(setUp.ctx));
                 t1.start();
                 t2.start();
@@ -204,7 +209,7 @@ public class AntibanScript {
         if (Random.nextDouble() > 0.80){
 //            AntibanScript.randomCameraTurn(ctx);
             if (Random.nextDouble() < 0.3){
-                Thread t1 = new Thread(() -> Util.moveCamera(Random.nextInt(-90, 90), Random.nextInt(50, 99)));
+                Thread t1 = new Thread(() -> Util.moveCamera(setUp.ctx,Random.nextInt(-90, 90), Random.nextInt(50, 99)));
                 Thread t2 = new Thread(()-> AntibanScript.randomMouseMovement(setUp.ctx));
                 t1.start();
                 t2.start();
@@ -222,7 +227,7 @@ public class AntibanScript {
 //            AntibanScript.randomMouseMovement(ctx);
         }
         else {
-            AntibanScript.moveMouseOffScreen(setUp.ctx,level,cond);
+            AntibanScript.moveMouseOffScreen(setUp.ctx,level,cond, true);
         }
 
 //        moveMouseOffScreen();

@@ -20,7 +20,7 @@ public class mailme {
 
 //        sendGET();
 //        System.out.println("GET DONE");
-        sendPOST("hola ma");
+        sendPOST("hola ma","");
         System.out.println("POST DONE");
     }
 
@@ -48,7 +48,7 @@ public class mailme {
 
     }
 
-    public static void sendPOST(String str) throws IOException {
+    public static void sendPOST(String subj, String body) throws IOException {
         URL obj = new URL(POST_URL);
         HttpURLConnection con = (HttpURLConnection) obj.openConnection();
         con.setRequestProperty("Connection", "close");
@@ -59,7 +59,7 @@ public class mailme {
         con.setDoOutput(true);
         OutputStream os = con.getOutputStream();
 //        System.out.println(POST_PARAMS);
-        String POST_REQ = POST_PARAMS+str;
+        String POST_REQ = POST_PARAMS+"&subject="+subj+"&bodyText="+body;
         os.write(POST_REQ.getBytes());
         os.flush();
         os.close();

@@ -2,6 +2,7 @@ package combiner.Tasks;
 
 
 import combiner.Task;
+import idleChopper.Constants;
 import idleChopper.script.AntibanScript;
 import org.powerbot.script.Condition;
 import org.powerbot.script.Random;
@@ -20,20 +21,27 @@ public class clean extends Task {
 
     @Override
     public boolean activate()  {
+        System.out.println(ctx.inventory.select().id(HERB).count()>0 && ctx.inventory.select().id(VIAL).count()>0);
         return ctx.inventory.select().id(HERB).count()>0 && ctx.inventory.select().id(VIAL).count()>0;
     }
 
     @Override
     public void execute() {
         int inv=ctx.inventory.select().id(HERB).count();
-        ctx.inventory.select().id(HERB).peek().hover();
-        Condition.sleep(Random.nextInt(30,40));
-//                    ctx.inventory.select().id(13421).peek().interact("Use");
-        ctx.inventory.select().id(HERB).shuffle().poll().click();
-//                    Condition.sleep(Random.nextInt(100, 150));
-        Item pine = ctx.inventory.select().shuffle().id(VIAL).poll();
-        pine.hover();
-        pine.click();
-        AntibanScript.moveMouseOffScreen(ctx,-1);
+        if(Random.nextDouble()>0.80) {
+            ctx.inventory.select().id(HERB).shuffle().poll().click();
+            System.out.println(Condition.sleep(Random.nextInt(30,50)));
+            if (!ctx.widgets.select().id(270).poll().component(14).visible())
+                ctx.inventory.select().id(VIAL).shuffle().poll().click();
+        } else {
+            ctx.inventory.select().id(VIAL).shuffle().poll().click();
+            System.out.println(Condition.sleep(Random.nextInt(30,50)));
+            if (!ctx.widgets.select().id(270).poll().component(14).visible())
+                ctx.inventory.select().id(HERB).shuffle().poll().click();
+        }
+        Condition.sleep(Random.nextInt(750,1300));
+        if(ctx.players.local().animation()!=-1)
+            Condition.wait(()->ctx.widgets.select().id(270).poll().component(14).visible(), 300,10);
+//        AntibanScript.moveMouseOffScreen(ctx,-1);
     }
 }

@@ -1,5 +1,6 @@
 package idleChopper;
 
+import idleChopper.common_tasks.Idle;
 import org.powerbot.script.Area;
 import org.powerbot.script.Condition;
 import org.powerbot.script.Tile;
@@ -36,12 +37,17 @@ public class  SetUp {
     }
 
     public void setTheSetUp(){
-
-        GUI.WcInitLevel =ctx.skills.level(WOODCUTTING_LEVEL);
+        int currLevel=0;
+        try {
+            final String strlvl = ctx.widgets.widget(320).component(22).component(4).text();
+            if(!strlvl.equals(""))
+                currLevel = Integer.parseInt(strlvl);
+        } catch (Exception e){e.printStackTrace();}
+        GUI.WcInitLevel = currLevel;
         GUI.WcExpInit= ctx.skills.experience(WOODCUTTING_LEVEL);
         GUI.frame();
         Condition.wait(() -> run, 300, 1000);
-
+        taskList.add(new Idle(ctx));
         if(setUp.debug)
             taskList.add(new Tester(ctx));
         if(set == 1) {
@@ -98,7 +104,7 @@ public class  SetUp {
         } else if (set == 4){
             this.TREE_ID = YEW_ID;
             this.TREE_NAME = "Yew";
-            this.AXE_NAME = "Dragon Axe";  //can change(update)
+            this.AXE_NAME = "Dragon axe";  //can change(update)
             this.TREE_MESS_NAME = "yew";  //can change(update)
             this.AXE_ID = 6739;  //dragon axe
             this.TREE_XP = 175;

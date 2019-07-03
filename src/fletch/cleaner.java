@@ -1,25 +1,27 @@
-package combiner;
+package fletch;
 
-import combiner.Tasks.check;
-import combiner.Tasks.clean;
-import combiner.Tasks.store;
+import fletch.Tasks.check;
+import fletch.Tasks.clean;
+import fletch.Tasks.store;
 import idleChopper.script.AntibanScript;
-import org.powerbot.script.*;
+import org.powerbot.script.Condition;
+import org.powerbot.script.PollingScript;
+import org.powerbot.script.Random;
+import org.powerbot.script.Script;
 import org.powerbot.script.rt4.ClientContext;
 import org.powerbot.script.rt4.Component;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 
-@Script.Manifest(name = "vialer", properties = "author=ete; topic=1333332; client=4;", description = "jaja")
+@Script.Manifest(name = "fletcher", properties = "author=ete; topic=1333332; client=4;", description = "jaja")
 public class cleaner extends PollingScript<ClientContext>  {
         Component unselectedInventory=ctx.widgets.widget(164).component(53);
         Component inventory = ctx.widgets.widget(164).component(60);
     public static List<Task> taskList = new ArrayList<Task>();
-    int GUAM = 68;
-    int VIAL = 1777;
+    int GUAM = 946;
+    int VIAL = 1519;
     public void start() {
         taskList.add(new check(ctx, GUAM, VIAL));
         taskList.add(new clean(ctx, GUAM, VIAL));
@@ -28,10 +30,6 @@ public class cleaner extends PollingScript<ClientContext>  {
     }
 
     public void poll() {
-//        for (MenuCommand command : ctx.menu.commands()) {
-//            System.out.println(command.toString().contains("Use"));
-//        }
-//        System.out.println("////////////////////////////////////////////////////");
         if (unselectedInventory.textureId() == -1) {
             inventory.click();
         }
@@ -95,7 +93,6 @@ public class cleaner extends PollingScript<ClientContext>  {
      *             }
      *         }
      */
-
     void miniAntiban(){
         AntibanScript.moveMouseOffScreen(ctx, -1,()->ctx.inventory.select().id(2114).count()==0);
         if (Random.nextDouble() < 0.01 ) {

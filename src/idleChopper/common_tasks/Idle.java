@@ -21,28 +21,22 @@ public class Idle extends Task {
     @Override
     public boolean activate() {
 
-        Condition.sleep(500);
-//        System.out.println("idle check");
-        if(ctx.players.local().animation()==-1 && (ctx.objects.select().name(setUp.TREE_NAME).size()>0)){
-            System.out.println("entro idle");
+        System.out.println("idle check");
+        if(ctx.players.local().animation()==-1){
+            System.out.println(Condition.wait(()->ctx.players.local().animation()!=-1));
             c++;
             if(c>3) {
                 setUp.STATE = State.IDLE;
-                Chop(ctx.objects.select().name(setUp.TREE_NAME).nearest().poll());
             }
             if(c>100) {
                 setUp.STATE = State.REALLY_IDLE;
-            }
-        }
-        else if (ctx.objects.select().name(setUp.TREE_NAME).size()==0){
-                setUp.STATE = State.WAITING;
-                System.out.println("waiting");
-
-                Condition.wait(() -> !(ctx.objects.select().id(setUp.TREE_ID).size()>0), 400,20);
+                ctx.game.logout();
+                ctx.widgets.select().id(218).poll().component(70).click();
                 c=0;
-            return false;
-        }
-        return true;
+            }
+        } else c=0;
+        return false;
+
     }
 
     @Override

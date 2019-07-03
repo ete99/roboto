@@ -18,7 +18,7 @@ public class WalkToBank extends Task {
     @Override
     public boolean activate() {
         openDoor();
-        return !setUp.BANK_AREA.contains(ctx.players.local()) && ctx.inventory.isFull()  && !ctx.bank.inViewport() && !openBank();
+        return !setUp.BANK_AREA.contains(ctx.players.local()) && ctx.inventory.isFull()  && !ctx.bank.inViewport() && !openBank(ctx, true);
     }
 
     @Override

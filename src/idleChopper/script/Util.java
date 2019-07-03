@@ -1,5 +1,6 @@
 package idleChopper.script;
 
+import idleChopper.GUI;
 import org.powerbot.script.*;
 import org.powerbot.script.rt4.*;
 import org.powerbot.script.rt4.ClientContext;
@@ -18,7 +19,7 @@ import static idleChopper.script.AntibanScript.moveMouseOffScreen;
 
 public class Util {
     public static void Chop(GameObject Tree){
-        if(!Tree.inViewport()){
+        if(!Tree.inViewport()) {
             if(Random.nextDouble()>0.5){
                 Thread t1 = new Thread(()-> setUp.ctx.camera.pitch(Random.nextInt(90,99)));
                 Thread t2 = new Thread(()-> setUp.ctx.camera.turnTo(Tree.tile(), 35));
@@ -28,7 +29,7 @@ public class Util {
             } else
                 dragUntilCamera(Tree);
         }
-        if(setUp.ctx.players.local().animation()!=WC_ANIM){
+        if(setUp.ctx.players.local().animation()!=WC_ANIM) {
             boolean b=true;
             int tries = Random.nextInt(1,4);
             for (int i = 0; i< tries && b; i++) {
@@ -44,7 +45,7 @@ public class Util {
             Condition.sleep(150);
 
             if(setUp.ctx.players.local().animation()!=WC_ANIM)
-                    b=b || setUp.ctx.menu.click(menuCommand -> menuCommand.toString().equals("Chop down "+ setUp.TREE_NAME));
+                    b=b || Tree.click(menuCommand -> menuCommand.toString().equals("Chop down "+ setUp.TREE_NAME));
 
             moveMouseOffScreen(setUp.ctx,-1);
             if(b) {
@@ -56,7 +57,6 @@ public class Util {
                 System.out.println("better");
 
             }
-
             if (setUp.ctx.players.local().animation() != -1 && WC_ANIM == 0)
                 Constants.WC_ANIM = setUp.ctx.players.local().animation();
         }
@@ -67,22 +67,30 @@ public class Util {
     }
 
     //@TODO redo banking system like this.
-    public static boolean openBank(){
-        ClientContext ctx = setUp.ctx;
+    public static boolean openBank(ClientContext ctx, boolean turn){
+        if(ctx.bank.nearest().tile().distanceTo(ctx.players.local())>13)
+            return false;
         if(!ctx.bank.opened()) {
-            ctx.camera.turnTo(ctx.bank.nearest().tile(), 7);
-            final Filter<MenuCommand> filter = new Filter<MenuCommand>() {
-                public boolean accept(MenuCommand command) {
-                    String action = command.action;
-                    return action.equalsIgnoreCase("Bank") || action.equalsIgnoreCase("Use") || action.equalsIgnoreCase("Open");
-                }
-            };
-            final GameObject bank = ctx.objects.select(ctx.bank.nearest().tile(), 1).nearest().name("Bank chest", "Bank Booth", "Bank").poll();
-            bank.hover();
-            final boolean b = bank.interact(filter);
-            if (b) {
-                AntibanScript.moveMouseOffScreen(ctx, 0, () -> ctx.bank.opened());
+            boolean b=false;
+            if(turn){
+                Thread t1 = new Thread(() -> ctx.camera.pitch(99));
+                Thread t2 = new Thread(() -> ctx.camera.turnTo(ctx.bank.nearest().tile(), 35));
+                t1.start();
+                t2.start();
             }
+            for (int i=0; i<4 && !b; i++) {
+                final Filter<MenuCommand> filter = new Filter<MenuCommand>() {
+                    public boolean accept(MenuCommand command) {
+                        String action = command.action;
+                        return action.equalsIgnoreCase("Bank") || action.equalsIgnoreCase("Use") || action.equalsIgnoreCase("Open");
+                    }
+                };
+                final GameObject bank = (GameObject) ctx.bank.nearest();
+                bank.hover();
+                b = bank.interact(filter);
+                AntibanScript.moveMouseOffScreen(ctx, 0, () -> ctx.bank.opened() || !ctx.players.local().inMotion());
+            }
+
             return b;
         } else return true;
     }
@@ -90,7 +98,7 @@ public class Util {
     //@TODO on walk, moveOffScreen to the right, not left
     public static void walkToBank() throws Exception {
         if(Random.nextDouble()>0.1)
-            moveCamera(setUp.ctx.camera.yaw() + Random.nextInt(-50, 50), setUp.ctx.camera.pitch() + Random.nextInt(-10, 10));
+            moveCamera(setUp.ctx,setUp.ctx.camera.yaw() + Random.nextInt(-50, 50), setUp.ctx.camera.pitch() + Random.nextInt(-10, 10));
         else
             setUp.ctx.camera.turnTo(setUp.ctx.objects.select().name(setUp.TREE_NAME).poll());
         TilePath path = setUp.ctx.movement.newTilePath(setUp.RIDE);
@@ -109,7 +117,7 @@ public class Util {
     }
     public static void walkToTree(){
         if(Random.nextDouble()>0.1)
-            moveCamera(setUp.ctx.camera.yaw() + Random.nextInt(-50, 50), setUp.ctx.camera.pitch() + Random.nextInt(-10, 10));
+            moveCamera(setUp.ctx, setUp.ctx.camera.yaw() + Random.nextInt(-50, 50), setUp.ctx.camera.pitch() + Random.nextInt(-10, 10));
         else
             setUp.ctx.camera.turnTo(setUp.ctx.objects.select().name(setUp.TREE_NAME).poll());
         TilePath path = setUp.ctx.movement.newTilePath(setUp.RIDE);
@@ -127,9 +135,9 @@ public class Util {
         moveMouseOffScreen(setUp.ctx,0,()->!setUp.ctx.players.local().inMotion());
     }
 
-    public static void moveCamera(final int angle, final int pitch){
-        Thread t1 = new Thread(()-> setUp.ctx.camera.pitch(pitch));
-        Thread t2 = new Thread(()-> setUp.ctx.camera.angle(angle));
+    public static void moveCamera(final ClientContext ctx,final int angle, final int pitch) {
+        Thread t1 = new Thread(() -> ctx.camera.pitch(pitch));
+        Thread t2 = new Thread(() -> ctx.camera.angle(angle));
         t1.start();
         t2.start();
     }
@@ -197,7 +205,7 @@ public class Util {
 
                 if(Random.nextDouble()>0.5) {
                     for(int deg = 0; deg<=360 && !Tree.inViewport();deg+=Random.nextInt(20,50)) {
-                        moveCamera(now-deg, 99);
+                        moveCamera(ctx,now-deg, 99);
 
                         dragUntilCamera(Tree);
 //                        moveCamera(now+deg, 99);
@@ -205,7 +213,7 @@ public class Util {
                     }
                 }else{
                     for(int deg = 0; deg<=360 && !Tree.inViewport();deg+=Random.nextInt(20,50)) {
-                        moveCamera(now-deg, 99);
+                        moveCamera(setUp.ctx,now-deg, 99);
                         dragCamera();
 //                        ctx.camera.angle(now - deg);
                     }
@@ -215,9 +223,9 @@ public class Util {
             System.out.println("waiting");
             // waits for a new yew tree
             if(Random.nextDouble()>0.5) {
-                moveCamera(now + 180 + Random.nextInt(-90,90), Random.nextInt(80,99));
+                moveCamera(setUp.ctx,now + 180 + Random.nextInt(-90,90), Random.nextInt(80,99));
             }else{
-                moveCamera(now - 180 + Random.nextInt(-90,90), Random.nextInt(80,99));
+                moveCamera(setUp.ctx,now - 180 + Random.nextInt(-90,90), Random.nextInt(80,99));
             }
             Condition.wait(() -> ctx.objects.select().within(setUp.TREE_AREA).id(setUp.TREE_ID).size()!=0,800,20);
         }
@@ -226,17 +234,17 @@ public class Util {
     public static void sendMail(){
         if(setUp.mail)
             try {
-            mailme.sendPOST("paso algo");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+                mailme.sendPOST("paso algo", "logs: "+GUI.logsChopped+"  run time: "+GUI.runTime+"  xp: "+GUI.expGained);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
     }
 
     public static void openDoor(){
         final GameObject DOOR = setUp.ctx.objects.select().id(1543).nearest().poll();
         if(DOOR.valid()) {
 //            System.out.println("ESNTER");
-            moveCamera(90 + Random.nextInt(0,20), Random.nextInt(0,10));
+            moveCamera(setUp.ctx,90 + Random.nextInt(0,20), Random.nextInt(0,10));
 //            ctx.camera.angle(90 + Random.nextInt(0,20));
             DOOR.interact("Open");
             Condition.wait(new Callable<Boolean>() {
@@ -248,12 +256,12 @@ public class Util {
         }
     }
 
-    public static void sendMail(String str){
+    public static void sendMail(final String str){
         if(setUp.mail)
-        try {
-            mailme.sendPOST(str);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+            try {
+                mailme.sendPOST(str, "logs: "+GUI.logsChopped+"  run time: "+GUI.runTime+"  xp: "+GUI.expGained);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
     }
 }

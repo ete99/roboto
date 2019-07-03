@@ -31,7 +31,7 @@ public class Bank extends Task {
             ctx.camera.turnTo(ctx.bank.nearest());
         }else {
             if(!ctx.bank.opened())
-                openBank();
+                openBank(ctx,true);
             int AXE_ID=ctx.inventory.name(setUp.AXE_NAME).poll().id();
             ctx.bank.depositAllExcept(AXE_ID);
             ctx.bank.close();
