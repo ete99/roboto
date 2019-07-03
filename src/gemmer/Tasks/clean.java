@@ -1,14 +1,10 @@
-package combiner.Tasks;
+package gemmer.Tasks;
 
 
-import combiner.Task;
-import idleChopper.Constants;
-import idleChopper.script.AntibanScript;
+import gemmer.Task;
 import org.powerbot.script.Condition;
 import org.powerbot.script.Random;
 import org.powerbot.script.rt4.ClientContext;
-import org.powerbot.script.rt4.Item;
-import org.powerbot.script.rt4.ItemQuery;
 
 public class clean extends Task {
     int HERB;
@@ -21,6 +17,7 @@ public class clean extends Task {
 
     @Override
     public boolean activate()  {
+        System.out.println(ctx.inventory.select().id(HERB).count()>0 && ctx.inventory.select().id(VIAL).count()>0);
         return ctx.inventory.select().id(HERB).count()>0 && ctx.inventory.select().id(VIAL).count()>0;
     }
 

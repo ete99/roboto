@@ -1,17 +1,13 @@
-package combiner.Tasks;
+package gemmer.Tasks;
 
 
-import combiner.Task;
+import gemmer.Task;
 import idleChopper.script.AntibanScript;
 import idleChopper.script.Util;
 import idleChopper.utility.mailme;
 import org.powerbot.script.Condition;
-import org.powerbot.script.Filter;
-import org.powerbot.script.MenuCommand;
 import org.powerbot.script.Random;
 import org.powerbot.script.rt4.ClientContext;
-import org.powerbot.script.rt4.GameObject;
-import org.powerbot.script.rt4.Npc;
 
 import java.io.IOException;
 
@@ -41,7 +37,7 @@ public class store extends Task {
             ctx.inventory.select().poll().click();
         }
         if (ctx.bank.opened()) {
-            if (ctx.bank.select().id(VIAL).count()==0 || ctx.bank.select().id(HERB).count()==0) {
+            if (ctx.bank.select().id(VIAL).count()==0) {
                 f=true;
                 try {
                     mailme.sendPOST("c acabo","");
@@ -51,27 +47,27 @@ public class store extends Task {
                 throw new RuntimeException("bai");
             } else {
 //                ctx.bank.depositAllExcept(HERB);
-                if(Random.nextDouble()>0.8)
-                    ctx.bank.depositInventory();
-                else
-                    ctx.inventory.select().shuffle().poll().click();
-                Condition.sleep(Random.nextInt(150, 350));
+//                if(Random.nextDouble()>0.8)
+//                    ctx.bank.depositInventory();
+//                else
+//                    ctx.inventory.select().shuffle().poll().click();
+//                Condition.sleep(Random.nextInt(150, 350));
                 if(Random.nextDouble()>0.8) {
                     if (ctx.inventory.select().id(HERB).count() == 0)
                         ctx.bank.select().id(HERB).poll().click();
-                    Condition.sleep(Random.nextInt(0, 30));
+                    System.out.println(Random.nextInt(0, 30));
                     if (ctx.inventory.select().id(VIAL).count() == 0)
                         ctx.bank.select().id(VIAL).poll().click();
                 } else {
                     if (ctx.inventory.select().id(VIAL).count() == 0)
                         ctx.bank.select().id(VIAL).poll().click();
-                    Condition.sleep(Random.nextInt(0, 30));
+                    System.out.println(Random.nextInt(0, 30));
                     if (ctx.inventory.select().id(HERB).count() == 0)
                         ctx.bank.select().id(HERB).poll().click();
                 }
                 Condition.wait(() -> ctx.inventory.select().id(VIAL).count() != 0, 150, 3);
                 ctx.bank.close();
-                Condition.wait(()->ctx.inventory.isFull(),300,10);
+                System.out.println(Condition.wait(()->ctx.inventory.isFull(),300,10));
             }
         }
     }

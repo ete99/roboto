@@ -38,7 +38,6 @@ public class quest101 extends PollingScript<ClientContext> implements PaintListe
         GUI.frame.setVisible(false);
         GUI.frame.dispose();
         System.out.println("paro\n");
-        sendMail("Paro: "+ ctx.players.local().name().toString() + " " + dtf.format(LocalDateTime.now()));
     }
 
     @Override

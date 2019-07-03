@@ -88,7 +88,10 @@ public class Util {
                 final GameObject bank = (GameObject) ctx.bank.nearest();
                 bank.hover();
                 b = bank.interact(filter);
-                AntibanScript.moveMouseOffScreen(ctx, 0, () -> ctx.bank.opened() || !ctx.players.local().inMotion());
+                if (ctx.players.local().tile().distanceTo(bank.tile())>2) {
+                    System.out.println("NO");
+                    AntibanScript.moveMouseOffScreen(ctx, 0, () -> ctx.bank.opened() || !ctx.players.local().inMotion());
+                }
             }
 
             return b;

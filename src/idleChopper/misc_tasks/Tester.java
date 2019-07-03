@@ -66,7 +66,13 @@ public class Tester extends Task {
 
     @Override
     public boolean activate() {
-        ctx.magic.cast(WEAKEN);
+        for (int i = 0; i < ctx.skills.experiences().length; i++) {
+
+            System.out.println(i+" "+ctx.skills.level(i));
+
+        }
+
+//        ctx.magic.cast(WEAKEN);
 //        System.out.println(ctx.players.local().animation());
 //        System.out.println(ctx.combat.specialAttack(true));
 //        System.out.println(ctx.varpbits.varpbit(300));

@@ -1,7 +1,7 @@
-package combiner.Tasks;
+package gemmer.Tasks;
 
 
-import combiner.Task;
+import gemmer.Task;
 import idleChopper.script.AntibanScript;
 import org.powerbot.script.Condition;
 import org.powerbot.script.Random;
