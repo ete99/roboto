@@ -2,42 +2,40 @@ package gemmer.Tasks;
 
 
 import gemmer.Task;
+import gemmer.cleaner;
 import org.powerbot.script.Condition;
 import org.powerbot.script.Random;
 import org.powerbot.script.rt4.ClientContext;
 
 public class clean extends Task {
-    int HERB;
-    int VIAL;
-    public clean(ClientContext ctx, int HERB, int VIAL) {
+    int GEM;
+    int CHISEL;
+    public clean(ClientContext ctx, int GEM, int CHISEL) {
         super(ctx);
-        this.HERB=HERB;
-        this.VIAL=VIAL;
+        this.GEM=GEM;
+        this.CHISEL=CHISEL;
     }
 
     @Override
     public boolean activate()  {
-        return ctx.inventory.select().id(HERB).count()>0 && ctx.inventory.select().id(VIAL).count()>0;
+        return ctx.inventory.select().id(GEM).count()>0 && ctx.inventory.select().id(CHISEL).count()>0 && ctx.players.local().animation()==-1;
     }
 
     @Override
     public void execute() {
-        int inv=ctx.inventory.select().id(HERB).count();
+        cleaner.status = "combining";
+
         if(Random.nextDouble()>0.80) {
-            ctx.inventory.select().id(HERB).shuffle().poll().click();
-            System.out.println(Condition.sleep(Random.nextInt(30,50)));
+            ctx.inventory.select().id(GEM).shuffle().poll().click();
+            Condition.sleep(Random.nextInt(30,50));
             if (!ctx.widgets.select().id(270).poll().component(14).visible())
-                ctx.inventory.select().id(VIAL).shuffle().poll().click();
+                ctx.inventory.select().id(CHISEL).shuffle().poll().click();
         } else {
-            ctx.inventory.select().id(VIAL).shuffle().poll().click();
-            System.out.println(Condition.sleep(Random.nextInt(30,50)));
+            ctx.inventory.select().id(CHISEL).shuffle().poll().click();
+            Condition.sleep(Random.nextInt(30,50));
             if (!ctx.widgets.select().id(270).poll().component(14).visible())
-                ctx.inventory.select().id(HERB).shuffle().poll().click();
+                ctx.inventory.select().id(GEM).shuffle().poll().click();
         }
-//        if(!ctx.widgets.select().id(270).poll().component(14).visible())
-//            Condition.sleep(Random.nextInt(750,1300));
-//        if(ctx.players.local().animation()==-1)
         Condition.wait(()->ctx.widgets.select().id(270).poll().component(14).visible(), 30, 50);
-//        AntibanScript.moveMouseOffScreen(ctx,-1);
     }
 }

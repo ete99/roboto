@@ -2,11 +2,11 @@ package combiner.Tasks;
 
 
 import combiner.Task;
-import idleChopper.Constants;
 import idleChopper.script.AntibanScript;
 import org.powerbot.script.Condition;
 import org.powerbot.script.Random;
 import org.powerbot.script.rt4.ClientContext;
+import org.powerbot.script.rt4.Constants;
 import org.powerbot.script.rt4.Item;
 import org.powerbot.script.rt4.ItemQuery;
 

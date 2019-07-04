@@ -104,13 +104,13 @@ public class Util {
 
     //@TODO on walk, moveOffScreen to the right, not left
     public static void walkToBank() throws Exception {
+
         if(Random.nextDouble()>0.1)
             moveCamera(setUp.ctx,setUp.ctx.camera.yaw() + Random.nextInt(-50, 50), setUp.ctx.camera.pitch() + Random.nextInt(-10, 10));
-        else
-            setUp.ctx.camera.turnTo(setUp.ctx.objects.select().name(setUp.TREE_NAME).poll());
+
         TilePath path = setUp.ctx.movement.newTilePath(setUp.RIDE);
         if(path.valid()) {
-            path.randomize(2, 2);
+            path.randomize(1, 1);
             path.traverse();
         } else {
             setUp.ctx.movement.step(setUp.RIDE[setUp.RIDE.length-1]);
@@ -123,14 +123,11 @@ public class Util {
         moveMouseOffScreen(setUp.ctx,-1,()->!setUp.ctx.players.local().inMotion());
     }
     public static void walkToTree(){
-        if(Random.nextDouble()>0.1)
-            moveCamera(setUp.ctx, setUp.ctx.camera.yaw() + Random.nextInt(-50, 50), setUp.ctx.camera.pitch() + Random.nextInt(-10, 10));
-        else
-            setUp.ctx.camera.turnTo(setUp.ctx.objects.select().name(setUp.TREE_NAME).poll());
+        setUp.ctx.camera.angle(setUp.ctx.camera.angleTo(Random.nextInt(80,90)));
         TilePath path = setUp.ctx.movement.newTilePath(setUp.RIDE);
         if(path.valid()) {
             path.reverse();
-            path.randomize(2, 2);
+            path.randomize(1, 1);
             path.traverse();
         } else {
             setUp.ctx.movement.step(setUp.RIDE[0]);

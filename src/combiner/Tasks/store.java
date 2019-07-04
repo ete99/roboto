@@ -6,6 +6,7 @@ import combiner.cleaner;
 import idleChopper.script.AntibanScript;
 import idleChopper.script.Util;
 import idleChopper.utility.mailme;
+import org.omg.CORBA.CTX_RESTRICT_SCOPE;
 import org.powerbot.script.Condition;
 import org.powerbot.script.Filter;
 import org.powerbot.script.MenuCommand;
@@ -51,12 +52,11 @@ public class store extends Task {
                 throw new RuntimeException("bai");
             } else {
 //                ctx.bank.depositAllExcept(HERB);
-                /*
                 if(Random.nextDouble()>0.8)
                     ctx.bank.depositInventory();
                 else
                     ctx.inventory.select().shuffle().poll().click();
-                Condition.sleep(Random.nextInt(150, 350));*/
+                Condition.sleep(Random.nextInt(150, 350));
                 if(Random.nextDouble()>0.8) {
                     if (ctx.inventory.select().id(HERB).count() == 0)
                         ctx.bank.select().id(HERB).poll().click();

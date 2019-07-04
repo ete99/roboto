@@ -2,10 +2,7 @@ package idleChopper.misc_tasks;
 
 
 import idleChopper.script.AntibanScript;
-import org.powerbot.script.Client;
-import org.powerbot.script.Condition;
-import org.powerbot.script.Filter;
-import org.powerbot.script.MenuCommand;
+import org.powerbot.script.*;
 import org.powerbot.script.rt4.ClientContext;
 import org.powerbot.script.rt4.GameObject;
 import idleChopper.utility.Task;
@@ -64,9 +61,18 @@ public class Tester extends Task {
         } else return true;
     }
 
+    Tile reverse(Tile t){
+        return new Tile(-t.x(),-t.y());
+    }
+
     @Override
     public boolean activate() {
-        System.out.println(ctx.menu.indexOf(menuCommand -> menuCommand.action.equalsIgnoreCase("Use")));
+        System.out.println(ctx.players.local().animation());
+//        ctx.camera.turnTo(reverse(ctx.objects.select().name("Magic tree").poll().tile()));
+//        ctx.camera.angle(ctx.camera.angleTo(Random.nextInt(80,90)));
+//        System.out.println(ctx.objects.select().name("Magic tree").poll().tile().toString());
+//        System.out.println(ctx.camera.x()+" "+ctx.camera.y()+" "+ctx.camera.z());
+//        System.out.println(ctx.menu.indexOf(menuCommand -> menuCommand.action.equalsIgnoreCase("Use")));
 //        ctx.magic.cast(WEAKEN);
 //        System.out.println(ctx.players.local().animation());
 //        System.out.println(ctx.combat.specialAttack(true));

@@ -2,6 +2,7 @@ package gemmer.Tasks;
 
 
 import gemmer.Task;
+import gemmer.cleaner;
 import idleChopper.script.AntibanScript;
 import org.powerbot.script.Condition;
 import org.powerbot.script.Random;
@@ -11,8 +12,8 @@ import org.powerbot.script.rt4.Component;
 import static idleChopper.script.Util.moveCamera;
 
 public class check extends Task {
-    int GUAM = 249;
-    int VIAL = 249;
+    int GUAM;
+    int VIAL;
 
     public check(ClientContext ctx,int GUAM,int VIAL) {
         super(ctx);
@@ -29,6 +30,7 @@ public class check extends Task {
 
     @Override
     public void execute() {
+        cleaner.status = "cutting";
         Condition.sleep(Random.nextInt(300,500));
         if(Random.nextDouble()<0.9)
             ctx.input.send("1");
@@ -40,8 +42,7 @@ public class check extends Task {
 
     void miniAntiban(){
         AntibanScript.moveMouseOffScreen(ctx, -1);
-//        Condition.sleep(Random.nextInt(14000,15000));
-        Condition.wait(()->ctx.inventory.select().id(VIAL).count()==0 || ctx.widgets.select().id(233).poll().component(3).visible(), Random.nextInt(100,120),750);
+        Condition.wait(()->ctx.inventory.select().id(GUAM).count()==0 || ctx.widgets.select().id(233).poll().component(3).visible(), Random.nextInt(100,120),750);
         if(Random.nextDouble()<0.9)
             Condition.sleep(Random.nextInt(500,750));
         else
@@ -51,7 +52,5 @@ public class check extends Task {
             Condition.sleep(Random.nextInt(3000, 7000));
             moveCamera(ctx,Random.nextInt(-10, 10), Random.nextInt(80, 99));
         }
-//        if(ctx.widgets.select().id(233).poll().component(3).visible())
-//            ctx.input.send("   ");
     }
 }

@@ -33,11 +33,11 @@ public class store extends Task {
 
     @Override
     public void execute() {
+        cleaner.status = "Banking";
         if (Util.openBank(ctx, Random.nextDouble()>0.9)) {
             countH = ctx.bank.select().id(HERB).count();
-            countV = ctx.bank.select().id(VIAL).count();
             cleaner.until = ctx.bank.select().id(HERB).peek().stackSize();
-            if (countH == 0 || countV == 0) {
+            if (countH == 0) {
                 f=true;
                 try {
                     mailme.sendPOST("c acabo","");
@@ -46,13 +46,6 @@ public class store extends Task {
                 }
                 throw new RuntimeException("bai");
             } else {
-//                ctx.bank.depositAllExcept(HERB);
-                /*
-                if(Random.nextDouble()>0.8)
-                    ctx.bank.depositInventory();
-                else
-                    ctx.inventory.select().shuffle().poll().click();
-                Condition.sleep(Random.nextInt(150, 350));*/
                 if(Random.nextDouble()>0.8) {
                     if (ctx.inventory.select().id(HERB).count() == 0)
                         ctx.bank.select().id(HERB).poll().click();
@@ -75,7 +68,6 @@ public class store extends Task {
     }
 
     void miniAntiban(){
-//        Condition.sleep(Random.nextInt(14000,15000));
         if(Random.nextDouble()>0.2)
             Condition.sleep(Random.nextInt(500,750));
         else

@@ -128,7 +128,8 @@ public class cleaner extends PollingScript<ClientContext> implements PaintListen
         g1.drawString("Strung :  " + done, 20, 25);
 //        int money= (int) ((done*50)/runTime);
 //        g1.drawString("Money/Hour "+money,335,125);
-        String mailOn = "until: "+until/logH;
+        double finish = until/logH;
+        String mailOn = "until: "+(int)finish+" : "+(int)(finish*60)%60+" : "+(int)(finish*3600)%60;
         g1.drawString(mailOn, 335,25);
         String logs= "Str/h: "+(int)logH;
         g1.drawString(logs, 335,50);

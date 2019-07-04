@@ -9,45 +9,38 @@ import org.powerbot.script.rt4.ClientContext;
 import org.powerbot.script.rt4.Component;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 import java.util.List;
 
 
 @Script.Manifest(name = "gemmer", properties = "author=ete; topic=1333332; client=4;", description = "jaja")
-public class cleaner extends PollingScript<ClientContext> implements PaintListener,MessageListener  {
+public class cleaner extends PollingScript<ClientContext> implements PaintListener,MessageListener,BotMenuActionListener  {
         Component unselectedInventory=ctx.widgets.widget(164).component(53);
         Component inventory = ctx.widgets.widget(164).component(60);
     public static List<Task> taskList = new ArrayList<Task>();
-    int GUAM = 1601;
-    int VIAL = 1755;
+    int GUAM = 1601; // diamond
+    int VIAL = 1755; //chisel
     public void start() {
         initime = System.currentTimeMillis();
         taskList.add(new check(ctx, GUAM, VIAL));
         taskList.add(new clean(ctx, GUAM, VIAL));
         taskList.add(new store(ctx, GUAM, VIAL));
-//        taskList.add(new idleChopper.guild_magic_tasks.Chop(ctx));
     }
 
     public void poll() {
-//        for (MenuCommand command : ctx.menu.commands()) {
-//            System.out.println(command.toString().contains("Use"));
-//        }
-//        System.out.println("////////////////////////////////////////////////////");
         if (unselectedInventory.textureId() == -1) {
             inventory.click();
         }
         for(Task task : taskList){
-
             if(ctx.controller.isStopping()){
                 break;
             }
-
-                if(task.activate()){
-                    task.execute();
-                    break;
-                }
+            if(task.activate()){
+                task.execute();
+                break;
+            }
         }
-
     }
 
     @Override
@@ -83,6 +76,7 @@ public class cleaner extends PollingScript<ClientContext> implements PaintListen
     static int LEVEL;
     static Font font = new Font(("Arial"), Font.BOLD, 16);
     static final int SKILL = 9; // fletch
+    public static String status = "-";
 
     static public void rep(Graphics g1, ClientContext ctx){
         while(WcInitLevel == 0 || WcExpInit == 0){
@@ -108,7 +102,7 @@ public class cleaner extends PollingScript<ClientContext> implements PaintListen
 //        g2.drawLine(posx-10,posy,posx+10,posy);
 //        g2.setColor(Color.GREEN);
         g2.drawOval(posx-9,posy-9,18,18);
-        g1.setColor(new Color(0,0,0,20));
+        g1.setColor(new Color(0,0,0,40));
         int gameY=ctx.game.dimensions().height;
         g1.fillRect(1,0,515,140);
         long thickness = 4;
@@ -127,15 +121,21 @@ public class cleaner extends PollingScript<ClientContext> implements PaintListen
         g1.drawString("Strung :  " + done, 20, 25);
 //        int money= (int) ((done*50)/runTime);
 //        g1.drawString("Money/Hour "+money,335,125);
-        String mailOn = "until: "+until/logH;
+        double finish = until/logH;
+        String mailOn = "until: "+(int)finish+" : "+(int)(finish*60)%60+" : "+(int)(finish*3600)%60;
         g1.drawString(mailOn, 335,25);
         String logs= "Str/h: "+(int)logH;
         g1.drawString(logs, 335,50);
         String xpH= "xp/h: "+(int)(expGained/runTime);
         g1.drawString(xpH, 335,75);
         g1.drawString("Time passed: " + hours + " : " + minutes + " : " + seconds, 335, 100);
+        g1.drawString("Status: " + status, 335, 100);
 
     }
 
 
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        System.out.println(e.getActionCommand());
+    }
 }

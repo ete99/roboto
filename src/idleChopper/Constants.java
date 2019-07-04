@@ -42,8 +42,8 @@ public class Constants {
             new Tile(3383, 3271)
     };
     public final static Tile GUILD_MAGIC_TO_BANK_RIDE[] = {
-            new Tile(1587, 3484),
-            new Tile(1591, 3477)
+            new Tile(1579, 3487),
+            new Tile(1590, 3482)
     };
 
 /* gnome

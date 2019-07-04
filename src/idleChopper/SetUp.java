@@ -47,9 +47,9 @@ public class  SetUp {
         GUI.WcExpInit= ctx.skills.experience(WOODCUTTING_LEVEL);
         GUI.frame();
         Condition.wait(() -> run, 300, 1000);
-        taskList.add(new Idle(ctx));
         if(setUp.debug)
             taskList.add(new Tester(ctx));
+        taskList.add(new Idle(ctx));
         if(set == 1) {
             this.TREE_AREA = YEW_AREA;
             this.BANK_AREA = EDGE_BANK_AREA;
