@@ -82,19 +82,23 @@ public class Util {
                 final Filter<MenuCommand> filter = new Filter<MenuCommand>() {
                     public boolean accept(MenuCommand command) {
                         String action = command.action;
-                        return action.equalsIgnoreCase("Bank") || action.equalsIgnoreCase("Use") || action.equalsIgnoreCase("Open");
+                        return action.equalsIgnoreCase("Bank") || action.equalsIgnoreCase("Open");
                     }
                 };
                 final GameObject bank = (GameObject) ctx.bank.nearest();
                 bank.hover();
-                b = bank.interact(filter);
+                Condition.sleep(Random.nextInt(30,50));
+                if(ctx.menu.indexOf(menuCommand -> menuCommand.action.equalsIgnoreCase("Use"))!=-1) {
+                    bank.click();
+                } else b = bank.interact(filter);
+
                 if (ctx.players.local().tile().distanceTo(bank.tile())>2) {
-                    System.out.println("NO");
+                    System.out.println("far away");
                     AntibanScript.moveMouseOffScreen(ctx, 0, () -> ctx.bank.opened() || !ctx.players.local().inMotion());
-                }
+                } else Condition.wait(() -> ctx.bank.opened(),30,40);
             }
 
-            return b;
+            return ctx.bank.opened();
         } else return true;
     }
 

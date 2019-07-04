@@ -29,7 +29,7 @@ public class check extends Task {
 
     @Override
     public void execute() {
-        Condition.sleep(Random.nextInt(30,50));
+        Condition.sleep(Random.nextInt(300,500));
         if(Random.nextDouble()<0.9)
             ctx.input.send("1");
         else
@@ -41,7 +41,7 @@ public class check extends Task {
     void miniAntiban(){
         AntibanScript.moveMouseOffScreen(ctx, -1);
 //        Condition.sleep(Random.nextInt(14000,15000));
-        Condition.wait(()->ctx.inventory.select().id(VIAL).count()==0 || ctx.widgets.select().id(233).poll().component(3).visible(), Random.nextInt(100,120),250);
+        Condition.wait(()->ctx.inventory.select().id(VIAL).count()==0 || ctx.widgets.select().id(233).poll().component(3).visible(), Random.nextInt(100,120),750);
         if(Random.nextDouble()<0.9)
             Condition.sleep(Random.nextInt(500,750));
         else

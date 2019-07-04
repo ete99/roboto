@@ -29,7 +29,7 @@ public class check extends Task {
 
     @Override
     public void execute() {
-        Condition.sleep(Random.nextInt(30,50));
+        Condition.sleep(Random.nextInt(300,500));
         if(Random.nextDouble()<0.9)
             ctx.input.send("1");
         else

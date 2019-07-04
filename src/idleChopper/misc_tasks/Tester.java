@@ -66,12 +66,7 @@ public class Tester extends Task {
 
     @Override
     public boolean activate() {
-        for (int i = 0; i < ctx.skills.experiences().length; i++) {
-
-            System.out.println(i+" "+ctx.skills.level(i));
-
-        }
-
+        System.out.println(ctx.menu.indexOf(menuCommand -> menuCommand.action.equalsIgnoreCase("Use")));
 //        ctx.magic.cast(WEAKEN);
 //        System.out.println(ctx.players.local().animation());
 //        System.out.println(ctx.combat.specialAttack(true));

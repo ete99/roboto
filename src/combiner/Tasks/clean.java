@@ -41,7 +41,7 @@ public class clean extends Task {
 //        if(!ctx.widgets.select().id(270).poll().component(14).visible())
 //            Condition.sleep(Random.nextInt(750,1300));
 //        if(ctx.players.local().animation()==-1)
-        Condition.wait(()->ctx.widgets.select().id(270).poll().component(14).visible(), 300,10);
+        Condition.wait(()->ctx.widgets.select().id(270).poll().component(14).visible(), 30, 50);
 //        AntibanScript.moveMouseOffScreen(ctx,-1);
     }
 }

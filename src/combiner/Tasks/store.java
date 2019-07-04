@@ -2,6 +2,7 @@ package combiner.Tasks;
 
 
 import combiner.Task;
+import combiner.cleaner;
 import idleChopper.script.AntibanScript;
 import idleChopper.script.Util;
 import idleChopper.utility.mailme;
@@ -26,7 +27,7 @@ public class store extends Task {
         this.VIAL=VIAL;
     }
     static boolean f;
-    static int countH, countV;
+    int countH, countV;
     @Override
     public boolean activate() {
         countH = ctx.inventory.select().id(HERB).count();
@@ -36,12 +37,11 @@ public class store extends Task {
 
     @Override
     public void execute() {
-        miniAntiban();
-        if (!Util.openBank(ctx, Random.nextDouble()>0.9)) {
-            ctx.inventory.select().poll().click();
-        }
-        if (ctx.bank.opened()) {
-            if (ctx.bank.select().id(VIAL).count()==0 || ctx.bank.select().id(HERB).count()==0) {
+        if (Util.openBank(ctx, Random.nextDouble()>0.9)) {
+            countH = ctx.bank.select().id(HERB).count();
+            countV = ctx.bank.select().id(VIAL).count();
+            cleaner.until = ctx.bank.select().id(HERB).peek().stackSize();
+            if (countH == 0 || countV == 0) {
                 f=true;
                 try {
                     mailme.sendPOST("c acabo","");
@@ -51,11 +51,12 @@ public class store extends Task {
                 throw new RuntimeException("bai");
             } else {
 //                ctx.bank.depositAllExcept(HERB);
+                /*
                 if(Random.nextDouble()>0.8)
                     ctx.bank.depositInventory();
                 else
                     ctx.inventory.select().shuffle().poll().click();
-                Condition.sleep(Random.nextInt(150, 350));
+                Condition.sleep(Random.nextInt(150, 350));*/
                 if(Random.nextDouble()>0.8) {
                     if (ctx.inventory.select().id(HERB).count() == 0)
                         ctx.bank.select().id(HERB).poll().click();
@@ -74,6 +75,7 @@ public class store extends Task {
                 Condition.wait(()->ctx.inventory.isFull(),300,10);
             }
         }
+        miniAntiban();
     }
 
     void miniAntiban(){
