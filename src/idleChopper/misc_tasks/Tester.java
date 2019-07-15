@@ -3,10 +3,10 @@ package idleChopper.misc_tasks;
 
 import idleChopper.script.AntibanScript;
 import org.powerbot.script.*;
-import org.powerbot.script.rt4.ClientContext;
-import org.powerbot.script.rt4.GameObject;
+import org.powerbot.script.rt4.*;
 import idleChopper.utility.Task;
-import org.powerbot.script.rt4.Npc;
+import org.powerbot.script.rt4.ClientContext;
+import org.powerbot.script.rt4.Component;
 
 import java.awt.*;
 
@@ -64,10 +64,21 @@ public class Tester extends Task {
     Tile reverse(Tile t){
         return new Tile(-t.x(),-t.y());
     }
-
+    static boolean first;
+    int HERB = 66;
+    int VIAL = 1777;
     @Override
     public boolean activate() {
-        System.out.println(ctx.players.local().animation());
+
+        System.out.println();
+
+//        for (Widget w : ctx.widgets.select()){
+//            for(Component c : w.components()){
+//                if(c.text().contains("Use"))
+//                    System.out.println(w.id()+" "+ c.id());
+//            }
+//        }
+//        System.out.println(ctx.players.local().animation());
 //        ctx.camera.turnTo(reverse(ctx.objects.select().name("Magic tree").poll().tile()));
 //        ctx.camera.angle(ctx.camera.angleTo(Random.nextInt(80,90)));
 //        System.out.println(ctx.objects.select().name("Magic tree").poll().tile().toString());

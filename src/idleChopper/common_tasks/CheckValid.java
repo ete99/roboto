@@ -22,6 +22,7 @@ public class CheckValid extends Task {
     public boolean activate() throws Exception {
 
         System.out.println("check valid");
+        ctx.widgets.widget(595).component(37).click();
         Condition.wait(()-> setUp.ctx.players.local().animation() != -1, 60,10);
         if(ctx.widgets.select().id(310).poll().component(2).component(11).valid())
             ctx.widgets.select().id(310).poll().component(2).component(11).click();

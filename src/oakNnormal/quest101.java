@@ -21,10 +21,10 @@ public class quest101 extends PollingScript<ClientContext> {
 //        taskList.add(new PosUtil(ctx));
 //        taskList.add(new WalkToTree(ctx));
         taskList.add(new Chop(ctx,WILLOW_AREA,"Willow"));
-        taskList.add(new Drop(ctx, "Willow logs"));
+//        taskList.add(new Drop(ctx, "Willow logs"));
 
 //        taskList.add(new WalkToBank(ctx));
-//        taskList.add(new Bank(ctx));
+        taskList.add(new Bank(ctx));
         taskList.add(new Antiban(ctx));
         taskList.add(new Idle(ctx));
     }

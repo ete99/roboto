@@ -17,7 +17,7 @@ public class util {
 
     public static boolean needsHeal()
     {
-        return RockySands.s.ctx.combat.health() < 11;
+        return RockySands.s.ctx.combat.health() < 6;
     }
 
     public static boolean shouldAttack()
@@ -152,7 +152,8 @@ public class util {
         goblin.click();
         Condition.sleep(Random.nextInt(50,80));
 //        final boolean b = goblin.interact(filter);
-        Util.moveCamera(RockySands.s.ctx,RockySands.s.ctx.camera.yaw()+ Random.nextInt(0,90),99);
+        if(Random.nextDouble()>.80)
+            Util.moveCamera(RockySands.s.ctx,RockySands.s.ctx.camera.yaw()+ Random.nextInt(0,90),99);
         AntibanScript.moveMouseOffScreen(RockySands.s.ctx,1,()->!(goblin.inCombat()&&goblin.valid() && RockySands.s.ctx.players.local().inCombat()));
 
 //        Condition.wait(()->goblin.inCombat()&&s.ctx.players.local().inCombat(), Random.nextInt(350,500),10);
@@ -234,7 +235,7 @@ public class util {
 
     public static Npc exclusiveLocateNPC(int ids[])
     {
-        return RockySands.s.ctx.npcs.select().id(ids).select(npc -> (!npc.inCombat())).nearest().poll();
+        return RockySands.s.ctx.npcs.select().nearest().id(ids).select(npc -> (!npc.inCombat())).nearest().poll();
     }
 /*
     public static void walkToGoblins()

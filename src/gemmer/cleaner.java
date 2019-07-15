@@ -19,7 +19,7 @@ public class cleaner extends PollingScript<ClientContext> implements PaintListen
         Component unselectedInventory=ctx.widgets.widget(164).component(53);
         Component inventory = ctx.widgets.widget(164).component(60);
     public static List<Task> taskList = new ArrayList<Task>();
-    int GUAM = 1601; // diamond
+    int GUAM = 1625; // diamond
     int VIAL = 1755; //chisel
     public void start() {
         initime = System.currentTimeMillis();
@@ -129,7 +129,7 @@ public class cleaner extends PollingScript<ClientContext> implements PaintListen
         String xpH= "xp/h: "+(int)(expGained/runTime);
         g1.drawString(xpH, 335,75);
         g1.drawString("Time passed: " + hours + " : " + minutes + " : " + seconds, 335, 100);
-        g1.drawString("Status: " + status, 335, 100);
+        g1.drawString("Status: " + status, 335, 125);
 
     }
 

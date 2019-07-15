@@ -4,6 +4,7 @@ package RockySand.goblin_killer;
 import RockySand.tasks.*;
 import RockySand.utils.sett;
 
+import org.powerbot.script.Condition;
 import org.powerbot.script.PaintListener;
 import org.powerbot.script.rt4.*;
 import org.powerbot.script.PollingScript;
@@ -48,6 +49,7 @@ public class RockySands extends PollingScript<ClientContext> implements PaintLis
     @Override
     public void poll()
     {
+        ctx.widgets.widget(595).component(37).click();
         for (Task task : taskList)
         {
             if (ctx.controller.isStopping())

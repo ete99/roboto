@@ -87,7 +87,7 @@ public class Util {
                 };
                 final GameObject bank = (GameObject) ctx.bank.nearest();
                 bank.hover();
-                Condition.sleep(Random.nextInt(30,50));
+                Condition.sleep(Random.nextInt(50,80));
                 if(ctx.menu.indexOf(menuCommand -> menuCommand.action.equalsIgnoreCase("Use"))!=-1) {
                     bank.click();
                 } else b = bank.interact(filter);

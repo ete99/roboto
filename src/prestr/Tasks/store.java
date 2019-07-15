@@ -1,8 +1,6 @@
-package gemmer.Tasks;
+package prestr.Tasks;
 
 
-import gemmer.Task;
-import gemmer.cleaner;
 import idleChopper.script.AntibanScript;
 import idleChopper.script.Util;
 import idleChopper.utility.mailme;
@@ -10,6 +8,8 @@ import org.powerbot.script.Condition;
 import org.powerbot.script.Random;
 import org.powerbot.script.rt4.Bank;
 import org.powerbot.script.rt4.ClientContext;
+import prestr.Task;
+import prestr.cleaner;
 
 import java.io.IOException;
 
@@ -47,6 +47,7 @@ public class store extends Task {
                 }
                 throw new RuntimeException("bai");
             } else {
+                ctx.bank.depositAllExcept(VIAL);
                 if (ctx.inventory.select().id(VIAL).count() == 0)
                     ctx.bank.withdraw(VIAL,1);
                 ctx.bank.withdrawModeQuantity(Bank.Amount.ALL);

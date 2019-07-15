@@ -31,7 +31,9 @@ public class check extends Task {
     public void execute() {
         Condition.sleep(Random.nextInt(300,500));
         if(Random.nextDouble()<0.9)
-            ctx.input.send("1");
+            for (int i = 0; i < Random.nextInt(1,3); i++) {
+                ctx.input.send("1");
+            }
         else
             c.click();
         miniAntiban();

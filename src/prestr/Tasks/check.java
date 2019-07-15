@@ -1,13 +1,13 @@
-package gemmer.Tasks;
+package prestr.Tasks;
 
 
-import gemmer.Task;
-import gemmer.cleaner;
 import idleChopper.script.AntibanScript;
 import org.powerbot.script.Condition;
 import org.powerbot.script.Random;
 import org.powerbot.script.rt4.ClientContext;
 import org.powerbot.script.rt4.Component;
+import prestr.Task;
+import prestr.cleaner;
 
 import static idleChopper.script.Util.moveCamera;
 
