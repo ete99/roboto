@@ -12,4 +12,4 @@ Los scripts están en la carpeta src.
 buscar en https://www.powerbot.org/ una guia para hacer el setup del enviroment, fue complicado en su momento. probablemente la mayoria del codigo esté obsoleto.
 
 # Disclaimer
-Los scripts fueron utilizados solo con fines educativos.
+Los scripts fueron utilizados y deben ser utilizados solo con fines educativos.
